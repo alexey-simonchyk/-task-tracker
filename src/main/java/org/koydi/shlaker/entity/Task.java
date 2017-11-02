@@ -1,6 +1,8 @@
 package org.koydi.shlaker.entity;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -10,6 +12,8 @@ import java.util.Set;
 @Entity
 @Table(name = "task")
 @Data
+@EqualsAndHashCode(exclude = {"project", "comments", "developers"}, callSuper = false)
+@ToString(exclude = {"project", "comments", "developers"})
 public class Task extends BaseEntity {
 
     @Column(name = "description", length = 65535, columnDefinition = "text")

@@ -1,6 +1,8 @@
 package org.koydi.shlaker.entity;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -8,6 +10,8 @@ import java.util.Date;
 @Entity
 @Table(name = "comment")
 @Data
+@EqualsAndHashCode(exclude = {"user"}, callSuper = false)
+@ToString(exclude = {"user"})
 public class Comment extends BaseEntity {
 
     @Column(name = "text", length = 65535, columnDefinition = "text")

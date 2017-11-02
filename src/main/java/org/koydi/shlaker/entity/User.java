@@ -1,6 +1,8 @@
 package org.koydi.shlaker.entity;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -9,6 +11,8 @@ import java.util.Set;
 @Entity
 @Table(name = "user")
 @Data
+@EqualsAndHashCode(exclude = {"role", "comments", "projects", "tasks"}, callSuper = false)
+@ToString(exclude = {"role", "comments", "projects", "tasks"})
 public class User extends BaseEntity {
 
     @Column(name = "email", nullable = false)
