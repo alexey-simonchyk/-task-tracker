@@ -4,12 +4,15 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserDto {
+public class CommentDto {
     private String id;
-    private String nick;
-    private String email;
-    private String password;
+    private String text;
+    private Date creationDate;
+
+    private UserDto user;
 }

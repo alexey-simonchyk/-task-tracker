@@ -21,6 +21,12 @@ public class User extends BaseEntity {
     @Column(name = "password", nullable = false)
     private String password;
 
+    @Column(name = "nick")
+    private String nick;
+
+    @Column(name = "is_activated")
+    private boolean isActivated;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "role_id", nullable = false)
     private Role role;
