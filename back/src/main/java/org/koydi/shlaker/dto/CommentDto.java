@@ -13,6 +13,4 @@ public class CommentDto {
     private String id;
     private String text;
     private Date creationDate;
-
-    private UserDto user;
 }

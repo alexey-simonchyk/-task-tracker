@@ -1,0 +1,2 @@
+<div *ngIf="(selectedProject | async).selectedProject != null">{{(selectedProject | async).selectedProject | json}}</div>
+<div *ngIf="(selectedProject | async).selectedProject == null">Select the project</div>

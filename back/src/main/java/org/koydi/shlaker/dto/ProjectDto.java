@@ -1,6 +1,7 @@
 package org.koydi.shlaker.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,6 +13,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ProjectDto {
     private String id;
     private String name;
@@ -23,8 +25,4 @@ public class ProjectDto {
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date endTime;
-
-    private List<CommentDto> comments;
-    private List<UserDto> developers;
-    private List<TaskDto> tasks;
 }
