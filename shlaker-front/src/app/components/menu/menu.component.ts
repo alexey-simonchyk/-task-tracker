@@ -4,6 +4,7 @@ import { Project } from '../../models/project.model';
 import { ProjectService } from '../../services/project-service';
 import { IAppState } from '../../app.store';
 import { DESELECT_PROJECT } from "../../actions";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-menu',
@@ -15,7 +16,8 @@ export class MenuComponent implements OnInit {
     @select('projects') projects: Project[];
 
     constructor(private projectService: ProjectService,
-                private ngRedux: NgRedux<IAppState>) { }
+                private ngRedux: NgRedux<IAppState>,
+                private router: Router) { }
 
     ngOnInit() {
         this.projectService.getProjects();
@@ -23,9 +25,10 @@ export class MenuComponent implements OnInit {
 
     selectProject(projectId) {
         if (projectId) {
-            this.projectService.getProject(projectId);
+            this.router.navigate(['/project', projectId])
+            // this.projectService.getProject(projectId);
         } else {
-            this.ngRedux.dispatch({  type: DESELECT_PROJECT})
+            // this.ngRedux.dispatch({  type: DESELECT_PROJECT})
         }
     }
 
