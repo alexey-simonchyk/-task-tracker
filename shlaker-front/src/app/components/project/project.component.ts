@@ -8,7 +8,7 @@ import { select } from 'ng2-redux';
 })
 export class ProjectComponent implements OnInit {
 
-    @select() selectedProject;
+    @select('selectedProject') selectedProject;
 
     constructor() { }
 

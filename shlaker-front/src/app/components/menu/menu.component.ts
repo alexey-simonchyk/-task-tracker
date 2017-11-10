@@ -12,7 +12,7 @@ import { DESELECT_PROJECT } from "../../actions";
 })
 export class MenuComponent implements OnInit {
 
-    @select() projects: Project[];
+    @select('projects') projects: Project[];
 
     constructor(private projectService: ProjectService,
                 private ngRedux: NgRedux<IAppState>) { }

@@ -9,7 +9,6 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { combineReducers } from 'redux';
 import { MainModule } from './components/main.module';
-import {MainAppRout} from "./router.module";
 import { HttpClientModule } from '@angular/common/http';
 
 
@@ -22,8 +21,7 @@ import { HttpClientModule } from '@angular/common/http';
     NgReduxModule,
       HttpClientModule,
 
-    MainModule,
-    MainAppRout
+    MainModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,2 +1,8 @@
-<div *ngIf="(selectedProject | async)">{{selectedProject | async | json}}</div>
-<div *ngIf="!(selectedProject | async)">Select the project</div>
+<div *ngIf="(selectedProject | async)">
+    {{selectedProject | async | json}}
+    <project-comments [comments]="(selectedProject | async).comments"></project-comments>
+</div>
+
+<div *ngIf="!(selectedProject | async)">
+    Select the project
+</div>

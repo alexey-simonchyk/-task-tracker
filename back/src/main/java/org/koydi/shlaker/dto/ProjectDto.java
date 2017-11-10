@@ -25,4 +25,6 @@ public class ProjectDto {
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date endTime;
+
+    private List<CommentDto> comments;
 }

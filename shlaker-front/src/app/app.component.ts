@@ -13,11 +13,4 @@ export class AppComponent {
   constructor(private ngRedux: NgRedux<IAppState>) {
 
   }
-
-  increment() {
-  }
-
-  decrement() {
-  }
-
 }
