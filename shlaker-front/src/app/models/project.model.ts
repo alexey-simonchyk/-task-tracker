@@ -5,4 +5,6 @@ export class Project {
     status: string;
     startTime: Date;
     endTime: Date;
+
+    comments: Comment[];
 }

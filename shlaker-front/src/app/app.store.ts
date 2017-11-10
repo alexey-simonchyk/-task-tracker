@@ -13,29 +13,29 @@ export interface IAppState {
 export const INITIAL_STATE: IAppState = {
     projects: [],
     tasks: [],
-    selectedTask: new Task(),
-    selectedProject: new Project()
+    selectedTask: null,
+    selectedProject: null
 };
 
-export function projectReducer(state = {projects: []}, action) {
+export function projectReducer(state = [], action) {
     switch(action.type) {
-        case LOAD_PROJECTS: return Object.assign(state, {projects: action.projects})
+        case LOAD_PROJECTS: return action.projects
     }
     return state;
 }
 
-export function taskReducer(state = {tasks: []}, action) {
+export function taskReducer(state = [], action) {
     return state;
 }
 
-export function selectedTaskReducer(state = {selectedTask: null}, action) {
+export function selectedTaskReducer(state = null, action) {
     return state;
 }
 
-export function selectedProjectReducer(state = {selectedProject: null}, action) {
+export function selectedProjectReducer(state = null, action) {
     switch(action.type) {
-        case SELECT_PROJECT: return Object.assign(state, {selectedProject: action.project})
-        case DESELECT_PROJECT: return Object.assign(state, {selectedProject: null})
+        case SELECT_PROJECT: return action.project
+        case DESELECT_PROJECT: return null
     }
     return state;
 }

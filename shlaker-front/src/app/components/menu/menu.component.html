@@ -1,8 +1,8 @@
 <p>
     <!--Add Project (Manager) , All projects, Projects with me, My tasks-->
-    {{ (projects | async).projects | json }}
+    {{ projects | async | json }}
     <select (change)="selectProject($event.target.value)">
         <option></option>
-        <option *ngFor="let project of (projects | async).projects" [value]="project.id">{{project.name}}</option>
+        <option *ngFor="let project of projects | async" [value]="project.id">{{project.name}}</option>
     </select>
 </p>

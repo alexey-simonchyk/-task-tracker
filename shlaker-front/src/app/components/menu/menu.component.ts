@@ -25,7 +25,7 @@ export class MenuComponent implements OnInit {
         if (projectId) {
             this.projectService.getProject(projectId);
         } else {
-            this.ngRedux.dispatch({type: DESELECT_PROJECT})
+            this.ngRedux.dispatch({  type: DESELECT_PROJECT})
         }
     }
 
