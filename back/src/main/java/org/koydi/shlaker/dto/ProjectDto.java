@@ -27,4 +27,5 @@ public class ProjectDto {
     private Date endTime;
 
     private List<CommentDto> comments;
+    private List<UserDto> developers;
 }

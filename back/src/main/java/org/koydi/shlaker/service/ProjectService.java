@@ -22,6 +22,6 @@ public class ProjectService {
     }
 
     public Project getProject(String projectId) {
-        return projectRepository.getOne(projectId);
+        return projectRepository.getFullProject(projectId);
     }
 }

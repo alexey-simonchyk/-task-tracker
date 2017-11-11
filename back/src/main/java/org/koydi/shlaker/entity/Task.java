@@ -32,16 +32,16 @@ public class Task extends BaseEntity {
     @Column(name = "end_time")
     private Date endTime;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "project_id", nullable = false)
     private Project project;
 
-    @ManyToMany()
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "task_has_comment", joinColumns = @JoinColumn(name = "task_id"),
                                             inverseJoinColumns = @JoinColumn(name = "comment_id"))
     private Set<Comment> comments = new HashSet<>();
 
-    @ManyToMany()
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_has_task", joinColumns = @JoinColumn(name = "task_id"),
                                         inverseJoinColumns = @JoinColumn(name = "user_id"))
     private Set<User> developers = new HashSet<>();

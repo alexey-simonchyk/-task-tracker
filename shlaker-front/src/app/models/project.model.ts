@@ -1,3 +1,5 @@
+import { User } from './user.model';
+
 export class Project {
     id: string;
     name: string;
@@ -7,4 +9,5 @@ export class Project {
     endTime: Date;
 
     comments: Comment[];
+    developers: User[];
 }

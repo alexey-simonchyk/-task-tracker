@@ -14,6 +14,13 @@ import java.util.Set;
 @Data
 @EqualsAndHashCode(exclude = {"tasks", "comments", "developers"}, callSuper = false)
 @ToString(exclude = {"tasks", "comments", "developers"})
+@NamedEntityGraph(
+        name = "FullLoad",
+        attributeNodes = {
+                @NamedAttributeNode(value = "comments"),
+                @NamedAttributeNode(value = "developers")
+        }
+)
 public class Project extends BaseEntity {
 
     @Column(name = "name")
@@ -35,12 +42,12 @@ public class Project extends BaseEntity {
     @OneToMany(mappedBy = "project", fetch = FetchType.LAZY)
     private Set<Task> tasks = new HashSet<>();
 
-    @ManyToMany()
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "project_has_comment", joinColumns = @JoinColumn(name = "project_id"),
                                                 inverseJoinColumns = @JoinColumn(name = "comment_id"))
     private Set<Comment> comments = new HashSet<>();
 
-    @ManyToMany()
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_in_project", joinColumns = @JoinColumn(name = "project_id"),
                                             inverseJoinColumns = @JoinColumn(name = "user_id"))
     private Set<User> developers = new HashSet<>();

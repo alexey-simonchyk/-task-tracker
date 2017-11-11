@@ -1,5 +1,6 @@
 package org.koydi.shlaker.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,6 +15,8 @@ import java.util.Date;
 public class CommentDto {
     private String id;
     private String text;
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date creationTime;
 
     private UserDto user;

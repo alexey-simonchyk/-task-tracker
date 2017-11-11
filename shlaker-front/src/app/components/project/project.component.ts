@@ -1,7 +1,9 @@
+import { PROJECT_ID } from './../routing.const';
 import { Component, OnInit } from '@angular/core';
 import { select } from 'ng2-redux';
 import { ActivatedRoute } from '@angular/router';
 import { ProjectService } from '../../services/project-service';
+import { ParamMap } from '@angular/router/src/shared';
 
 @Component({
   templateUrl: './project.component.html',
@@ -18,8 +20,8 @@ export class ProjectComponent implements OnInit {
 
     ngOnInit() {
         this.route.params.subscribe(params => {
-            this.projectService.getProject(params['projectId']);
-        })
+            this.projectService.getProject(params[PROJECT_ID]);
+        });
     }
 
 }

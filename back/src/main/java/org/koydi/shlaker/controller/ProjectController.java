@@ -1,5 +1,6 @@
 package org.koydi.shlaker.controller;
 
+import lombok.val;
 import org.koydi.shlaker.dto.ProjectDto;
 import org.koydi.shlaker.entity.Project;
 import org.koydi.shlaker.mapper.ProjectMapper;
@@ -26,7 +27,7 @@ public class ProjectController {
 
     @GetMapping("/")
     public List<ProjectDto> getProjects() {
-        List<Project> projects = projectService.getProjects();
+        val projects = projectService.getProjects();
         return projectMapper.toShortProjectDtos(projects);
     }
 
@@ -37,7 +38,7 @@ public class ProjectController {
 
     @GetMapping("/{project_id}")
     public ProjectDto getProject(@PathVariable("project_id") String projectId) {
-        Project project = projectService.getProject(projectId);
+        val project = projectService.getProject(projectId);
         return projectMapper.toFullDto(project);
     }
 

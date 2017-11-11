@@ -25,8 +25,7 @@ export class MenuComponent implements OnInit {
 
     selectProject(projectId) {
         if (projectId) {
-            this.router.navigate(['/project', projectId])
-            // this.projectService.getProject(projectId);
+            this.router.navigate(['/project', { projectId: projectId }])
         } else {
             // this.ngRedux.dispatch({  type: DESELECT_PROJECT})
         }

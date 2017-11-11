@@ -9,7 +9,7 @@ import java.util.List;
 @Mapper(
         nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS,
         componentModel = "spring",
-        uses = CommentMapper.class
+        uses = {CommentMapper.class, UserMapper.class}
 )
 public interface ProjectMapper {
 
@@ -26,6 +26,9 @@ public interface ProjectMapper {
     @Named("toShortDto")
     ProjectDto toShortDto(Project project);
 
-    @Mapping(target = "comments", qualifiedByName = "toCommentsDtos")
+    @Mappings({
+            @Mapping(target = "comments", qualifiedByName = "toCommentsDtos"),
+            @Mapping(target = "developers", qualifiedByName = "toShortUsersDtos")
+    })
     ProjectDto toFullDto(Project project);
 }

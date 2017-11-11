@@ -1,9 +1,16 @@
 package org.koydi.shlaker.repository;
 
 import org.koydi.shlaker.entity.Project;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ProjectRepository extends JpaRepository<Project, String> {
+
+    @EntityGraph(value = "FullLoad", type = EntityGraph.EntityGraphType.LOAD)
+    @Query("select project from Project project where project.id = :projectId")
+    Project getFullProject(@Param("projectId") String projectId);
 }
