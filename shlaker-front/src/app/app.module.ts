@@ -10,6 +10,7 @@ import { AppComponent } from './app.component';
 import { combineReducers } from 'redux';
 import { MainModule } from './components/main.module';
 import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import { HttpClientModule } from '@angular/common/http';
   ],
   imports: [
     BrowserModule,
+      BrowserAnimationsModule,
     NgReduxModule,
       HttpClientModule,
 

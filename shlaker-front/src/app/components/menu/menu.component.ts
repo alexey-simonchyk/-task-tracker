@@ -5,16 +5,19 @@ import { ProjectService } from '../../services/project-service';
 import { IAppState } from '../../app.store';
 import { DESELECT_PROJECT } from "../../actions";
 import { Router } from '@angular/router';
+import * as $ from 'jquery';
 
 @Component({
-  selector: 'app-menu',
-  templateUrl: './menu.component.html',
-  styleUrls: ['./menu.component.css']
+    selector: 'app-menu',
+    templateUrl: './menu.component.html',
+    styleUrls: ['./menu.component.css']
 })
 export class MenuComponent implements OnInit {
 
     @select('projects') projects: Project[];
     @select('selectedProject') selectedProject: Project;
+
+    state = {projects: false, tasks: false};
 
     constructor(private projectService: ProjectService,
                 private ngRedux: NgRedux<IAppState>,
@@ -31,6 +34,26 @@ export class MenuComponent implements OnInit {
             this.ngRedux.dispatch({  type: DESELECT_PROJECT })
             this.router.navigate(['/']);
         }
+    }
+
+    changeState(target) {
+        let element;
+        switch (target) {
+            case 'projects':
+                element = $('#projects_close');
+                break;
+            case 'tasks':
+                element = $('#tasks_close');
+                break;
+        }
+
+        if (this.state[target]) {
+            element.slideDown('slow');
+        } else {
+            element.slideUp('slow');
+        }
+
+        this.state[target] = !this.state[target];
     }
 
 }

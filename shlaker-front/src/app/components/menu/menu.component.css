@@ -60,17 +60,8 @@
 .nav_element {
     background: firebrick;
     color: #fff;
-    /*    border-bottom: 1px solid #fff;*/
-    padding: 10px 20px;
-    cursor: pointer;
     display: inline-flex;
-    align-content: center;
-    flex-direction: row;
-}
-
-.nav_element:hover {
-    background: #fff;
-    color: firebrick;
+    flex-direction: column;
 }
 
 .nav_element:last-child {
@@ -84,4 +75,37 @@
 .down_arrow_image {
     height: 25px;
     width: 25px;
+}
+
+.nav_element_header {
+    background: firebrick;
+    color: #fff;
+    padding: 0 20px;
+    cursor: pointer;
+    display: inline-flex;
+    align-content: center;
+    flex-direction: row;
+}
+
+.nav_element_header:hover {
+    background: #fff;
+    color: firebrick;
+}
+
+.nav_element_list {
+    overflow: hidden;
+    display: inline-flex;
+    flex-direction: column;
+}
+
+.list_element {
+    padding-left: 40px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    cursor: pointer;
+}
+
+.list_element:hover {
+    color: firebrick;
+    background: #fff;
 }
