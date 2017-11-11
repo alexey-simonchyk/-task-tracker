@@ -1,4 +1,5 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Task } from "../../../models/task.model";
 
 @Component({
   selector: 'project-tasks',
@@ -7,9 +8,12 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 })
 export class ProjectTasksComponent implements OnInit {
 
-  constructor() { }
+    @Input("tasks") tasks: Task[];
 
-  ngOnInit() {
-  }
+    constructor() { }
+
+    ngOnInit() {
+
+    }
 
 }

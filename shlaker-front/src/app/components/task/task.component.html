@@ -1,3 +1,4 @@
 <div *ngIf="selectedTask | async">
     {{selectedTask | async | json}}
 </div>
+<task-comments [comments]="(selectedTask | async)?.comments"></task-comments>

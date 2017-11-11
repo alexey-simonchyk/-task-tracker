@@ -1,5 +1,5 @@
 <div *ngIf="(selectedProject | async)">
-    {{selectedProject | async | json}}
+    <project-tasks [tasks]="(selectedProject | async).tasks"></project-tasks>
     <project-comments [comments]="(selectedProject | async).comments"></project-comments>
 </div>
 

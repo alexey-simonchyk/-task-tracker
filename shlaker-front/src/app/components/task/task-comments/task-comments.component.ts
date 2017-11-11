@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Comment } from '../../../models/comment.model';
 
 @Component({
   selector: 'task-comments',
@@ -7,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TaskCommentsComponent implements OnInit {
 
-  constructor() { }
+    @Input("comments") comments: Comment[];
 
-  ngOnInit() {
-  }
+    constructor() { }
+
+    ngOnInit() {
+    }
 
 }

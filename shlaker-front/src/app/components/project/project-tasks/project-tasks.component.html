@@ -1,3 +1,5 @@
-<p>
-  project-tasks works!
-</p>
+<h1>Tasks</h1>
+<div *ngFor="let task of tasks">
+    <a [routerLink]="['/task', task.id]">{{task.name}} - {{task.status}}</a>
+</div>
+<hr>

@@ -1,2 +1,4 @@
-<p *ngFor="let comment of comments">{{comment | json}}</p>
+<h3>Comments</h3>
+<p *ngFor="let comment of comments">{{comment.user.nick}} - {{comment.text}}</p>
+<hr>
 
