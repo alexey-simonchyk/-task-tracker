@@ -1,6 +1,6 @@
 import { NgRedux, NgReduxModule } from 'ng2-redux';
 import {
-    IAppState, INITIAL_STATE, taskReducer, projectReducer,
+    IAppState, INITIAL_STATE, projectReducer,
     selectedTaskReducer, selectedProjectReducer
 } from './app.store';
 import { BrowserModule } from '@angular/platform-browser';
@@ -29,7 +29,6 @@ import { HttpClientModule } from '@angular/common/http';
 export class AppModule {
     constructor(ngRedux: NgRedux<IAppState>) {
         ngRedux.configureStore(combineReducers({
-            tasks: taskReducer,
             projects: projectReducer,
             selectedTask: selectedTaskReducer,
             selectedProject: selectedProjectReducer

@@ -19,8 +19,4 @@ public interface UserMapper {
     @Named("toShortUserDto")
     UserDto toShortDto(User user);
 
-    @IterableMapping(qualifiedByName = "toShortUserDto")
-    @Named("toShortUsersDtos")
-    List<UserDto> toShortUsersDtos(List<User> users);
-
 }

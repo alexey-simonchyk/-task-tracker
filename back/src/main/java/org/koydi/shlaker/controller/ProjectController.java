@@ -39,7 +39,7 @@ public class ProjectController {
     @GetMapping("/{project_id}")
     public ProjectDto getProject(@PathVariable("project_id") String projectId) {
         val project = projectService.getProject(projectId);
-        return projectMapper.toFullDto(project);
+        return projectMapper.toFullProjectDto(project);
     }
 
 }

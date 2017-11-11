@@ -13,10 +13,6 @@ import java.util.List;
 )
 public interface CommentMapper {
 
-    @IterableMapping(qualifiedByName = "toCommentDto")
-    @Named("toCommentsDtos")
-    List<CommentDto> toCommentsDto(List<Comment> comments);
-
     @Named("toCommentDto")
     @Mapping(target = "user", qualifiedByName = "toShortUserDto")
     CommentDto toCommentDto(Comment comment);

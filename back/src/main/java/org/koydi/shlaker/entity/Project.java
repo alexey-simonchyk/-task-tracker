@@ -15,10 +15,11 @@ import java.util.Set;
 @EqualsAndHashCode(exclude = {"tasks", "comments", "developers"}, callSuper = false)
 @ToString(exclude = {"tasks", "comments", "developers"})
 @NamedEntityGraph(
-        name = "FullLoad",
+        name = "FullProject",
         attributeNodes = {
                 @NamedAttributeNode(value = "comments"),
-                @NamedAttributeNode(value = "developers")
+                @NamedAttributeNode(value = "developers"),
+                @NamedAttributeNode(value = "tasks")
         }
 )
 public class Project extends BaseEntity {

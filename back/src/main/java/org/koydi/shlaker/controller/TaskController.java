@@ -1,6 +1,10 @@
 package org.koydi.shlaker.controller;
 
+import lombok.val;
 import org.koydi.shlaker.dto.TaskDto;
+import org.koydi.shlaker.mapper.TaskMapper;
+import org.koydi.shlaker.service.TaskService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -9,15 +13,18 @@ import java.util.List;
 @RequestMapping("/task")
 public class TaskController {
 
-    @PostMapping("/project/{project_id}")
-    public TaskDto createTask(@PathVariable("project_id") String projectId,
-                              @RequestBody TaskDto taskDto) {
-        return new TaskDto();
+    private final TaskService taskService;
+    private final TaskMapper taskMapper;
+
+    @Autowired
+    public TaskController(TaskService taskService, TaskMapper taskMapper) {
+        this.taskService = taskService;
+        this.taskMapper = taskMapper;
     }
 
-    @PutMapping("/{task_id}")
-    public TaskDto updateTask(@PathVariable("task_id") String taskId,
-                              @RequestBody TaskDto taskDto) {
-        return new TaskDto();
+    @GetMapping("/{task_id}")
+    public TaskDto getTask(@PathVariable("task_id") String taskId) {
+        val task = taskService.getFullTask(taskId);
+        return taskMapper.toFullTaskDto(task);
     }
 }

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ProjectRepository extends JpaRepository<Project, String> {
 
-    @EntityGraph(value = "FullLoad", type = EntityGraph.EntityGraphType.LOAD)
+    @EntityGraph(value = "FullProject", type = EntityGraph.EntityGraphType.LOAD)
     @Query("select project from Project project where project.id = :projectId")
     Project getFullProject(@Param("projectId") String projectId);
 }

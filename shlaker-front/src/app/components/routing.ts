@@ -1,4 +1,3 @@
-import { TASK_ID, PROJECT_ID } from './routing.const';
 import { Routes }  from '@angular/router';
 import { ProjectComponent } from './project/project.component';
 import { TaskComponent } from './task/task.component';
@@ -7,11 +6,11 @@ import { TaskComponent } from './task/task.component';
 
 export const MAIN_ROUTE: Routes = [
     {
-        path: `project/:${PROJECT_ID}`,
+        path: 'project/:projectId',
         component: ProjectComponent
     },
     {
-        path: `task/:${TASK_ID}`,
+        path: 'task/:taskId',
         component: TaskComponent
     }
 ];

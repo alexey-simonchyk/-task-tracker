@@ -1,4 +1,4 @@
 export const LOAD_PROJECTS = 'LOAD_PROJECTS';
-export const LOAD_TASKS = 'LOAD_TASKS';
+export const SELECT_TASK = 'SELECT_TASK';
 export const SELECT_PROJECT = 'SELECT_PROJECT';
 export const DESELECT_PROJECT = 'DESELECT_PROJECT';

@@ -9,11 +9,11 @@ import java.util.List;
 @Mapper(
         nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS,
         componentModel = "spring",
-        uses = {CommentMapper.class, UserMapper.class}
+        uses = {CommentMapper.class, UserMapper.class, TaskMapper.class}
 )
 public interface ProjectMapper {
 
-    @IterableMapping(qualifiedByName = "toShortDto")
+    @IterableMapping(qualifiedByName = "toShortProjectDto")
     List<ProjectDto> toShortProjectDtos(List<Project> projects);
 
     @Mappings({
@@ -21,14 +21,18 @@ public interface ProjectMapper {
             @Mapping(target = "startTime", ignore = true),
             @Mapping(target = "endTime", ignore = true),
             @Mapping(target = "status", ignore = true),
-            @Mapping(target = "comments", ignore = true)
+            @Mapping(target = "comments", ignore = true),
+            @Mapping(target = "developers", ignore = true),
+            @Mapping(target = "tasks", ignore = true)
     })
-    @Named("toShortDto")
-    ProjectDto toShortDto(Project project);
+    @Named("toShortProjectDto")
+    ProjectDto toShortProjectDto(Project project);
 
     @Mappings({
-            @Mapping(target = "comments", qualifiedByName = "toCommentsDtos"),
-            @Mapping(target = "developers", qualifiedByName = "toShortUsersDtos")
+            @Mapping(target = "comments", qualifiedByName = "toCommentDto"),
+            @Mapping(target = "developers", qualifiedByName = "toShortUserDto"),
+            @Mapping(target = "tasks", qualifiedByName = "toShortTaskDto")
     })
-    ProjectDto toFullDto(Project project);
+    @Named("toFullProjectDto")
+    ProjectDto toFullProjectDto(Project project);
 }

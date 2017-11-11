@@ -25,4 +25,7 @@ public class TaskDto {
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date endTime;
+
+    private List<CommentDto> comments;
+    private List<UserDto> developers;
 }

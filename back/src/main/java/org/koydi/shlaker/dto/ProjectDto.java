@@ -28,4 +28,6 @@ public class ProjectDto {
 
     private List<CommentDto> comments;
     private List<UserDto> developers;
+    private List<TaskDto> tasks;
+
 }

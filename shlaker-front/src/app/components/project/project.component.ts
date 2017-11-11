@@ -1,4 +1,3 @@
-import { PROJECT_ID } from './../routing.const';
 import { Component, OnInit } from '@angular/core';
 import { select } from 'ng2-redux';
 import { ActivatedRoute } from '@angular/router';
@@ -20,7 +19,7 @@ export class ProjectComponent implements OnInit {
 
     ngOnInit() {
         this.route.params.subscribe(params => {
-            this.projectService.getProject(params[PROJECT_ID]);
+            this.projectService.getProject(params['projectId']);
         });
     }
 

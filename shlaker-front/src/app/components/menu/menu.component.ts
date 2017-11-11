@@ -14,6 +14,7 @@ import { Router } from '@angular/router';
 export class MenuComponent implements OnInit {
 
     @select('projects') projects: Project[];
+    @select('selectedProject') selectedProject: Project;
 
     constructor(private projectService: ProjectService,
                 private ngRedux: NgRedux<IAppState>,
@@ -25,9 +26,10 @@ export class MenuComponent implements OnInit {
 
     selectProject(projectId) {
         if (projectId) {
-            this.router.navigate(['/project', { projectId: projectId }])
+            this.router.navigate(['/project', projectId]);
         } else {
-            // this.ngRedux.dispatch({  type: DESELECT_PROJECT})
+            this.ngRedux.dispatch({  type: DESELECT_PROJECT })
+            this.router.navigate(['/']);
         }
     }
 

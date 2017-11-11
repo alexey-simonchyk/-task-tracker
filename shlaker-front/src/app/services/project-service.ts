@@ -21,7 +21,7 @@ export class ProjectService {
   getProject(projectId) {
       this
           .http
-          .get('http://localhost:8090/shlaker/project/' + projectId)
+          .get(`http://localhost:8090/shlaker/project/${projectId}`)
           .toPromise()
           .then(data => this.ngRedux.dispatch({type: SELECT_PROJECT, project: data}));
   }
