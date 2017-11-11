@@ -1,0 +1,87 @@
+.nav_header {
+    background: firebrick;
+    color: #fff;
+    border-bottom: 1px solid #fff;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+}
+
+.nav_header_text {
+    align-self: center;
+    font-size: 40px;
+    font-weight: 600;
+    cursor: default
+}
+
+.nav_element_profile {
+    background: firebrick;
+    border-bottom: 1px solid #fff;
+    color: #fff;
+    padding-top: 15px;
+    padding-left: 20px;
+    padding-right: 20px;
+    display: inline-flex;
+    align-content: center;
+    flex-direction: column;
+}
+
+.avatar_image {
+    align-self: center;
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    box-shadow: 1px 1px 5px 0px rgba(0,0,0,0.35);
+}
+
+.nav_profile {
+    align-self: center;
+    font-size: 30px;
+    font-weight: 400;
+}
+
+.logout {
+    border: 1px solid #fff;
+    align-self: center;
+    font-size: 20px;
+    font-weight: 200;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 2px;
+}
+
+.logout:hover {
+    background: #fff;
+    color: firebrick;
+}
+
+.nav_element {
+    background: firebrick;
+    color: #fff;
+    /*    border-bottom: 1px solid #fff;*/
+    padding: 10px 20px;
+    cursor: pointer;
+    display: inline-flex;
+    align-content: center;
+    flex-direction: row;
+}
+
+.nav_element:hover {
+    background: #fff;
+    color: firebrick;
+}
+
+.nav_element:last-child {
+    border-bottom: 1px solid firebrick;
+}
+
+.down_arrow {
+    margin-left: auto;
+}
+
+.down_arrow_image {
+    height: 25px;
+    width: 25px;
+}

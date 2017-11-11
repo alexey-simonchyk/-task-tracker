@@ -1,7 +1,46 @@
-<p>
+<div class="nav_header">
+    <p class="nav_header_text">Shlaker</p>
+</div>
+<div class="nav_element_profile">
+    <img class="avatar_image" src="assets/images/default_user.png" alt="Avatar" />
+    <div class="nav_profile">
+        Nick
+    </div>
+    <div class="logout">
+        Logout
+    </div>
+</div>
+
+<div class="nav_element">
+    <p class="nav_projects">
+        My Projects
+    </p>
+    <p class="down_arrow">
+        <img class="down_arrow_image" src="assets/images/down_arrow.png" alt="Down Arrow">
+    </p>
+</div>
+
+<div class="nav_element">
+    <p class="nav_projects">
+        My Tasks
+    </p>
+    <p class="down_arrow">
+        <img class="down_arrow_image" src="assets/images/down_arrow.png" alt="Down Arrow">
+    </p>
+</div>
+
+<div class="nav_element">
+    <p class="nav_projects">
+        Some more
+    </p>
+    <p class="down_arrow">
+        <img class="down_arrow_image" src="assets/images/down_arrow.png" alt="Down Arrow">
+    </p>
+</div>
+<!--<p>
     {{ projects | async | json }}
     <select (change)="selectProject($event.target.value)">
         <option></option>
         <option *ngFor="let project of projects | async" [value]="project.id" [selected]="project.id == (selectedProject | async)?.id">{{project.name}}</option>
     </select>
-</p>
+</p>-->

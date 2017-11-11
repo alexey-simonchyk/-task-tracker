@@ -1,0 +1,23 @@
+.nav {
+    flex: 1 0 270px;
+    display: inline-flex;
+    background: firebrick;
+    flex-wrap: wrap;
+    flex-direction: column;
+    box-shadow: 3px 2px 17px 0px rgba(0,0,0,0.52);
+}
+
+.content {
+    overflow: auto;
+    flex: 1 1 auto;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+.select-project-text {
+    font-size: 70px;
+    font-weight: 900;
+    color: grey;
+    align-self: center;
+}
