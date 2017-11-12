@@ -1,5 +1,26 @@
-<h1>Tasks</h1>
-<div *ngFor="let task of tasks">
-    <a [routerLink]="['/task', task.id]">{{task.name}} - {{task.status}}</a>
+<div class="project_tasks_container">
+    <div class="tasks_table">
+
+        <div class="task_table_status">
+            <div class="task_table_header_side">Appointed</div>
+            <div class="task_table_content_side">
+                <inner-task *ngFor="let task of getTasks('APPOINTED')" [task]="task" class="table_task"></inner-task>
+            </div>
+        </div>
+        
+        <div class="task_table_status">
+            <div class="task_table_header_middle">Performnig</div>
+            <div class="task_table_content_middle">
+                <inner-task *ngFor="let task of getTasks('PERFORMING')" [task]="task" class="table_task"></inner-task>
+            </div>
+        </div>
+
+        <div class="task_table_status">
+            <div class="task_table_header_side">Fulfilled</div>
+            <div class="task_table_content_side">
+                <inner-task *ngFor="let task of getTasks('FULFILLED')" [task]="task" class="table_task"></inner-task>
+            </div>
+        </div>
+
+    </div>
 </div>
-<hr>

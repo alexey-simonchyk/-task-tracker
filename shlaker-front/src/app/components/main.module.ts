@@ -16,6 +16,7 @@ import { TaskComponent } from './task/task.component';
 import { TaskCommentsComponent } from './task/task-comments/task-comments.component';
 import { ProjectCreateComponent } from './project/project-create/project-create.component';
 import { EmptyComponent } from './main/empty/empty.component';
+import { InnerTaskComponent } from './project/project-tasks/inner-task/inner-task.component';
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import { EmptyComponent } from './main/empty/empty.component';
         TaskCommentsComponent,
         ProjectCreateComponent,
         EmptyComponent,
+        InnerTaskComponent,
     ],
     imports: [
         BrowserModule,

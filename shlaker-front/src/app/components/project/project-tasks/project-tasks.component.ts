@@ -16,4 +16,8 @@ export class ProjectTasksComponent implements OnInit {
 
     }
 
+    getTasks(status) {
+        return this.tasks ? this.tasks.filter(t => t.status == status) : [];
+    }
+
 }

@@ -4,4 +4,20 @@
     min-height: 91%;
     margin: 1%;
     padding: 2%;
+    color: black;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.project_name_text {
+    font-size: 50px;
+    font-weight: 900;
+    border-bottom: 2px solid firebrick;
+    width: 100%;
+    text-align: center;
+}
+
+.full_width {
+    width: 100%;
 }

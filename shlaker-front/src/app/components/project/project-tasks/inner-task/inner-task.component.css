@@ -1,0 +1,40 @@
+.task_header {
+    font-size: 20px;
+    font-weight: 400;
+    cursor: pointer;
+}
+
+.task_description {
+    font-size: 18px;
+    font-weight: 300;
+    color: rgb(70, 63, 63);
+}
+
+.task_information {
+    display: inline-flex;
+}
+
+.task_developers {
+    display: inline-flex;
+    width: 100%;
+}
+
+.task_developer {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.developer_task_wrapper {
+    margin-right: 3px;
+}
+
+.task_end_time {
+    width: 100%;
+    margin-left: auto;
+    font-size: 18px;
+    font-weight: 300;
+    color: rgb(70, 63, 63);
+    padding-top: 10px;
+    padding-right: 10px;
+}
