@@ -17,7 +17,7 @@ export class MenuComponent implements OnInit {
     @select('projects') projects: Project[];
     @select('selectedProject') selectedProject: Project;
 
-    state = {projects: false, tasks: false};
+    menuState = {projects: false};
 
     constructor(private projectService: ProjectService,
                 private ngRedux: NgRedux<IAppState>,
@@ -27,33 +27,21 @@ export class MenuComponent implements OnInit {
         this.projectService.getProjects();
     }
 
-    selectProject(projectId) {
-        if (projectId) {
-            this.router.navigate(['/project', projectId]);
-        } else {
-            this.ngRedux.dispatch({  type: DESELECT_PROJECT })
-            this.router.navigate(['/']);
-        }
-    }
-
-    changeState(target) {
+    changeMenuState(target) {
         let element;
         switch (target) {
             case 'projects':
                 element = $('#projects_close');
                 break;
-            case 'tasks':
-                element = $('#tasks_close');
-                break;
         }
 
-        if (this.state[target]) {
+        if (this.menuState[target]) {
             element.slideDown('slow');
         } else {
             element.slideUp('slow');
         }
 
-        this.state[target] = !this.state[target];
+        this.menuState[target] = !this.menuState[target];
     }
 
 }

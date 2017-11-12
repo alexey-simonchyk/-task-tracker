@@ -14,6 +14,8 @@ import { RouterModule } from '@angular/router';
 import { MAIN_ROUTE } from './routing';
 import { TaskComponent } from './task/task.component';
 import { TaskCommentsComponent } from './task/task-comments/task-comments.component';
+import { ProjectCreateComponent } from './project/project-create/project-create.component';
+import { EmptyComponent } from './main/empty/empty.component';
 
 
 @NgModule({
@@ -25,6 +27,8 @@ import { TaskCommentsComponent } from './task/task-comments/task-comments.compon
         ProjectTasksComponent,
         TaskComponent,
         TaskCommentsComponent,
+        ProjectCreateComponent,
+        EmptyComponent,
     ],
     imports: [
         BrowserModule,

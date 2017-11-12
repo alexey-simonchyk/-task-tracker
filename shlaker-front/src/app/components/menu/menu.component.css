@@ -5,13 +5,18 @@
     height: 80px;
     display: flex;
     justify-content: center;
+    cursor: pointer;
 }
 
 .nav_header_text {
     align-self: center;
     font-size: 40px;
     font-weight: 600;
-    cursor: default
+    cursor: pointer;
+}
+
+.nav_header_text:focus {
+    outline: none;
 }
 
 .nav_element_profile {
@@ -70,6 +75,8 @@
 
 .down_arrow {
     margin-left: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .down_arrow_image {
@@ -103,9 +110,15 @@
     padding-bottom: 5px;
     padding-top: 5px;
     cursor: pointer;
+    font-size: 25px;
 }
 
 .list_element:hover {
     color: firebrick;
     background: #fff;
+}
+
+.menu_header {
+    margin-top: 10px;
+    margin-bottom: 10px;
 }

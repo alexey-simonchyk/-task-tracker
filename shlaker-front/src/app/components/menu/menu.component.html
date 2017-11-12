@@ -1,5 +1,5 @@
 <div class="nav_header">
-    <p class="nav_header_text">Shlaker</p>
+    <div class="no_select nav_header_text" [routerLink]="['/']">Shlaker</div>
 </div>
 
 <div class="nav_element_profile">
@@ -13,37 +13,19 @@
 </div>
 
 <div #piu class="nav_element">
-    <div class="nav_element_header" (click)="changeState('projects')">
-        <p>Projects</p>
-        <p class="down_arrow">
+    <div class="nav_element_header" (click)="changeMenuState('projects')">
+        <div class="menu_header">Projects</div>
+        <div class="down_arrow">
             <img class="down_arrow_image" src="assets/images/down_arrow.png" alt="Down Arrow">
-        </p>
+        </div>
     </div>
     <div id="projects_close" class="nav_element_list">
-        <div class="list_element">One</div>
-        <div class="list_element">Two</div>
-        <div class="list_element">Three</div>
+        <div *ngFor="let project of projects | async" [routerLink]="['/project', project.id]" class="list_element">{{project.name}}</div>
     </div>
 </div>
 
 <div class="nav_element">
-    <div class="nav_element_header" (click)="changeState('tasks')">
-        <p>Tasks</p>
-        <p class="down_arrow">
-            <img class="down_arrow_image" src="assets/images/down_arrow.png" alt="Down Arrow">
-        </p>
-    </div>
-    <div id="tasks_close" class="nav_element_list">
-        <div class="list_element">One</div>
-        <div class="list_element">Two</div>
-        <div class="list_element">Three</div>
+    <div class="nav_element_header">
+        <div [routerLink]="['/project/create']" class="menu_header">Create Project</div>
     </div>
 </div>
-
-<!--<p>
-    {{ projects | async | json }}
-    <select (change)="selectProject($event.target.value)">
-        <option></option>
-        <option *ngFor="let project of projects | async" [value]="project.id" [selected]="project.id == (selectedProject | async)?.id">{{project.name}}</option>
-    </select>
-</p>-->

@@ -1,8 +1,10 @@
-<div *ngIf="(selectedProject | async)">
-    <project-tasks [tasks]="(selectedProject | async).tasks"></project-tasks>
-    <project-comments [comments]="(selectedProject | async).comments"></project-comments>
-</div>
+<div class="project_container">
+    <div *ngIf="(selectedProject | async)">
+        <project-tasks [tasks]="(selectedProject | async).tasks"></project-tasks>
+        <project-comments [comments]="(selectedProject | async).comments"></project-comments>
+    </div>
 
-<div *ngIf="!(selectedProject | async)">
-    Select the project
+    <div *ngIf="!(selectedProject | async)">
+        Select the project
+    </div>
 </div>

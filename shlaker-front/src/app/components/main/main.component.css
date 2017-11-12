@@ -13,11 +13,5 @@
     display: flex;
     width: 100%;
     justify-content: center;
-}
-
-.select-project-text {
-    font-size: 70px;
-    font-weight: 900;
-    color: grey;
-    align-self: center;
+    align-items: center;
 }

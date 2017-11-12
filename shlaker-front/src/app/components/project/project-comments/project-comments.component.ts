@@ -1,3 +1,4 @@
+import { Comment } from './../../../models/comment.model';
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
