@@ -5,7 +5,6 @@
 
     <div *ngIf="!isCollapsed" class="comment_list_container">
         <project-comment *ngFor="let comment of comments" [comment]="comment"></project-comment>
-        <!--<p *ngFor="let comment of comments">{{comment.user.nick}} - {{comment.text}}</p>-->
     </div>
 </div>
 

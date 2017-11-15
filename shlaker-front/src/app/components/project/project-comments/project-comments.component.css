@@ -21,6 +21,10 @@
     cursor: pointer;
 }
 
+.collapsed_comments:hover {
+    background: #f3f4f4;
+}
+
 .comment_list_container {
     display: flex;
     flex-direction: column;

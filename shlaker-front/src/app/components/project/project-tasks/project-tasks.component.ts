@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Task } from "../../../models/task.model";
 import * as $ from 'jquery';
+import { TaskService } from '../../../services/task-service';
 
 @Component({
   selector: 'project-tasks',
@@ -12,7 +13,9 @@ export class ProjectTasksComponent implements OnInit {
     @Input("tasks") tasks: Task[];
     private draggedTask = null;
 
-    constructor() { }
+    constructor(
+        private taskService: TaskService
+    ) { }
 
     ngOnInit() {
 
@@ -31,7 +34,8 @@ export class ProjectTasksComponent implements OnInit {
         event.preventDefault();
         $(event.target).removeClass('drop_here');
         let data = event.dataTransfer.getData("task_id");
-        this.tasks.find(task => task.id === data).status = status;
+        // this.tasks.find(task => task.id === data).status = status;
+        this.taskService.updateTaskStatus(data, status);
     }
 
     allowDrag(event) {

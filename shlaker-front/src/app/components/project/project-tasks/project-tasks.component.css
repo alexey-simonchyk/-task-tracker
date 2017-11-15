@@ -34,14 +34,13 @@
     border-left: 2px solid #e8e9e9;
     display: flex;
     flex-direction: column;
-    height: 65vh;
-    overflow: auto;
+    min-height: 65vh;
+    height: 95%;
 }
 
 .task_table_content_side {
     display: flex;
-    height: 65vh;
-    overflow: auto;
+    min-height: 65vh;
     flex-direction: column;
 }
 
@@ -59,5 +58,5 @@
 }
 
 .drop_here {
-    background: black;
+    background: #f3f4f4;
 }

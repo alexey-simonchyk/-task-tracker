@@ -17,9 +17,23 @@ import java.util.Set;
 @NamedEntityGraph(
         name = "FullProject",
         attributeNodes = {
-                @NamedAttributeNode(value = "comments"),
+                @NamedAttributeNode(value = "comments", subgraph = "commentsWithUser"),
                 @NamedAttributeNode(value = "developers"),
-                @NamedAttributeNode(value = "tasks")
+                @NamedAttributeNode(value = "tasks", subgraph = "taskWithDevelopers")
+        },
+        subgraphs = {
+                @NamedSubgraph(
+                        name = "taskWithDevelopers",
+                        attributeNodes = {
+                                @NamedAttributeNode("developers")
+                    }
+                ),
+                @NamedSubgraph(
+                        name = "commentsWithUser",
+                        attributeNodes = {
+                                @NamedAttributeNode("user")
+                        }
+                )
         }
 )
 public class Project extends BaseEntity {
