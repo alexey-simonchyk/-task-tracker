@@ -27,7 +27,6 @@ export class TaskService {
           .toPromise()
           .then(res => this.ngRedux.dispatch({ type: UPDATE_TASK_STATUS, taskId: taskId, status: taskStatus}),
             err => console.log(err));
-      // this.ngRedux.dispatch({ type: UPDATE_TASK_STATUS, taskId: taskId, status: taskStatus});
   }
 
 }

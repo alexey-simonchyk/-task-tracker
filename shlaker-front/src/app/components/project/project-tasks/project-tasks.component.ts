@@ -11,7 +11,6 @@ import { TaskService } from '../../../services/task-service';
 export class ProjectTasksComponent implements OnInit {
 
     @Input("tasks") tasks: Task[];
-    private draggedTask = null;
 
     constructor(
         private taskService: TaskService
@@ -27,15 +26,15 @@ export class ProjectTasksComponent implements OnInit {
 
     onDragStart(event, task) {
         event.dataTransfer.setData("task_id", task.id);
-        this.draggedTask = task;
     }
 
     onDrop(event, status) {
         event.preventDefault();
         $(event.target).removeClass('drop_here');
-        let data = event.dataTransfer.getData("task_id");
-        // this.tasks.find(task => task.id === data).status = status;
-        this.taskService.updateTaskStatus(data, status);
+        let data = event.dataTransfer.getData('task_id');
+        if (this.tasks.find(t => t.id == data).status !== status) {
+            this.taskService.updateTaskStatus(data, status);
+        }
     }
 
     allowDrag(event) {

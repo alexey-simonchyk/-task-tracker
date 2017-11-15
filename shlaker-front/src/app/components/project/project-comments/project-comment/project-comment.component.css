@@ -15,6 +15,7 @@
 }
 
 .comment_text {
+    font-family: monospace;
     padding-top: 5px;
     font-size: 20px;
     font-weight: 400;
@@ -27,6 +28,7 @@
 }
 
 .comment_body {
+    width: 100%;
     padding-top: 15px;
     padding-left: 30px;
     display: flex;
@@ -34,5 +36,16 @@
 }
 
 .user_name {
+    color: indianred;
+    display: flex;
     font-size: 25px;
+}
+
+.creation_time {
+    padding-right: 20px;
+    padding-top: 13px;
+    font-weight: 300;
+    font-size: 13px;
+    margin-right: auto;
+    color: #5a7171;
 }
