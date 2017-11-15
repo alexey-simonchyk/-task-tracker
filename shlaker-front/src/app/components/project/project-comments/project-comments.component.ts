@@ -1,4 +1,4 @@
-import { Comment } from './../../../models/comment.model';
+import { Comment } from '../../../models/comment.model';
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
@@ -9,10 +9,15 @@ import { Component, Input, OnInit } from '@angular/core';
 export class ProjectCommentsComponent implements OnInit {
 
   @Input('comments') public comments: Comment[];
+  isCollapsed: boolean = true;
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  changeCollapse() {
+      this.isCollapsed = !this.isCollapsed;
   }
 
 }

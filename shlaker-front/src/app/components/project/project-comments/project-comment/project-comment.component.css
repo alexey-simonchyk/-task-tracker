@@ -1,0 +1,38 @@
+.comment_wrapper {
+    margin: 15px 0;
+    display: flex;
+    padding: 0 15px 20px;
+    border-radius: 35px;
+    border: 2px solid #e8e9e9;
+}
+
+.comment_image {
+    align-self: center;
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    box-shadow: 1px 1px 5px 0px rgba(0,0,0,0.35);
+}
+
+.comment_text {
+    padding-top: 5px;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.comment_image_wrapper {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.comment_body {
+    padding-top: 15px;
+    padding-left: 30px;
+    display: flex;
+    flex-direction: column;
+}
+
+.user_name {
+    font-size: 25px;
+}

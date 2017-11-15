@@ -1,5 +1,11 @@
 <div class="project_comments_container">
     <div class="project_comments_text">Comments</div>
-    <p *ngFor="let comment of comments">{{comment.user.nick}} - {{comment.text}}</p>
+    <div *ngIf="isCollapsed" (click)="changeCollapse()" class="collapsed_comments">Show comments</div>
+    <div *ngIf="!isCollapsed" (click)="changeCollapse()" class="collapsed_comments">Hide comments</div>
+
+    <div *ngIf="!isCollapsed" class="comment_list_container">
+        <project-comment *ngFor="let comment of comments" [comment]="comment"></project-comment>
+        <!--<p *ngFor="let comment of comments">{{comment.user.nick}} - {{comment.text}}</p>-->
+    </div>
 </div>
 

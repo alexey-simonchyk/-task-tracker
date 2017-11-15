@@ -1,5 +1,27 @@
 .project_comments_text {
     padding-top: 15px;
     font-size: 30px;
-    font-weight: 600;
+    font-weight: 500;
+}
+
+.project_comments_container {
+    display: flex;
+    flex-direction: column;
+}
+
+.collapsed_comments {
+    font-size: 20px;
+    font-weight: 400;
+    color: black;
+    text-align: center;
+    border-radius: 2px;
+    border: 1px solid #e8e9e9;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    cursor: pointer;
+}
+
+.comment_list_container {
+    display: flex;
+    flex-direction: column;
 }
