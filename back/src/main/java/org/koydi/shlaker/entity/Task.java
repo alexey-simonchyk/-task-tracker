@@ -17,7 +17,16 @@ import java.util.Set;
 @NamedEntityGraph(
         name = "FullTask",
         attributeNodes = {
-                @NamedAttributeNode(value = "comments")
+                @NamedAttributeNode(value = "comments", subgraph = "commentWithUser"),
+                @NamedAttributeNode(value = "developers")
+        },
+        subgraphs = {
+                @NamedSubgraph(
+                        name = "commentsWithUser",
+                        attributeNodes = {
+                                @NamedAttributeNode(value = "user")
+                        }
+                )
         }
 )
 public class Task extends BaseEntity {

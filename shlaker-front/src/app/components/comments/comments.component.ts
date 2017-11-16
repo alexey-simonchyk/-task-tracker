@@ -1,12 +1,12 @@
-import { Comment } from '../../../models/comment.model';
+import { Comment } from '../../models/comment.model';
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'project-comments',
-  templateUrl: './project-comments.component.html',
-  styleUrls: ['./project-comments.component.css'],
+  selector: 'comments',
+  templateUrl: './comments.component.html',
+  styleUrls: ['./comments.component.css'],
 })
-export class ProjectCommentsComponent implements OnInit {
+export class CommentsComponent implements OnInit {
 
   @Input('comments') public comments: Comment[];
   isCollapsed: boolean = true;

@@ -4,7 +4,7 @@
     <div *ngIf="!isCollapsed" (click)="changeCollapse()" class="collapsed_comments">Hide comments</div>
 
     <div *ngIf="!isCollapsed" class="comment_list_container">
-        <project-comment *ngFor="let comment of comments" [comment]="comment"></project-comment>
+        <comment *ngFor="let comment of comments" [comment]="comment"></comment>
         <div>Your message:</div>
         <textarea class="comment_input no_select" cols="92" rows="7" tabindex="101" ></textarea>
     </div>

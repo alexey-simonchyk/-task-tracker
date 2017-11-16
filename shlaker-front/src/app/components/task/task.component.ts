@@ -4,6 +4,7 @@ import { TaskService } from '../../services/task-service';
 import { IAppState } from "../../app.store";
 import { ActivatedRoute } from '@angular/router';
 import { Task } from '../../models/task.model';
+import { Project } from '../../models/project.model';
 
 @Component({
     templateUrl: './task.component.html',
@@ -11,7 +12,9 @@ import { Task } from '../../models/task.model';
 })
 export class TaskComponent implements OnInit {
 
+    @select('selectedProject') selectedProject: Project;
     @select('selectedTask') selectedTask: Task;
+    projectId: string;
 
     constructor(
         private ngRedux: NgRedux<IAppState>,
@@ -22,6 +25,7 @@ export class TaskComponent implements OnInit {
     ngOnInit() {
         this.route.params.subscribe(params => {
             let taskId = params['taskId'];
+            this.projectId = params['projectId'];
             this.taskService.getTask(taskId);
         })
     }

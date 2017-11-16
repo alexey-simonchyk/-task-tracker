@@ -7,18 +7,19 @@ import { ProjectService } from '../services/project-service';
 import { CommonModule } from '@angular/common';
 import { MenuComponent } from './menu/menu.component';
 import { ProjectComponent } from './project/project.component';
-import { ProjectCommentsComponent } from './project/project-comments/project-comments.component';
+import { CommentsComponent } from './comments/comments.component';
 import { ProjectTasksComponent } from './project/project-tasks/project-tasks.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { MAIN_ROUTE } from './routing';
 import { TaskComponent } from './task/task.component';
-import { TaskCommentsComponent } from './task/task-comments/task-comments.component';
 import { ProjectCreateComponent } from './project/project-create/project-create.component';
 import { EmptyComponent } from './main/empty/empty.component';
 import { InnerTaskComponent } from './project/project-tasks/inner-task/inner-task.component';
-import { ProjectCommentComponent } from './project/project-comments/project-comment/project-comment.component';
+import { CommentComponent } from './comments/comment/comment.component';
 import { FormsModule } from '@angular/forms';
+import { TaskCreateComponent } from './task/task-create/task-create.component';
+import { ProjectDescriptionComponent } from './project/project-description/project-description.component';
 
 
 @NgModule({
@@ -26,14 +27,15 @@ import { FormsModule } from '@angular/forms';
         MainComponent,
         MenuComponent,
         ProjectComponent,
-        ProjectCommentsComponent,
+        CommentsComponent,
         ProjectTasksComponent,
         TaskComponent,
-        TaskCommentsComponent,
         ProjectCreateComponent,
         EmptyComponent,
         InnerTaskComponent,
-        ProjectCommentComponent,
+        CommentComponent,
+        TaskCreateComponent,
+        ProjectDescriptionComponent,
     ],
     imports: [
         BrowserModule,

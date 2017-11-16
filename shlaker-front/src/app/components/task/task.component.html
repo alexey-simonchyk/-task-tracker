@@ -1,4 +1,22 @@
-<div *ngIf="selectedTask | async">
-    {{selectedTask | async | json}}
+<div class="full_width detailed_task_information">
+
+    <div class="detailed_task_name">
+        <div>Task name:</div>
+        <div>{{(selectedTask | async)?.name}}</div>
+    </div>
+
+    <div class="detailed_task_description">
+        <div>Task description:</div>
+        <div>{{(selectedTask | async)?.description}}</div>
+    </div>
+
+    <div class="detailed_task_end_time">
+        <div>Task edn time:</div>
+        <div>{{(selectedTask | async)?.endTime}}</div>
+    </div>
+
 </div>
-<task-comments [comments]="(selectedTask | async)?.comments"></task-comments>
+<comments class="full_width" [comments]="(selectedTask | async)?.comments"></comments>
+
+<!--<div [routerLink]="['/project', projectId]">back to porject</div>-->
+<!--<comments [comments]="(selectedTask | async)?.comments"></comments>-->

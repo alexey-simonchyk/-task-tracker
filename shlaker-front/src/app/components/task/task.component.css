@@ -1,0 +1,34 @@
+.task_container {
+    background: #fff;
+    border-radius: 8px;
+    min-height: 90%;
+    margin: 1%;
+    padding: 2%;
+    color: black;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.full_width {
+    width: 100%;
+}
+
+.detailed_task_information {
+    display: flex;
+    flex-direction: column;
+    min-height: 69vh;
+    margin-top: 15px;
+    padding: 10px;
+}
+
+.detailed_task_name {
+}
+
+.detailed_task_description {
+    margin-top: 20px;
+}
+
+.detailed_task_end_time {
+    margin-top: 20px;
+}

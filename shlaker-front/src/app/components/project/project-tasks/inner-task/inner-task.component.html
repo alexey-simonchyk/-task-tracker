@@ -1,4 +1,4 @@
-<div class="task_header">{{task.name}}</div>
+<div class="task_header" [routerLink]="['./task', task.id]">{{task.name}}</div>
 <div class="task_description">
     {{task.description}}
 </div>
