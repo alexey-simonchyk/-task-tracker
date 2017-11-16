@@ -23,7 +23,12 @@ export class ProjectService {
           .http
           .get(`http://localhost:8090/shlaker/project/${projectId}`)
           .toPromise()
-          .then(data => this.ngRedux.dispatch({type: SELECT_PROJECT, project: data}));
+          .then(data => {
+              this.ngRedux.dispatch({type: SELECT_PROJECT, project: data})
+          },
+              err => {
+                  console.log(err);
+              });
   }
 
   createProject(project) {
