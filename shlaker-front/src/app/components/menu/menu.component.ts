@@ -3,7 +3,6 @@ import { NgRedux, select } from 'ng2-redux';
 import { Project } from '../../models/project.model';
 import { ProjectService } from '../../services/project-service';
 import { IAppState } from '../../app.store';
-import { DESELECT_PROJECT } from "../../actions";
 import { Router } from '@angular/router';
 import * as $ from 'jquery';
 

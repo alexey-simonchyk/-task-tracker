@@ -1,15 +1,29 @@
 import { Component, OnInit } from '@angular/core';
+import { Project } from '../../../models/project.model';
+import { ProjectService } from '../../../services/project-service';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-project-create',
   templateUrl: './project-create.component.html',
   styleUrls: ['./project-create.component.css']
 })
 export class ProjectCreateComponent implements OnInit {
 
-  constructor() { }
+    newProject: Project = new Project();
 
-  ngOnInit() {
-  }
+    constructor(
+        private projectService: ProjectService,
+        private router: Router
+    ) { }
+
+    ngOnInit() {
+    }
+
+    onSubmit() {
+        this
+            .projectService
+            .createProject(this.newProject)
+            .then(data => this.router.navigate(['/']));
+    }
 
 }

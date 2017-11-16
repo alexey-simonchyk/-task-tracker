@@ -45,14 +45,14 @@ public class Project extends BaseEntity {
     private String description;
 
     @Column(name = "start_time")
-    private Date startTime;
+    private Date startTime = new Date();
 
     @Column(name = "end_time")
     private Date endTime;
 
     @Column(name = "status", columnDefinition = "varchar")
     @Enumerated(EnumType.STRING)
-    private ProjectStatus status;
+    private ProjectStatus status = ProjectStatus.DEVELOPING;
 
     @OneToMany(mappedBy = "project", fetch = FetchType.LAZY)
     private Set<Task> tasks = new HashSet<>();

@@ -25,3 +25,14 @@ ng-component {
 .no_select:focus {
     outline: none;
 }
+
+input[type=date]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    display: none;
+}
+
+
+input[type=date]::-webkit-calendar-picker-indicator:hover {
+    background: white;
+    cursor: pointer;
+}

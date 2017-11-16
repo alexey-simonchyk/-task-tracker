@@ -1,6 +1,7 @@
 package org.koydi.shlaker.service;
 
 import org.koydi.shlaker.entity.Project;
+import org.koydi.shlaker.entity.ProjectStatus;
 import org.koydi.shlaker.repository.ProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,5 +24,10 @@ public class ProjectService {
 
     public Project getProject(String projectId) {
         return projectRepository.getFullProject(projectId);
+    }
+
+    public Project createProject(Project newProject) {
+        newProject = projectRepository.save(newProject);
+        return newProject;
     }
 }

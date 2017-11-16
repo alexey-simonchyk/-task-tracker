@@ -35,4 +35,14 @@ public interface ProjectMapper {
     })
     @Named("toFullProjectDto")
     ProjectDto toFullProjectDto(Project project);
+
+    @Mappings({
+            @Mapping(target = "startTime", ignore = true),
+            @Mapping(target = "status", ignore = true),
+            @Mapping(target = "comments", ignore = true),
+            @Mapping(target = "developers", ignore = true),
+            @Mapping(target = "tasks", ignore = true),
+            @Mapping(target = "id", ignore = true)
+    })
+    Project fromProjectDto(ProjectDto projectDto);
 }

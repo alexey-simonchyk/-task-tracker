@@ -1,6 +1,9 @@
 import { Task } from './models/task.model';
 import { Project } from './models/project.model';
-import { DESELECT_PROJECT, LOAD_PROJECTS, SELECT_PROJECT, SELECT_TASK, UPDATE_TASK_STATUS } from './actions';
+import {
+    ADD_PROJECT, DESELECT_PROJECT, LOAD_PROJECTS, SELECT_PROJECT, SELECT_TASK,
+    UPDATE_TASK_STATUS
+} from './actions';
 import { IAppState } from './app.store';
 
 export interface IAppState {
@@ -17,7 +20,8 @@ export const INITIAL_STATE: IAppState = {
 
 export function projectReducer(state = [], action) {
     switch(action.type) {
-        case LOAD_PROJECTS: return action.projects
+        case LOAD_PROJECTS: return action.projects;
+        case ADD_PROJECT: return [...state, action.project];
     }
     return state;
 }

@@ -1,0 +1,72 @@
+.create_project_wrapper {
+    background: #fff;
+    border-radius: 8px;
+    min-height: 94%;
+    margin: 1%;
+    padding: 2%;
+    color: black;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.create_project_header {
+    font-size: 50px;
+    font-weight: 900;
+    border-bottom: 2px solid firebrick;
+    width: 100%;
+    text-align: center;
+}
+
+.create_project_body {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+.create_project_form {
+    width: 50%;
+    margin-top: 1%;
+    display: flex;
+    flex-direction: column;
+    /*justify-content: center;*/
+}
+
+.create_project_form_element {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+.create_project_description_text {
+    font-size: 20px;
+    padding: 7px;
+    border-radius: 10px;
+    resize: none;
+    border: 2px solid firebrick;
+}
+
+.create_project_name_text {
+    border-radius: 10px;
+    font-size: 20px;
+    padding: 7px;
+    border: 2px solid firebrick;
+}
+
+.project_create_button {
+    font-size: 20px;
+    font-weight: 500;
+    padding: 3%;
+    width: 50%;
+    align-self: center;
+    color: firebrick;
+    background: #fff;
+    border: 2px solid firebrick;
+    cursor: pointer;
+}
+
+.project_create_button:hover {
+    color: #fff;
+    background: firebrick;
+}

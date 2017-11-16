@@ -5,6 +5,7 @@
 }
 
 .task_description {
+    font-family: monospace;
     font-size: 18px;
     font-weight: 300;
     color: rgb(70, 63, 63);

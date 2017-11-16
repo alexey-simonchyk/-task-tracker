@@ -12,7 +12,7 @@
     </div>
 </div>
 
-<div #piu class="nav_element">
+<div class="nav_element">
     <div class="nav_element_header" (click)="changeMenuState('projects')">
         <div class="menu_header">Projects</div>
         <div class="down_arrow">
@@ -20,12 +20,12 @@
         </div>
     </div>
     <div id="projects_close" class="nav_element_list">
-        <div *ngFor="let project of projects | async" [routerLink]="['/project', project.id]" class="list_element">{{project.name}}</div>
+        <div *ngFor="let project of projects | async" [routerLink]="['/project', project.id]" class="list_element no_select">{{project.name}}</div>
     </div>
 </div>
 
 <div class="nav_element">
     <div class="nav_element_header">
-        <div [routerLink]="['/project/create']" class="menu_header">Create Project</div>
+        <div [routerLink]="['/project/create']" class="menu_header no_select">Create Project</div>
     </div>
 </div>

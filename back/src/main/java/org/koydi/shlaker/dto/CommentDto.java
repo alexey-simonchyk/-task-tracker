@@ -16,7 +16,8 @@ public class CommentDto {
     private String id;
     private String text;
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    //@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date creationTime;
 
     private UserDto user;

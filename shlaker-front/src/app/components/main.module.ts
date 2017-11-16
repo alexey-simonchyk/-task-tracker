@@ -18,6 +18,7 @@ import { ProjectCreateComponent } from './project/project-create/project-create.
 import { EmptyComponent } from './main/empty/empty.component';
 import { InnerTaskComponent } from './project/project-tasks/inner-task/inner-task.component';
 import { ProjectCommentComponent } from './project/project-comments/project-comment/project-comment.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { ProjectCommentComponent } from './project/project-comments/project-comm
     imports: [
         BrowserModule,
         CommonModule,
-        RouterModule.forRoot(MAIN_ROUTE)
+        RouterModule.forRoot(MAIN_ROUTE),
+        FormsModule
     ],
     exports: [
         MainComponent

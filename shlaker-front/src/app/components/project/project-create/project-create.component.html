@@ -1,3 +1,61 @@
-<p>
-  project-create works!
-</p>
+<div class="create_project_wrapper">
+    <div class="create_project_header">
+        Create New Project
+    </div>
+
+    <div class="create_project_body">
+        <form (ngSubmit)="onSubmit()" #createProjectForm="ngForm" class="create_project_form">
+
+            <div class="create_project_form_element">
+                <label for="project_name">Project name:</label>
+                <input type="text"
+                       class="create_project_name_text no_select"
+                       id="project_name"
+                       name="name"
+                       placeholder="Project name"
+                       [(ngModel)]="newProject.name"
+                       required
+                       #name="ngModel"
+                />
+                <!--<div [hidden]="name.valid || name.pristine">
+                    Name is required
+                </div>-->
+            </div>
+
+            <div class="create_project_form_element">
+                <label for="project_end_time">Project end time:</label>
+                <input type="date"
+                       class="create_project_name_text no_select"
+                       id="project_end_time"
+                       name="endTime"
+                       [(ngModel)]="newProject.endTime"
+                       required
+                       #endTime="ngModel"
+                />
+                <!--<div [hidden]="endTime.valid || endTime.pristine">
+                    Name is required
+                </div>-->
+            </div>
+
+            <div class="create_project_form_element">
+                <label for="project_description">Project description:</label>
+                <textarea class="create_project_description_text no_select" rows="15" type="text"
+                       id="project_description"
+                       name="description"
+                       [(ngModel)]="newProject.description"
+                       required
+                       placeholder="Project description"
+                       #description="ngModel"
+                ></textarea>
+               <!-- <div [hidden]="description.valid || description.pristine">
+                    Name is required
+                </div>-->
+            </div>
+
+            <div class="create_project_form_element">
+                <button [disabled]="!createProjectForm.form.valid" class="project_create_button no_select" type="submit">Button</button>
+            </div>
+            <!--{{newProject | json}}-->
+        </form>
+    </div>
+</div>
