@@ -19,4 +19,10 @@ public interface UserMapper {
     @Named("toShortUserDto")
     UserDto toShortDto(User user);
 
+    @Named("fromUserDto")
+    @Mappings({
+            @Mapping(target = "password", ignore = true),
+            @Mapping(target = "email", ignore = true)
+    })
+    User fromUserDto(UserDto userDto);
 }

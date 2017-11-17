@@ -16,4 +16,10 @@ public interface CommentMapper {
     @Named("toCommentDto")
     @Mapping(target = "user", qualifiedByName = "toShortUserDto")
     CommentDto toCommentDto(Comment comment);
+
+    @Mappings({
+            @Mapping(target = "creationTime", ignore = true),
+            @Mapping(target = "user", qualifiedByName = "fromUserDto")
+    })
+    Comment fromCommentDto(CommentDto commentDto);
 }

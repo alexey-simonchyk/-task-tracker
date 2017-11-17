@@ -1,4 +1,4 @@
-import { NgRedux, NgReduxModule } from 'ng2-redux';
+import { NgRedux, NgReduxModule, DevToolsExtension } from 'ng2-redux';
 import {
     IAppState, INITIAL_STATE, projectReducer,
     selectedTaskReducer, selectedProjectReducer
@@ -29,11 +29,16 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   bootstrap: [AppComponent]
 })
 export class AppModule {
-    constructor(ngRedux: NgRedux<IAppState>) {
+    constructor(ngRedux: NgRedux<IAppState>, ngReduxDev: DevToolsExtension) {
+        let enhancers = [];
+
+        if (ngReduxDev.isEnabled()) {
+            enhancers = [ ...enhancers, ngReduxDev.enhancer() ];
+        }
         ngRedux.configureStore(combineReducers({
             projects: projectReducer,
             selectedTask: selectedTaskReducer,
             selectedProject: selectedProjectReducer
-        }), INITIAL_STATE);
+        }), INITIAL_STATE, [], enhancers);
     }
 }

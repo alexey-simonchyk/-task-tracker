@@ -1,10 +1,12 @@
 import { Task } from './models/task.model';
 import { Project } from './models/project.model';
 import {
+    ADD_COMMENT_TO_PROJECT, ADD_COMMENT_TO_TASK,
     ADD_PROJECT, ADD_TASK, DESELECT_PROJECT, LOAD_PROJECTS, SELECT_PROJECT, SELECT_TASK,
     UPDATE_TASK_STATUS
 } from './actions';
 import { IAppState } from './app.store';
+import { User } from './models/user.model';
 
 export interface IAppState {
     projects: Project[];
@@ -29,6 +31,11 @@ export function projectReducer(state = [], action) {
 export function selectedTaskReducer(state = null, action) {
     switch(action.type) {
         case SELECT_TASK: return action.task;
+        case ADD_COMMENT_TO_TASK: {
+            let newComments = state.comments.slice();
+            newComments.push(action.comment);
+            return {...state, newComments};
+        }
     }
     return state;
 }
@@ -49,6 +56,11 @@ export function selectedProjectReducer(state = null, action) {
             newTask.status = action.status;
             newTasks[index] = newTask;
             return {...state, tasks: newTasks};
+        }
+        case ADD_COMMENT_TO_PROJECT: {
+            let newComments = state.comments.slice();
+            newComments.push(action.comment);
+            return {...state, newComments};
         }
     }
     return state;

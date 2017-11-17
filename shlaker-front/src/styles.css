@@ -36,3 +36,9 @@ input[type=date]::-webkit-calendar-picker-indicator:hover {
     background: white;
     cursor: pointer;
 }
+
+input[type=date]::-webkit-calendar-picker-indicator {
+    background: white;
+    cursor: pointer;
+    visibility: visible;
+}
