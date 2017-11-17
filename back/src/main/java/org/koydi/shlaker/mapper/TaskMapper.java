@@ -24,4 +24,14 @@ public interface TaskMapper {
     })
     @Named("toFullTaskDto")
     TaskDto toFullTaskDto(Task task);
+
+    @Mappings({
+            @Mapping(target = "startTime", ignore = true),
+            @Mapping(target = "status", ignore = true),
+            @Mapping(target = "comments", ignore = true),
+            @Mapping(target = "developers", ignore = true),
+            @Mapping(target = "id", ignore = true),
+            @Mapping(target = "project", ignore = true)
+    })
+    Task fromTaskDto(TaskDto taskDto);
 }

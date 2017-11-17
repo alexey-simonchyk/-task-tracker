@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { NgRedux } from 'ng2-redux';
 import { IAppState } from '../app.store';
-import { SELECT_TASK, UPDATE_TASK_STATUS } from '../actions';
+import { ADD_TASK, SELECT_TASK, UPDATE_TASK_STATUS } from '../actions';
+import { Task } from '../models/task.model';
 
 @Injectable()
 export class TaskService {
@@ -27,6 +28,14 @@ export class TaskService {
           .toPromise()
           .then(res => this.ngRedux.dispatch({ type: UPDATE_TASK_STATUS, taskId: taskId, status: taskStatus}),
             err => console.log(err));
+  }
+
+  createTask(projectId: string, newTask: Task) {
+      return this
+          .http
+          .post(`http://localhost:8090/shlaker/task/project/${projectId}`, newTask)
+          .toPromise()
+          .then(data => this.ngRedux.dispatch({ type: ADD_TASK, task: data }));
   }
 
 }

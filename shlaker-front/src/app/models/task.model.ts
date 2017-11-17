@@ -5,7 +5,7 @@ export class Task {
     status: TaskStatus;
     
     startTime: Date;
-    endtime: Date;
+    endTime: Date;
 }
 
 export enum TaskStatus {

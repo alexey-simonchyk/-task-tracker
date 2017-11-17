@@ -39,10 +39,10 @@ public class Task extends BaseEntity {
 
     @Column(name = "status", columnDefinition = "varchar")
     @Enumerated(EnumType.STRING)
-    private TaskStatus status;
+    private TaskStatus status = TaskStatus.APPOINTED;
 
     @Column(name = "start_time")
-    private Date startTime;
+    private Date startTime = new Date();
 
     @Column(name = "end_time")
     private Date endTime;

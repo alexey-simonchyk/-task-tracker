@@ -18,6 +18,10 @@ export const MAIN_ROUTE: Routes = [
         component: ProjectCreateComponent
     },
     {
+        path: 'project/:projectId/task/create',
+        component: TaskCreateComponent
+    },
+    {
         path: 'project/:projectId',
         component: ProjectComponent,
         children: [
@@ -30,9 +34,5 @@ export const MAIN_ROUTE: Routes = [
                 component: TaskComponent
             }
         ]
-    },
-    {
-        path: 'project/:projectId/task/create',
-        component: TaskCreateComponent
     }
 ];

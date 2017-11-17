@@ -11,6 +11,9 @@
                 class="task_table_content_side"
             >
                 <inner-task *ngFor="let task of getTasks('APPOINTED')" [task]="task" (dragstart)="onDragStart($event, task)"  draggable="true" class="table_task"></inner-task>
+                <div [routerLink]="['/project', projectId, 'task', 'create']" class="create_task_link no_select">
+                    <div class="create_task_link_text no_select">+</div>
+                </div>
             </div>
         </div>
 

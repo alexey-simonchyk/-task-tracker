@@ -1,7 +1,7 @@
 import { Task } from './models/task.model';
 import { Project } from './models/project.model';
 import {
-    ADD_PROJECT, DESELECT_PROJECT, LOAD_PROJECTS, SELECT_PROJECT, SELECT_TASK,
+    ADD_PROJECT, ADD_TASK, DESELECT_PROJECT, LOAD_PROJECTS, SELECT_PROJECT, SELECT_TASK,
     UPDATE_TASK_STATUS
 } from './actions';
 import { IAppState } from './app.store';
@@ -37,6 +37,11 @@ export function selectedProjectReducer(state = null, action) {
     switch(action.type) {
         case SELECT_PROJECT: return action.project;
         case DESELECT_PROJECT: return null;
+        case ADD_TASK: {
+            let newTasks = state.tasks.slice();
+            newTasks.push(action.task);
+            return {...state, tasks: newTasks};
+        }
         case UPDATE_TASK_STATUS: {
             let index = state.tasks.findIndex(task => task.id === action.taskId);
             let newTasks = state.tasks.slice();

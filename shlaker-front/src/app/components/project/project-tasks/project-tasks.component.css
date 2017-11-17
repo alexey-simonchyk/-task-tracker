@@ -60,3 +60,15 @@
 .drop_here {
     background: #f3f4f4;
 }
+
+.create_task_link {
+    margin-top: auto;
+    display: flex;
+}
+
+.create_task_link_text {
+    margin-left: auto;
+    margin-right: 10px;
+    cursor: pointer;
+    color: #838a8a;
+}

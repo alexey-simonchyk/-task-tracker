@@ -1,3 +1,61 @@
-<p>
-  task-create works!
-</p>
+<div class="create_task_wrapper">
+  <div class="create_task_header">
+      Create New Task
+  </div>
+
+  <div class="create_task_body">
+      <form (ngSubmit)="onSubmit()" #createTaskForm="ngForm" class="create_task_form">
+
+          <div class="create_task_form_element">
+              <label for="task_name">Task name:</label>
+              <input type="text"
+                     class="create_task_name_text no_select"
+                     id="task_name"
+                     name="name"
+                     placeholder="Task name"
+                     [(ngModel)]="newTask.name"
+                     required
+                     #name="ngModel"
+              />
+              <!--<div [hidden]="name.valid || name.pristine">
+                  Name is required
+              </div>-->
+          </div>
+
+          <div class="create_task_form_element">
+              <label for="task_end_time">Task end time:</label>
+              <input type="date"
+                     class="create_task_name_text no_select"
+                     id="task_end_time"
+                     name="endTime"
+                     [(ngModel)]="newTask.endTime"
+                     required
+                     #endTime="ngModel"
+              />
+              <!--<div [hidden]="endTime.valid || endTime.pristine">
+                  Name is required
+              </div>-->
+          </div>
+
+          <div class="create_task_form_element">
+              <label for="task_description">Task description:</label>
+              <textarea class="create_task_description_text no_select" rows="15" type="text"
+                     id="task_description"
+                     name="description"
+                     [(ngModel)]="newTask.description"
+                     required
+                     placeholder="Task description"
+                     #description="ngModel"
+              ></textarea>
+             <!-- <div [hidden]="description.valid || description.pristine">
+                  Name is required
+              </div>-->
+          </div>
+
+          <div class="create_task_form_element">
+              <button [disabled]="!createTaskForm.form.valid" class="task_create_button no_select" type="submit">Button</button>
+          </div>
+          <!--{{newTask | json}}-->
+      </form>
+  </div>
+</div>

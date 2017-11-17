@@ -11,6 +11,7 @@ import { TaskService } from '../../../services/task-service';
 export class ProjectTasksComponent implements OnInit {
 
     @Input("tasks") tasks: Task[];
+    @Input("projectId") projectId: string;
 
     constructor(
         private taskService: TaskService
