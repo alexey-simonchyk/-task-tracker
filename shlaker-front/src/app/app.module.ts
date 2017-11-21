@@ -1,3 +1,4 @@
+import { RegistrationComponent } from './components/registration/registration.component';
 import { NgRedux, NgReduxModule, DevToolsExtension } from 'ng2-redux';
 import {
     IAppState, INITIAL_STATE, projectReducer,
@@ -14,24 +15,27 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { APP_ROUTE } from './app.routing';
 import { LoginComponent } from "./components/login/login.component";
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
-  declarations: [
-    AppComponent,
-      LoginComponent
-  ],
-  imports: [
-    BrowserModule,
-      BrowserAnimationsModule,
-    NgReduxModule,
-      HttpClientModule,
+    declarations: [
+        AppComponent,
+        LoginComponent,
+        RegistrationComponent
+    ],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        NgReduxModule,
+        HttpClientModule,
+        FormsModule,
 
-    MainModule,
-      RouterModule.forRoot(APP_ROUTE)
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+        MainModule,
+        RouterModule.forRoot(APP_ROUTE)
+    ],
+    providers: [],
+    bootstrap: [AppComponent]
 })
 export class AppModule {
     constructor(ngRedux: NgRedux<IAppState>, ngReduxDev: DevToolsExtension) {

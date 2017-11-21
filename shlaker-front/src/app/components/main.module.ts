@@ -11,7 +11,6 @@ import { CommentsComponent } from './comments/comments.component';
 import { ProjectTasksComponent } from './project/project-tasks/project-tasks.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
-import { MAIN_ROUTE } from './routing';
 import { TaskComponent } from './task/task.component';
 import { ProjectCreateComponent } from './project/project-create/project-create.component';
 import { EmptyComponent } from './main/empty/empty.component';

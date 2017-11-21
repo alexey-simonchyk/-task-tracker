@@ -1,3 +1,38 @@
-<p>
-  login works!
-</p>
+<div class="login_wrapper">
+    <form (ngSubmit)="onSubmit()" #loginForm="ngForm" class="login_form_wrapper">
+        <div class="login_header no_select">Login</div>
+        <div class="login_input_wrapper">
+            <label for="input_email">
+                Email
+            </label>
+            <input type="email"
+                   class="no_select login_input"
+                   id="input_email"
+                   name="email"
+                   placeholder="Enter email"
+                   required
+                   #email="ngModel"
+                   [(ngModel)]="user.email"
+            />
+        </div>
+        <div class="login_input_wrapper">
+            <label for="input_password">Password</label>
+            <input type="password"
+                   class="no_select login_input"
+                   id="input_password"
+                   placeholder="Enter your password"
+                   name="password"
+                   #password="ngModel"
+                   required
+                   [(ngModel)]="user.password"
+            />
+        </div>
+
+        <div class="button_login_wrapper">
+            <button [disabled]="!loginForm.form.valid" class="login_button no_select" type="submit">Sign in</button>
+        </div>
+        <div class="go_to_signup no_select">
+            <div class="no_select" [routerLink]="['/registration']">Not registered yet?</div>
+        </div>
+    </form>
+</div>
