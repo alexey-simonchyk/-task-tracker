@@ -40,7 +40,7 @@ import { ProjectDescriptionComponent } from './project/project-description/proje
     imports: [
         BrowserModule,
         CommonModule,
-        RouterModule.forRoot(MAIN_ROUTE),
+        RouterModule,
         FormsModule
     ],
     exports: [

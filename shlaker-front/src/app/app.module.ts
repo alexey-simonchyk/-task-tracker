@@ -11,11 +11,15 @@ import { combineReducers } from 'redux';
 import { MainModule } from './components/main.module';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterModule } from '@angular/router';
+import { APP_ROUTE } from './app.routing';
+import { LoginComponent } from "./components/login/login.component";
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+      LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -23,7 +27,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     NgReduxModule,
       HttpClientModule,
 
-    MainModule
+    MainModule,
+      RouterModule.forRoot(APP_ROUTE)
   ],
   providers: [],
   bootstrap: [AppComponent]
