@@ -3,40 +3,45 @@ import { HttpClient } from '@angular/common/http';
 import { IAppState } from '../app.store';
 import { NgRedux } from 'ng2-redux';
 import { ADD_PROJECT, LOAD_PROJECTS, SELECT_PROJECT } from '../actions';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class ProjectService {
 
-  constructor(private http: HttpClient,
-              private ngRedux: NgRedux<IAppState> ) { }
+    private projectEndPoint: string;
 
-  getProjects() {
-      this
-          .http
-          .get('http://localhost:8090/shlaker/project/')
-          .toPromise()
-          .then(data => this.ngRedux.dispatch({type: LOAD_PROJECTS, projects: data}));
-  }
+    constructor(private http: HttpClient,
+                private ngRedux: NgRedux<IAppState> ) {
+        this.projectEndPoint = `${environment.apiUrl}/project`
+    }
 
-  getProject(projectId) {
-      this
-          .http
-          .get(`http://localhost:8090/shlaker/project/${projectId}`)
-          .toPromise()
-          .then(data => {
-              this.ngRedux.dispatch({type: SELECT_PROJECT, project: data})
-          },
-              err => {
-                  console.log(err);
-              });
-  }
+    getProjects() {
+        this
+            .http
+            .get(`${this.projectEndPoint}/`)
+            .toPromise()
+            .then(data => this.ngRedux.dispatch({type: LOAD_PROJECTS, projects: data}));
+    }
 
-  createProject(project) {
-      return this
-          .http
-          .post(`http://localhost:8090/shlaker/project/`, project)
-          .toPromise()
-          .then(data => this.ngRedux.dispatch({type: ADD_PROJECT, project: data}));
-  }
+    getProject(projectId) {
+        this
+            .http
+            .get(`${this.projectEndPoint}/${projectId}`)
+            .toPromise()
+            .then(data => {
+                this.ngRedux.dispatch({type: SELECT_PROJECT, project: data})
+            },
+                err => {
+                    console.log(err);
+                });
+    }
+
+    createProject(project) {
+        return this
+            .http
+            .post(`${this.projectEndPoint}/`, project)
+            .toPromise()
+            .then(data => this.ngRedux.dispatch({type: ADD_PROJECT, project: data}));
+    }
 
 }

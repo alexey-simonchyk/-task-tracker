@@ -1,11 +1,10 @@
 import { Observable } from 'rxjs/Observable';
 import { Component, OnInit } from '@angular/core';
-import { NgRedux, select } from 'ng2-redux';
+import { select } from 'ng2-redux';
 import { Project } from '../../models/project.model';
 import { ProjectService } from '../../services/project-service';
-import { IAppState } from '../../app.store';
-import { Router } from '@angular/router';
 import * as $ from 'jquery';
+import { environment } from '../../../environments/environment';
 
 @Component({
     selector: 'app-menu',
@@ -17,11 +16,11 @@ export class MenuComponent implements OnInit {
     @select('projects') projects: Observable<Project[]>;
     @select('selectedProject') selectedProject: Observable<Project>;
 
+    imageEndPoint: string = `${environment.apiUrl}/image`;
+
     menuState = {projects: false};
 
-    constructor(private projectService: ProjectService,
-                private ngRedux: NgRedux<IAppState>,
-                private router: Router) { }
+    constructor(private projectService: ProjectService) { }
 
     ngOnInit() {
         this.projectService.getProjects();

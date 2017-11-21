@@ -14,7 +14,8 @@ public interface UserMapper {
 
     @Mappings({
             @Mapping(target = "email", ignore = true),
-            @Mapping(target = "password", ignore = true)
+            @Mapping(target = "password", ignore = true),
+            @Mapping(target = "imageId", source = "image.id")
     })
     @Named("toShortUserDto")
     UserDto toShortDto(User user);
@@ -22,7 +23,8 @@ public interface UserMapper {
     @Named("fromUserDto")
     @Mappings({
             @Mapping(target = "password", ignore = true),
-            @Mapping(target = "email", ignore = true)
+            @Mapping(target = "email", ignore = true),
+            @Mapping(target = "image", ignore = true)
     })
     User fromUserDto(UserDto userDto);
 }

@@ -14,4 +14,5 @@ public class UserDto {
     private String nick;
     private String email;
     private String password;
+    private String imageId;
 }

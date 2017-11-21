@@ -1,3 +1,4 @@
+import { environment } from './../../../environments/environment';
 import { NgRedux, select } from 'ng2-redux';
 import { Component, OnInit } from '@angular/core';
 import { TaskService } from '../../services/task-service';
@@ -17,6 +18,7 @@ export class TaskComponent implements OnInit {
     @select('selectedProject') selectedProject: Observable<Project>;
     @select('selectedTask') selectedTask: Observable<Task>;
     
+    imageEndPoint: string = `${environment.apiUrl}/image`;
     daysLeft: number = 0;
     isOver: boolean = false;
     

@@ -1,0 +1,1 @@
+alter table user modify image_id varchar(36) null;
