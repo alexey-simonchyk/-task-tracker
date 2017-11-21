@@ -1,19 +1,43 @@
 <div class="full_width detailed_task_information">
-
+        
     <div class="detailed_task_name">
-        <div>Task name:</div>
-        <div>{{(selectedTask | async)?.name}}</div>
+        <div class="task_subhead">Task name</div>
+        <div class="task_monospace">{{(selectedTask | async)?.name}}</div>
     </div>
 
     <div class="detailed_task_description">
-        <div>Task description:</div>
-        <div>{{(selectedTask | async)?.description}}</div>
+        <div class="task_subhead">Task description</div>
+        <div class="task_monospace">{{(selectedTask | async)?.description}}</div>
     </div>
 
-    <div class="detailed_task_end_time">
-        <div>Task edn time:</div>
-        <div>{{(selectedTask | async)?.endTime}}</div>
+    <div class="detailed_task_developers">
+        <div class="task_subhead">Task developers</div>
+        <div class="developer_task_wrapper"> 
+            <img class="task_developer" src="assets/images/default_user.png" alt="developer" title="developer">
+            <img class="task_developer" src="assets/images/default_user.png" alt="developer" title="developer">
+            <img class="task_developer" src="assets/images/default_user.png" alt="developer" title="developer">
+        </div>
     </div>
+    
+    <div class="detailed_task_end_time">
+        <div class="time_line_wrapper">
+            <div class="start_end_time_wrapper">
+                <div class="task_start_time">
+                    {{(selectedTask | async)?.startTime}}
+                </div>
+                <div class="task_end_time font_monospace">
+                    {{(selectedTask | async)?.endTime}}
+                </div>
+            </div>
+            <div class="task_time_line">
+                <div class="task_time_passed"></div>
+            </div>
+            <div class="task_days_left">{{daysLeft}} days left</div>
+        </div>
+    </div>
+
+    <div [routerLink]="['/project', (selectedProject | async)?.id]" class="back_to_project no_select">Back to project</div>
+    
 
 </div>
 <comments class="full_width" [comments]="(selectedTask | async)?.comments"></comments>

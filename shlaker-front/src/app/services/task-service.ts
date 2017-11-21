@@ -14,7 +14,7 @@ export class TaskService {
   ) { }
 
   getTask(taskId: string) {
-      this
+      return this
           .http
           .get(`http://localhost:8090/shlaker/task/${taskId}`)
           .toPromise()
@@ -22,7 +22,7 @@ export class TaskService {
   }
 
   updateTaskStatus(taskId: string, taskStatus: string) {
-      this
+      return this
           .http
           .patch(`http://localhost:8090/shlaker/task/${taskId}/status`, {status: taskStatus}, {responseType: 'text'})
           .toPromise()

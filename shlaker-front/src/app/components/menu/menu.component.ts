@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs/Observable';
 import { Component, OnInit } from '@angular/core';
 import { NgRedux, select } from 'ng2-redux';
 import { Project } from '../../models/project.model';
@@ -13,8 +14,8 @@ import * as $ from 'jquery';
 })
 export class MenuComponent implements OnInit {
 
-    @select('projects') projects: Project[];
-    @select('selectedProject') selectedProject: Project;
+    @select('projects') projects: Observable<Project[]>;
+    @select('selectedProject') selectedProject: Observable<Project>;
 
     menuState = {projects: false};
 

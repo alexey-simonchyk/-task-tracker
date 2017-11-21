@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs/Observable';
 import { Component, OnInit } from '@angular/core';
 import { select } from 'ng2-redux';
 import { Project } from '../../../models/project.model';
@@ -8,7 +9,7 @@ import { Project } from '../../../models/project.model';
 })
 export class ProjectDescriptionComponent implements OnInit {
 
-    @select('selectedProject') selectedProject: Project;
+    @select('selectedProject') selectedProject: Observable<Project>;
 
     constructor() { }
 

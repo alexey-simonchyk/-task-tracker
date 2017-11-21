@@ -25,10 +25,97 @@
 .detailed_task_name {
 }
 
+.back_to_project {
+    text-align: center;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 2%;
+    margin-top: 2%;
+    padding: 1%;
+    width: 20%;
+    color: #fff;
+    background: firebrick;
+    border: 2px solid firebrick;
+    cursor: pointer;
+}
+
+.back_to_project:hover {
+    color: #fff;
+    background: firebrick;
+}
+
 .detailed_task_description {
     margin-top: 20px;
 }
 
 .detailed_task_end_time {
+    margin-top: 60px;
+}
+
+.time_line_wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.task_start_time {
+    margin-right: auto;
+    font-family: monospace;
+}
+
+.task_time_line {
+    width: 100%;
+    border: 1px solid firebrick;
+    height: 25px;
+    border-radius: 25px;
+    margin-top: 10px;
+    overflow: hidden;
+}
+
+.task_end_time {
+    font-family: monospace;
+    margin-left: auto;
+}
+
+.task_monospace {
+    font-family: monospace;
+}
+
+.start_end_time_wrapper {
+    margin-top: 25px;
+    display: flex;
+}
+
+.task_time_passed {
+    background: firebrick;
+    height: 100%;
+    width: 0%;
+    border-radius: 25px;
+}
+
+.task_days_left {
+    margin-top: 15px;
+    text-align: center;
+}
+
+.task_subhead {
+    color: firebrick;
+}
+
+.detailed_task_developers {
     margin-top: 20px;
+}
+
+.task_developer {
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+    border-radius: 3px;
+    margin-right: 12px;
+}
+
+.developer_task_wrapper {
+    display: flex;
+    padding-left: 5px;
+    padding-top: 15px;
 }

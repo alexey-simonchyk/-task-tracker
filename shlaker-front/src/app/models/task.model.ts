@@ -3,6 +3,7 @@ export class Task {
     description: string;
     name: string;
     status: TaskStatus;
+    comments: Comment[];
     
     startTime: Date;
     endTime: Date;
