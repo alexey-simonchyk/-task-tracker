@@ -5,5 +5,9 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:8090/shlaker'
+  apiUrl: 'http://localhost:8090/shlaker',
+  defaultImageEndPoint: 'http://localhost:8090/shlaker/image',
+
+  webClientId: 'shlaker-front',
+  webClientSecret: 'secret'
 };

@@ -16,7 +16,7 @@ export class MenuComponent implements OnInit {
     @select('projects') projects: Observable<Project[]>;
     @select('selectedProject') selectedProject: Observable<Project>;
 
-    imageEndPoint: string = `${environment.apiUrl}/image`;
+    imageEndPoint: string = `${environment.defaultImageEndPoint}`;
 
     menuState = {projects: false};
 

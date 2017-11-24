@@ -18,7 +18,7 @@ export class TaskComponent implements OnInit {
     @select('selectedProject') selectedProject: Observable<Project>;
     @select('selectedTask') selectedTask: Observable<Task>;
     
-    imageEndPoint: string = `${environment.apiUrl}/image`;
+    imageEndPoint: string = `${environment.defaultImageEndPoint}`;
     daysLeft: number = 0;
     isOver: boolean = false;
     

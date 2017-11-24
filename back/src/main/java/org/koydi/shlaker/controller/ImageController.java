@@ -7,7 +7,6 @@ import org.springframework.core.io.Resource;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.StreamUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,7 +22,7 @@ public class ImageController {
     private static final String JPG_FORMAT = "jpg";
     private static final String PNG_FORMAT = "png";
 
-    @GetMapping(value = "/{imageName}")
+    @GetMapping(value = "/default/{imageName}")
     public ResponseEntity<byte[]> getImage(@PathVariable("imageName") String imageName) throws IOException {
 
         Resource image = new ClassPathResource("image/default/" + imageName + ".jpg");

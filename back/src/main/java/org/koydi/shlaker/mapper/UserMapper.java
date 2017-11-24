@@ -1,5 +1,6 @@
 package org.koydi.shlaker.mapper;
 
+import org.koydi.shlaker.dto.SignUpUserDto;
 import org.koydi.shlaker.dto.UserDto;
 import org.koydi.shlaker.entity.User;
 import org.mapstruct.*;
@@ -27,4 +28,16 @@ public interface UserMapper {
             @Mapping(target = "image", ignore = true)
     })
     User fromUserDto(UserDto userDto);
+
+    @Named("signUpMapper")
+    @Mappings({
+            @Mapping(target = "comments", ignore = true),
+            @Mapping(target = "projects", ignore = true),
+            @Mapping(target = "tasks", ignore = true),
+            @Mapping(target = "activated", ignore = true),
+            @Mapping(target = "role", ignore = true),
+            @Mapping(target = "image", ignore = true),
+            @Mapping(target = "id", ignore = true)
+    })
+    User signUpMapper(SignUpUserDto user);
 }
