@@ -7,3 +7,7 @@ export const ADD_PROJECT = 'ADD_PROJECT';
 export const ADD_TASK = 'ADD_TASK';
 export const ADD_COMMENT_TO_PROJECT = 'ADD_COMMENT_TO_PROJECT';
 export const ADD_COMMENT_TO_TASK = 'ADD_COMMENT_TO_TASK';
+export const ADD_TOKEN = 'ADD_TOKEN';
+export const REMOVE_TOKEN = 'REMOVE_TOKEN';
+export const ADD_USER = 'ADD_USER';
+export const REMOVE_USER = 'REMOVE_USER';

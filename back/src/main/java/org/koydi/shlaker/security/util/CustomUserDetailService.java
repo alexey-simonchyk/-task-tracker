@@ -1,4 +1,4 @@
-package org.koydi.shlaker.service;
+package org.koydi.shlaker.security.util;
 
 import org.koydi.shlaker.entity.User;
 import org.koydi.shlaker.repository.UserRepository;
@@ -10,12 +10,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
-@Transactional
 public class CustomUserDetailService implements UserDetailsService {
 
     private final UserRepository userRepository;
@@ -37,9 +35,9 @@ public class CustomUserDetailService implements UserDetailsService {
         authorities.add(new SimpleGrantedAuthority(user.getRole().getName()));
 
 
-        UserDetails userDetails = new org.springframework.security.core.userdetails.
-                User(user.getEmail(), user.getPassword(), authorities);
+//        UserDetails userDetails = new org.springframework.security.core.userdetails.
+//                User(user.getId(), user.getPassword(), authorities);
 
-        return userDetails;
+        return new SecurityUser(user, authorities);
     }
 }

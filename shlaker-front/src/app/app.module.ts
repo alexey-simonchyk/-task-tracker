@@ -2,7 +2,7 @@ import { RegistrationComponent } from './components/registration/registration.co
 import { NgRedux, NgReduxModule, DevToolsExtension } from 'ng2-redux';
 import {
     IAppState, INITIAL_STATE, projectReducer,
-    selectedTaskReducer, selectedProjectReducer
+    selectedTaskReducer, selectedProjectReducer, tokenReducer, userReducer
 } from './app.store';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -45,6 +45,8 @@ export class AppModule {
             enhancers = [ ...enhancers, ngReduxDev.enhancer() ];
         }
         ngRedux.configureStore(combineReducers({
+            user: userReducer,
+            token: tokenReducer,
             projects: projectReducer,
             selectedTask: selectedTaskReducer,
             selectedProject: selectedProjectReducer

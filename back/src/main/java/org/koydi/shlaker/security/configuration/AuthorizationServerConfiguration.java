@@ -1,4 +1,4 @@
-package org.koydi.shlaker.configuration;
+package org.koydi.shlaker.security.configuration;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -46,7 +46,8 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
                 .secret("secret")
                 .authorizedGrantTypes("password")
                 .scopes("read", "write")
-                .resourceIds("shlaker-back");
+                .resourceIds("shlaker-back")
+                .accessTokenValiditySeconds(60);
     }
 
     @Override

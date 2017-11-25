@@ -1,6 +1,6 @@
-package org.koydi.shlaker.configuration;
+package org.koydi.shlaker.security.configuration;
 
-import org.koydi.shlaker.service.CustomUserDetailService;
+import org.koydi.shlaker.security.util.CustomUserDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -63,6 +63,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     public JwtAccessTokenConverter accessTokenConverter() {
         JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
         converter.setSigningKey(jwtKey);
+//        converter.setAccessTokenConverter();
         return converter;
     }
 

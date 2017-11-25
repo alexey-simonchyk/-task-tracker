@@ -3,11 +3,11 @@
 </div>
 
 <div class="nav_element_profile">
-    <img class="avatar_image" src="{{imageEndPoint}}/default/default_user" alt="Avatar" />
+    <img class="avatar_image" src="{{imageEndPoint}}{{(currentUser | async).imageId | imageLink}}" alt="Avatar" />
     <div class="nav_profile">
-        Nick
+        {{(currentUser | async)?.nick}}
     </div>
-    <div class="logout">
+    <div (click)="logout()" class="logout">
         Logout
     </div>
 </div>

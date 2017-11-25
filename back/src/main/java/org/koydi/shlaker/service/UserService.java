@@ -16,7 +16,9 @@ public class UserService {
     private final UserRepository userRepository;
 
     @Autowired
-    public UserService(UserRepository userRepository, ShaPasswordEncoder shaPasswordEncoder, RoleRepository roleRepository) {
+    public UserService(UserRepository userRepository,
+                       ShaPasswordEncoder shaPasswordEncoder,
+                       RoleRepository roleRepository) {
         this.userRepository = userRepository;
         this.shaPasswordEncoder = shaPasswordEncoder;
         this.roleRepository = roleRepository;
@@ -27,5 +29,10 @@ public class UserService {
         Role role = roleRepository.findByName("developer");
         user.setRole(role);
         userRepository.save(user);
+    }
+
+    public User getUserInformation(String userId) {
+        User user = userRepository.getFullUser(userId);
+        return user;
     }
 }

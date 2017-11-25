@@ -1,4 +1,4 @@
-package org.koydi.shlaker.configuration;
+package org.koydi.shlaker.security.configuration;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;

@@ -19,6 +19,7 @@ import { CommentComponent } from './comments/comment/comment.component';
 import { FormsModule } from '@angular/forms';
 import { TaskCreateComponent } from './task/task-create/task-create.component';
 import { ProjectDescriptionComponent } from './project/project-description/project-description.component';
+import { PipeModule } from '../pipes/pipe-module';
 
 
 @NgModule({
@@ -40,10 +41,11 @@ import { ProjectDescriptionComponent } from './project/project-description/proje
         BrowserModule,
         CommonModule,
         RouterModule,
-        FormsModule
+        FormsModule,
+        PipeModule
     ],
     exports: [
-        MainComponent
+        MainComponent,
     ],
     providers: [
         CommentService,

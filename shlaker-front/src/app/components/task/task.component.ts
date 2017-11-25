@@ -28,7 +28,8 @@ export class TaskComponent implements OnInit {
         private ngRedux: NgRedux<IAppState>,
         private taskService: TaskService,
         private route: ActivatedRoute
-    ) { }
+    ) { 
+    }
 
     ngOnInit() {
         this.route.params.subscribe(params => {
