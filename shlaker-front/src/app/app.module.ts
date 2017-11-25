@@ -16,6 +16,7 @@ import { RouterModule } from '@angular/router';
 import { APP_ROUTE } from './app.routing';
 import { LoginComponent } from "./components/login/login.component";
 import { FormsModule } from '@angular/forms';
+import { AuthenticatedGuard } from './guards/authenticated-guard';
 
 
 @NgModule({
@@ -34,7 +35,9 @@ import { FormsModule } from '@angular/forms';
         MainModule,
         RouterModule.forRoot(APP_ROUTE)
     ],
-    providers: [],
+    providers: [
+        AuthenticatedGuard
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule {

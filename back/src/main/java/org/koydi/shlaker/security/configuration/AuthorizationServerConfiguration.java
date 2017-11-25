@@ -1,6 +1,7 @@
 package org.koydi.shlaker.security.configuration;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
@@ -17,6 +18,9 @@ import java.util.Collections;
 @Configuration
 @EnableAuthorizationServer
 public class AuthorizationServerConfiguration extends AuthorizationServerConfigurerAdapter {
+
+    @Value("${jwt.token.action.time}")
+    private int tokenActionTime;
 
     private final TokenStore tokenStore;
 
@@ -47,7 +51,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
                 .authorizedGrantTypes("password")
                 .scopes("read", "write")
                 .resourceIds("shlaker-back")
-                .accessTokenValiditySeconds(60);
+                .accessTokenValiditySeconds(tokenActionTime);
     }
 
     @Override

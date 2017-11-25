@@ -3,7 +3,7 @@
 </div>
 
 <div class="nav_element_profile">
-    <img class="avatar_image" src="{{imageEndPoint}}{{(currentUser | async).imageId | imageLink}}" alt="Avatar" />
+    <img class="avatar_image" src="{{imageEndPoint}}{{(currentUser | async)?.imageId | imageLink}}" alt="Avatar" />
     <div class="nav_profile">
         {{(currentUser | async)?.nick}}
     </div>

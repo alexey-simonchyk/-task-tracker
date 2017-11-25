@@ -22,7 +22,9 @@ export class UserService {
     login(email: string, password: string) {
         const body = `username=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}&grant_type=password`;
 
-        return this.http.post(this.loginEndPoint + '/token', body, { headers: this.getLoginHeaders() })
+        return this
+            .http
+            .post(this.loginEndPoint + '/token', body, { headers: this.getLoginHeaders() })
             .toPromise()
             .then((res: any) => {
                 if (res.access_token) {
@@ -40,9 +42,20 @@ export class UserService {
     }
 
     getUserInfo() {
-        return this.http.get(`${environment.apiUrl}/me`, {headers: this.getAuthenticationHeader()})
-        .toPromise()
-        .then(data => this.ngRedux.dispatch({type: ADD_USER, user: data}));
+        if (!this.token) return;
+        return this
+            .http
+            .get(`${environment.apiUrl}/me`, {headers: this.getAuthenticationHeader()})
+            .toPromise()
+            .then(data => {
+                this.ngRedux.dispatch({type: ADD_USER, user: data})
+            },
+            err => {
+                if (err.status === 401) {
+                    this.ngRedux.dispatch({ type: REMOVE_TOKEN });
+                }
+            }
+        );
     }
 
     getLoginHeaders() {
