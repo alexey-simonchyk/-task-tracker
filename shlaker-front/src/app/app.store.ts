@@ -3,18 +3,28 @@ import { Project } from './models/project.model';
 import {
     ADD_COMMENT_TO_PROJECT, ADD_COMMENT_TO_TASK,
     ADD_PROJECT, ADD_TASK, DESELECT_PROJECT, LOAD_PROJECTS, SELECT_PROJECT, SELECT_TASK,
-    UPDATE_TASK_STATUS
+    UPDATE_TASK_STATUS,
+    ADD_TOKEN,
+    REMOVE_TOKEN,
+    ADD_USER,
+    REMOVE_USER
 } from './actions';
 import { IAppState } from './app.store';
 import { User } from './models/user.model';
 
+const TOKEN = 'SHLAKER_TOKEN'
+
 export interface IAppState {
+    user: User;
+    token: string;
     projects: Project[];
     selectedProject: Project;
     selectedTask: Task;
 }
 
 export const INITIAL_STATE: IAppState = {
+    user: null,
+    token: window.localStorage.getItem(TOKEN) ,
     projects: [],
     selectedTask: null,
     selectedProject: null
@@ -28,6 +38,16 @@ export function projectReducer(state = [], action) {
     return state;
 }
 
+export function userReducer(state = null, action) {
+    switch(action.type) {
+        case ADD_USER: { 
+            return action.user;
+        }
+        case REMOVE_USER: return null;
+    }
+    return state;
+}
+
 export function selectedTaskReducer(state = null, action) {
     switch(action.type) {
         case SELECT_TASK: return action.task;
@@ -35,6 +55,20 @@ export function selectedTaskReducer(state = null, action) {
             let newComments = state.comments.slice();
             newComments.push(action.comment);
             return {...state, newComments};
+        }
+    }
+    return state;
+}
+
+export function tokenReducer(state = null, action) {
+    switch(action.type) {
+        case ADD_TOKEN: {
+            window.localStorage.setItem(TOKEN, action.token);
+            return action.token;
+        }
+        case REMOVE_TOKEN: {
+            window.localStorage.removeItem(TOKEN);
+            return null;
         }
     }
     return state;

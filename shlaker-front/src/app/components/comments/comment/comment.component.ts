@@ -10,7 +10,7 @@ import { Comment } from '../../../models/comment.model';
 export class CommentComponent implements OnInit {
 
     @Input('comment') comment: Comment;
-    imageEndPoint: string = `${environment.apiUrl}/image`;
+    imageEndPoint: string = `${environment.defaultImageEndPoint}`;
     
     constructor() { }
 

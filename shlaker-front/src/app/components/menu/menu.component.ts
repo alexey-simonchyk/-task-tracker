@@ -1,3 +1,5 @@
+import { User } from './../../models/user.model';
+import { UserService } from './../../services/user-service';
 import { Observable } from 'rxjs/Observable';
 import { Component, OnInit } from '@angular/core';
 import { select } from 'ng2-redux';
@@ -15,12 +17,13 @@ export class MenuComponent implements OnInit {
 
     @select('projects') projects: Observable<Project[]>;
     @select('selectedProject') selectedProject: Observable<Project>;
+    @select('user') currentUser: Observable<User>;
 
-    imageEndPoint: string = `${environment.apiUrl}/image`;
+    imageEndPoint: string = `${environment.defaultImageEndPoint}`;
 
     menuState = {projects: false};
 
-    constructor(private projectService: ProjectService) { }
+    constructor(private projectService: ProjectService, private userService: UserService) { }
 
     ngOnInit() {
         this.projectService.getProjects();
@@ -41,6 +44,10 @@ export class MenuComponent implements OnInit {
         }
 
         this.menuState[target] = !this.menuState[target];
+    }
+
+    logout() {
+        this.userService.getUserInfo();
     }
 
 }

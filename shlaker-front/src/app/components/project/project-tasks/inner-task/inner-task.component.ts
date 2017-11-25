@@ -10,7 +10,7 @@ import { Task } from "../../../../models/task.model";
 export class InnerTaskComponent implements OnInit {
 
     @Input('task') task: Task;
-    imageEndPoint: string = `${environment.apiUrl}/image`;
+    imageEndPoint: string = `${environment.defaultImageEndPoint}`;
 
     constructor() { }
 

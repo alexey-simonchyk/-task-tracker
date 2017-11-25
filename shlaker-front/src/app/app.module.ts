@@ -2,7 +2,7 @@ import { RegistrationComponent } from './components/registration/registration.co
 import { NgRedux, NgReduxModule, DevToolsExtension } from 'ng2-redux';
 import {
     IAppState, INITIAL_STATE, projectReducer,
-    selectedTaskReducer, selectedProjectReducer
+    selectedTaskReducer, selectedProjectReducer, tokenReducer, userReducer
 } from './app.store';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -16,6 +16,7 @@ import { RouterModule } from '@angular/router';
 import { APP_ROUTE } from './app.routing';
 import { LoginComponent } from "./components/login/login.component";
 import { FormsModule } from '@angular/forms';
+import { AuthenticatedGuard } from './guards/authenticated-guard';
 
 
 @NgModule({
@@ -34,7 +35,9 @@ import { FormsModule } from '@angular/forms';
         MainModule,
         RouterModule.forRoot(APP_ROUTE)
     ],
-    providers: [],
+    providers: [
+        AuthenticatedGuard
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule {
@@ -45,6 +48,8 @@ export class AppModule {
             enhancers = [ ...enhancers, ngReduxDev.enhancer() ];
         }
         ngRedux.configureStore(combineReducers({
+            user: userReducer,
+            token: tokenReducer,
             projects: projectReducer,
             selectedTask: selectedTaskReducer,
             selectedProject: selectedProjectReducer

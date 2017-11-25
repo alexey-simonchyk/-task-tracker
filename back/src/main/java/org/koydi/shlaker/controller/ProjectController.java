@@ -6,6 +6,7 @@ import org.koydi.shlaker.entity.Project;
 import org.koydi.shlaker.mapper.ProjectMapper;
 import org.koydi.shlaker.service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,6 +26,7 @@ public class ProjectController {
         this.projectMapper = projectMapper;
     }
 
+    @PreAuthorize("hasAuthority('developer')")
     @GetMapping("/")
     public List<ProjectDto> getProjects() {
         val projects = projectService.getProjects();

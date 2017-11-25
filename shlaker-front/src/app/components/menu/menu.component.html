@@ -3,11 +3,11 @@
 </div>
 
 <div class="nav_element_profile">
-    <img class="avatar_image" src="{{imageEndPoint}}/default_user" alt="Avatar" />
+    <img class="avatar_image" src="{{imageEndPoint}}{{(currentUser | async)?.imageId | imageLink}}" alt="Avatar" />
     <div class="nav_profile">
-        Nick
+        {{(currentUser | async)?.nick}}
     </div>
-    <div class="logout">
+    <div (click)="logout()" class="logout">
         Logout
     </div>
 </div>
@@ -16,7 +16,7 @@
     <div class="nav_element_header" (click)="changeMenuState('projects')">
         <div class="menu_header">Projects</div>
         <div class="down_arrow">
-            <img class="down_arrow_image" src="{{imageEndPoint}}/down_arrow" alt="Down Arrow">
+            <img class="down_arrow_image" src="{{imageEndPoint}}/default/down_arrow" alt="Down Arrow">
         </div>
     </div>
     <div id="projects_close" class="nav_element_list">

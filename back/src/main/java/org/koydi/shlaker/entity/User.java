@@ -13,6 +13,14 @@ import java.util.Set;
 @Data
 @EqualsAndHashCode(exclude = {"role", "comments", "projects", "tasks"}, callSuper = false)
 @ToString(exclude = {"role", "comments", "projects", "tasks"})
+@NamedEntityGraphs({
+        @NamedEntityGraph(
+                name = "userWithRole",
+                attributeNodes = {
+                        @NamedAttributeNode(value = "role")
+                }
+        )
+})
 public class User extends BaseEntity {
 
     @Column(name = "email", nullable = false)
