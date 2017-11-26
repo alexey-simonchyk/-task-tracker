@@ -40,7 +40,7 @@ export function projectReducer(state = [], action) {
 
 export function userReducer(state = null, action) {
     switch(action.type) {
-        case ADD_USER: { 
+        case ADD_USER: {
             return action.user;
         }
         case REMOVE_USER: return null;

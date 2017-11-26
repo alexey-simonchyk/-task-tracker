@@ -1,4 +1,4 @@
-import { environment } from './../../../../../environments/environment';
+import { environment } from '../../../../../environments/environment';
 import { Component, Input, OnInit } from '@angular/core';
 import { Task } from "../../../../models/task.model";
 

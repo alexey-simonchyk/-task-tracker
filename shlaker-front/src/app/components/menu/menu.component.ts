@@ -1,12 +1,13 @@
-import { User } from './../../models/user.model';
-import { UserService } from './../../services/user-service';
+import { User } from '../../models/user.model';
 import { Observable } from 'rxjs/Observable';
 import { Component, OnInit } from '@angular/core';
-import { select } from 'ng2-redux';
+import { NgRedux, select } from 'ng2-redux';
 import { Project } from '../../models/project.model';
 import { ProjectService } from '../../services/project-service';
 import * as $ from 'jquery';
 import { environment } from '../../../environments/environment';
+import { IAppState } from '../../app.store';
+import { REMOVE_TOKEN, REMOVE_USER } from '../../actions';
 
 @Component({
     selector: 'app-menu',
@@ -18,12 +19,13 @@ export class MenuComponent implements OnInit {
     @select('projects') projects: Observable<Project[]>;
     @select('selectedProject') selectedProject: Observable<Project>;
     @select('user') currentUser: Observable<User>;
-
     imageEndPoint: string = `${environment.defaultImageEndPoint}`;
 
-    menuState = {projects: false};
 
-    constructor(private projectService: ProjectService, private userService: UserService) { }
+    menuState = {projects: false};
+    imageLink: string = '';
+
+    constructor(private projectService: ProjectService, private ngRedux: NgRedux<IAppState>) { }
 
     ngOnInit() {
         this.projectService.getProjects();
@@ -47,7 +49,8 @@ export class MenuComponent implements OnInit {
     }
 
     logout() {
-        this.userService.getUserInfo();
+        this.ngRedux.dispatch({type: REMOVE_USER});
+        this.ngRedux.dispatch({type: REMOVE_TOKEN});
     }
 
 }

@@ -37,8 +37,20 @@ export class UserService {
             });
     }
 
-    checkToken() {
-
+    checkToken(isAuthenticated: boolean): boolean | Promise<boolean> {
+        if (!this.token) {
+            return isAuthenticated ? false : true;
+        }
+        return this
+            .http
+            .get(`${this.loginEndPoint}/check_token?token=${this.token}`, { headers: this.getLoginHeaders() })
+            .toPromise()
+            .then(data => {
+                return isAuthenticated ? true : false;
+            }, error => {
+                this.ngRedux.dispatch({ type: REMOVE_TOKEN });
+                return isAuthenticated ? false : true;
+            });
     }
 
     getUserInfo() {
