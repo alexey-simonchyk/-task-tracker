@@ -17,6 +17,7 @@ import { APP_ROUTE } from './app.routing';
 import { LoginComponent } from "./components/login/login.component";
 import { FormsModule } from '@angular/forms';
 import { AuthenticatedGuard } from './guards/authenticated-guard';
+import { NotAuthenticatedGuard } from './guards/not-authenticated-guard';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { AuthenticatedGuard } from './guards/authenticated-guard';
         RouterModule.forRoot(APP_ROUTE)
     ],
     providers: [
-        AuthenticatedGuard
+        AuthenticatedGuard,
+        NotAuthenticatedGuard
     ],
     bootstrap: [AppComponent]
 })

@@ -1,3 +1,73 @@
-<p>
-  registration works!
-</p>
+<div class="registration_wrapper">
+    <form (ngSubmit)="onSubmit()" #registrationForm="ngForm" class="registration_form_wrapper">
+        <div class="registration_header">Registration</div>
+
+        <div class="registration_input_wrapper">
+            <label for="input_email">
+                Email
+            </label>
+            <input type="email"
+                   class="no_select registration_input"
+                   email
+                   placeholder="Enter your email"
+                   required
+                   #email="ngModel"
+                   id="input_email"
+                   name="input_email"
+                   [(ngModel)]="newUser.email"
+            />
+        </div>
+
+        <div class="registration_input_wrapper">
+            <label for="input_nick">
+                Nick
+            </label>
+            <input type="text"
+                   class="no_select registration_input"
+                   placeholder="Enter your nick"
+                   required
+                   #nick="ngModel"
+                   id="input_nick"
+                   name="input_nick"
+                   [(ngModel)]="newUser.nick"
+            />
+        </div>
+
+        <div class="registration_input_wrapper">
+            <label for="input_password">
+                Password
+            </label>
+            <input type="password"
+                   class="no_select registration_input"
+                   placeholder="Enter your password"
+                   required
+                   #password="ngModel"
+                   id="input_password"
+                   name="input_password"
+                   [(ngModel)]="newUser.password"
+            />
+        </div>
+
+        <div class="registration_input_wrapper">
+            <label for="input_repeat_password">
+                Repeat password
+            </label>
+            <input type="password"
+                   class="no_select registration_input"
+                   placeholder="Repeat your password"
+                   required
+                   #repeatPassword="ngModel"
+                   id="input_repeat_password"
+                   name="input_repeat_password"
+                   [(ngModel)]="newUser.repeatPassword"
+            />
+        </div>
+
+        <div class="button_registration_wrapper">
+            <button [disabled]="!registrationForm.form.valid" class="no_select registration_button" type="submit">Sign up</button>
+        </div>
+        <div class="go_to_login no_select">
+            <div class="no_select" [routerLink]="['/login']">I am registered</div>
+        </div>
+    </form>
+</div>

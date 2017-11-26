@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.io.IOException;
 
 @Controller
-@CrossOrigin("http://localhost:4200")
 @RequestMapping("/image")
 public class ImageController {
 

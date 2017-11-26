@@ -1,12 +1,30 @@
 package org.koydi.shlaker.service;
 
-import org.koydi.shlaker.entity.Role;
+import lombok.val;
 import org.koydi.shlaker.entity.User;
+import org.koydi.shlaker.exception.BadRequestException;
 import org.koydi.shlaker.repository.RoleRepository;
 import org.koydi.shlaker.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
+
+class SuchUserExists extends BadRequestException {
+
+    SuchUserExists(String message) {
+        super(message);
+    }
+}
+
+class UserNotFound extends BadRequestException {
+
+    UserNotFound(String message) {
+        super(message);
+    }
+}
+
 
 @Service
 public class UserService {
@@ -25,14 +43,18 @@ public class UserService {
     }
 
     public void createAccount(User user) {
+        Optional.ofNullable(userRepository.findByEmail(user.getEmail())).ifPresent(s -> {
+            throw new SuchUserExists("Such user exists");
+        });
+
         user.setPassword(shaPasswordEncoder.encodePassword(user.getPassword(), ""));
-        Role role = roleRepository.findByName("developer");
+        val role = roleRepository.findByName("developer");
         user.setRole(role);
         userRepository.save(user);
     }
 
     public User getUserInformation(String userId) {
-        User user = userRepository.getFullUser(userId);
-        return user;
+        return Optional.ofNullable(userRepository.getFullUser(userId))
+                .orElseThrow(() -> new UserNotFound("User with id not found"));
     }
 }

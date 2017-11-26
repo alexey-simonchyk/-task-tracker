@@ -1,0 +1,88 @@
+.registration_wrapper {
+    color: black;
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    justify-content: center;
+
+}
+
+.registration_form_wrapper {
+    align-self: center;
+    width: 50vh;
+    height: 60vh;
+    background: #fff;
+    border-radius: 3px;
+    padding: 2%;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 1px 1px 5px 0px rgba(0,0,0,0.35);
+}
+
+.registration_header {
+    border-bottom: 2px solid firebrick;
+    color: firebrick;
+    text-align: center;
+    padding-bottom: 10px;
+    font-weight: 600;
+    font-size: 35px;
+}
+
+.registration_input_wrapper {
+    margin-top: 20px;
+    width: 100%;
+}
+
+.registration_input {
+    padding-bottom: 1%;
+    font-weight: 500;
+    font-family: monospace;
+    font-size: 20px;
+    height: 25px;
+    border: none;
+    border-bottom: 1px solid firebrick;
+    margin-top: 10px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.registration_input:focus {
+    border-bottom: 1px solid rgb(8, 197, 188);
+}
+
+.button_registration_wrapper {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+.registration_button {
+    text-align: center;
+    font-size: 25px;
+    font-weight: 600;
+    margin-top: 5%;
+    padding: 2%;
+    width: 40%;
+    color: firebrick;
+    background: #fff;
+    border: 1px solid firebrick;
+    cursor: pointer;
+}
+
+.registration_button:hover {
+    color: #fff;
+    background: firebrick;
+}
+
+.go_to_login {
+    margin-top: 3%;
+    font-size: 15px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: firebrick;
+    cursor: pointer;
+}
+

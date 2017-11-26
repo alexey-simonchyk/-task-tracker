@@ -4,6 +4,7 @@ import { MainComponent } from './components/main/main.component';
 import { LoginComponent } from './components/login/login.component';
 import { MAIN_ROUTE } from './components/routing';
 import { AuthenticatedGuard } from './guards/authenticated-guard';
+import { NotAuthenticatedGuard } from './guards/not-authenticated-guard';
 
 
 
@@ -16,11 +17,13 @@ export const APP_ROUTE: Routes = [
     },
     {
         path: 'login',
-        component: LoginComponent
+        component: LoginComponent,
+        canActivate: [NotAuthenticatedGuard]
     },
     {
         path: 'registration',
-        component: RegistrationComponent
+        component: RegistrationComponent,
+        canActivate: [NotAuthenticatedGuard]
     },
     {
         path: '**',
