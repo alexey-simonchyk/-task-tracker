@@ -26,7 +26,7 @@ export class CommentService {
         if (!this.token) return;
         this
             .http
-            .post(`${this.commentEndPoint}/task/${taskId}`, comment)
+            .post(`${this.commentEndPoint}/task/${taskId}`, comment, {headers: this.getAuthenticationHeader()})
             .toPromise()
             .then(data => {
                 this.ngRedux.dispatch({ type: ADD_COMMENT_TO_TASK, comment: data });
@@ -41,7 +41,7 @@ export class CommentService {
         if (!this.token) return;
         this
             .http
-            .post(`${this.commentEndPoint}/project/${projectId}`, comment)
+            .post(`${this.commentEndPoint}/project/${projectId}`, comment, {headers: this.getAuthenticationHeader()})
             .toPromise()
             .then(data => {
                 this.ngRedux.dispatch({ type: ADD_COMMENT_TO_PROJECT, comment: data })

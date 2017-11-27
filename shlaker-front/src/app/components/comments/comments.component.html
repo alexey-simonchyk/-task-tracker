@@ -5,8 +5,9 @@
 
     <div *ngIf="!isCollapsed" class="comment_list_container">
         <comment *ngFor="let comment of comments" [comment]="comment"></comment>
-        <div>Your message:</div>
-        <textarea class="comment_input no_select" cols="92" rows="7" tabindex="101" ></textarea>
+        <label for="comment_text">Your message:</label>
+        <textarea [(ngModel)]="comment.text" id="comment_text" class="comment_input no_select" cols="92" rows="7" tabindex="101" ></textarea>
+        <button class="send_comment no_select" (click)="sendMessage()">Send</button>
     </div>
 
 </div>

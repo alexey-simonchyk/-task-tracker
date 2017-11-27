@@ -1,2 +1,9 @@
-<project-tasks class="full_width" [projectId]="(selectedProject | async)?.id" [tasks]="(selectedProject | async)?.tasks"></project-tasks>
-<comments class="full_width" [comments]="(selectedProject | async)?.comments"></comments>
+<project-tasks class="full_width"
+               [projectId]="(selectedProject | async)?.id"
+               [tasks]="(selectedProject | async)?.tasks">
+</project-tasks>
+<comments class="full_width"
+          [itemType]="'project'"
+          [itemId]="(selectedProject | async)?.id"
+          [comments]="(selectedProject | async)?.comments">
+</comments>

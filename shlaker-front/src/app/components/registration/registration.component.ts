@@ -8,18 +8,18 @@ import { Router } from '@angular/router';
 })
 export class RegistrationComponent implements OnInit {
 
-    passwordsEquals: boolean = true;
     newUser: RegistrationUser = new RegistrationUser();
-    correctEmail: boolean = true;
 
+    errorMessage: string = '';
     constructor(private userService: UserService, private router: Router) { }
 
     ngOnInit() {
     }
 
     onSubmit() {
+        this.errorMessage = '';
         if (this.newUser.password !== this.newUser.repeatPassword) {
-            this.passwordsEquals = true;
+            this.errorMessage = 'Passwords must be the same';
             return;
         }
 
@@ -37,15 +37,10 @@ export class RegistrationComponent implements OnInit {
                     });
             }, error => {
                 if (error.status === 400) {
-                    switch (error.error) {
-                        case 'Such user exists':
-                            this.correctEmail = false;
-                            break;
-
-                        case 'Password and repeated password not equal':
-                            this.passwordsEquals = false;
-                            break;
-                    }
+                    this.errorMessage = error.error;
+                    this.newUser.email = '';
+                    this.newUser.password = '';
+                    this.newUser.repeatPassword = '';
                 }
             });
 

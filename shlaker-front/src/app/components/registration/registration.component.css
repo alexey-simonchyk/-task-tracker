@@ -10,7 +10,7 @@
 .registration_form_wrapper {
     align-self: center;
     width: 50vh;
-    height: 60vh;
+    height: 62vh;
     background: #fff;
     border-radius: 3px;
     padding: 2%;
@@ -61,7 +61,7 @@
     text-align: center;
     font-size: 25px;
     font-weight: 600;
-    margin-top: 5%;
+    margin-top: 20px;
     padding: 2%;
     width: 40%;
     color: firebrick;
@@ -79,10 +79,22 @@
     margin-top: 3%;
     font-size: 15px;
     text-align: center;
-    display: flex;
-    flex-direction: column;
     justify-content: center;
     color: firebrick;
+}
+
+.error_message_wrapper {
+    color: red;
+    font-size: 15px;
+    align-self: center;
+    padding-top: 15px;
+}
+
+.go_to_login_text {
     cursor: pointer;
 }
 
+.go_to_login_text:hover {
+    padding-bottom: 1px;
+    border-bottom: 1px solid firebrick;
+}

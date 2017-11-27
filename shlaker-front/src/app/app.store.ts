@@ -12,7 +12,7 @@ import {
 import { IAppState } from './app.store';
 import { User } from './models/user.model';
 
-const TOKEN = 'SHLAKER_TOKEN'
+const TOKEN = 'SHLAKER_TOKEN';
 
 export interface IAppState {
     user: User;
@@ -54,7 +54,7 @@ export function selectedTaskReducer(state = null, action) {
         case ADD_COMMENT_TO_TASK: {
             let newComments = state.comments.slice();
             newComments.push(action.comment);
-            return {...state, newComments};
+            return {...state, comments: newComments};
         }
     }
     return state;
@@ -94,7 +94,7 @@ export function selectedProjectReducer(state = null, action) {
         case ADD_COMMENT_TO_PROJECT: {
             let newComments = state.comments.slice();
             newComments.push(action.comment);
-            return {...state, newComments};
+            return {...state, comments: newComments};
         }
     }
     return state;

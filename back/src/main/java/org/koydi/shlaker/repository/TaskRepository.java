@@ -13,4 +13,8 @@ public interface TaskRepository extends JpaRepository<Task, String> {
     @EntityGraph(value = "FullTask", type = EntityGraph.EntityGraphType.LOAD)
     @Query("select task from Task task where task.id = :taskId")
     Task getFullTask(@Param("taskId") String taskId);
+
+    @EntityGraph(value = "TaskWithComments", type = EntityGraph.EntityGraphType.LOAD)
+    @Query("select task from Task task where task.id = :taskId")
+    Task getTaskWithComments(@Param("taskId") String taskId);
 }

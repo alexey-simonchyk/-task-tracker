@@ -44,6 +44,7 @@
                    #password="ngModel"
                    id="input_password"
                    name="input_password"
+                   minlength="8"
                    [(ngModel)]="newUser.password"
             />
         </div>
@@ -59,15 +60,19 @@
                    #repeatPassword="ngModel"
                    id="input_repeat_password"
                    name="input_repeat_password"
+                   minlength="8"
                    [(ngModel)]="newUser.repeatPassword"
             />
         </div>
 
+        <div *ngIf="errorMessage !== ''" class="error_message_wrapper">{{errorMessage}}</div>
         <div class="button_registration_wrapper">
             <button [disabled]="!registrationForm.form.valid" class="no_select registration_button" type="submit">Sign up</button>
         </div>
         <div class="go_to_login no_select">
-            <div class="no_select" [routerLink]="['/login']">I am registered</div>
+            <div class="no_select">
+                <div class="go_to_login_text no_select" style="display: inline-flex;" [routerLink]="['/login']">I am registered</div>
+            </div>
         </div>
     </form>
 </div>

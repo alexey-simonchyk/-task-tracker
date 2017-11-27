@@ -14,21 +14,30 @@ import java.util.Set;
 @Data
 @EqualsAndHashCode(exclude = {"project", "comments", "developers"}, callSuper = false)
 @ToString(exclude = {"project", "comments", "developers"})
-@NamedEntityGraph(
-        name = "FullTask",
-        attributeNodes = {
-                @NamedAttributeNode(value = "comments", subgraph = "commentWithUser"),
-                @NamedAttributeNode(value = "developers")
-        },
-        subgraphs = {
-                @NamedSubgraph(
-                        name = "commentsWithUser",
-                        attributeNodes = {
-                                @NamedAttributeNode(value = "user")
-                        }
-                )
-        }
-)
+@NamedEntityGraphs({
+        @NamedEntityGraph(
+                name = "FullTask",
+                attributeNodes = {
+                        @NamedAttributeNode(value = "comments", subgraph = "commentWithUser"),
+                        @NamedAttributeNode(value = "developers")
+                },
+                subgraphs = {
+                        @NamedSubgraph(
+                                name = "commentsWithUser",
+                                attributeNodes = {
+                                        @NamedAttributeNode(value = "user")
+                                }
+                        )
+                }
+        ),
+        @NamedEntityGraph(
+                name = "TaskWithComments",
+                attributeNodes = {
+                        @NamedAttributeNode(value = "comments")
+                }
+        )
+})
+
 public class Task extends BaseEntity {
 
     @Column(name = "description", length = 65535, columnDefinition = "text")

@@ -14,28 +14,37 @@ import java.util.Set;
 @Data
 @EqualsAndHashCode(exclude = {"tasks", "comments", "developers"}, callSuper = false)
 @ToString(exclude = {"tasks", "comments", "developers"})
-@NamedEntityGraph(
-        name = "FullProject",
-        attributeNodes = {
-                @NamedAttributeNode(value = "comments", subgraph = "commentsWithUser"),
-                @NamedAttributeNode(value = "developers"),
-                @NamedAttributeNode(value = "tasks", subgraph = "taskWithDevelopers")
-        },
-        subgraphs = {
-                @NamedSubgraph(
-                        name = "taskWithDevelopers",
-                        attributeNodes = {
-                                @NamedAttributeNode("developers")
-                    }
-                ),
-                @NamedSubgraph(
-                        name = "commentsWithUser",
-                        attributeNodes = {
-                                @NamedAttributeNode("user")
-                        }
-                )
-        }
-)
+@NamedEntityGraphs({
+        @NamedEntityGraph(
+                name = "FullProject",
+                attributeNodes = {
+                        @NamedAttributeNode(value = "comments", subgraph = "commentsWithUser"),
+                        @NamedAttributeNode(value = "developers"),
+                        @NamedAttributeNode(value = "tasks", subgraph = "taskWithDevelopers")
+                },
+                subgraphs = {
+                        @NamedSubgraph(
+                                name = "taskWithDevelopers",
+                                attributeNodes = {
+                                        @NamedAttributeNode("developers")
+                                }
+                        ),
+                        @NamedSubgraph(
+                                name = "commentsWithUser",
+                                attributeNodes = {
+                                        @NamedAttributeNode("user")
+                                }
+                        )
+                }
+        ),
+        @NamedEntityGraph(
+                name = "ProjectWithComments",
+                attributeNodes = {
+                        @NamedAttributeNode(value = "comments")
+                }
+        )
+})
+
 public class Project extends BaseEntity {
 
     @Column(name = "name")

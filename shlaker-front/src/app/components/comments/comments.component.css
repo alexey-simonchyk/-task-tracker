@@ -37,3 +37,22 @@
     border-radius: 21px;
     padding: 15px;
 }
+
+.send_comment {
+    margin-top: 15px;
+    width: 25%;
+    padding: 6px 3px;
+    margin-left: auto;
+    background: #FFF;
+    border: 1px solid firebrick;
+    font-size: 22px;
+    font-weight: 500;
+    color: firebrick;
+    cursor: pointer;
+    border-radius: 1px;
+}
+
+.send_comment:hover {
+    background: firebrick;
+    color: #fff;
+}

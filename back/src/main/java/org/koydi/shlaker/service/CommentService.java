@@ -31,8 +31,8 @@ public class CommentService {
     }
 
     public void addCommentToProject(String projectId, Comment comment) {
-        val project = projectRepository.findOne(projectId);
-        val user = userRepository.findOne(comment.getUser().getId());
+        val project = projectRepository.getProjectWithComments(projectId);
+        val user = userRepository.getFullUser(comment.getUser().getId());
         if (project != null && user != null) {
             comment.setUser(user);
             commentRepository.save(comment);
@@ -42,8 +42,8 @@ public class CommentService {
     }
 
     public void addCommentToTask(String taskId, Comment comment) {
-        val task = taskRepository.findOne(taskId);
-        val user = userRepository.findOne(comment.getUser().getId());
+        val task = taskRepository.getTaskWithComments(taskId);
+        val user = userRepository.getFullUser(comment.getUser().getId());
         if (task != null && user != null) {
             comment.setUser(user);
             commentRepository.save(comment);
