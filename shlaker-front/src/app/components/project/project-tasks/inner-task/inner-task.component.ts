@@ -1,6 +1,6 @@
 import { environment } from '../../../../../environments/environment';
 import { Component, Input, OnInit } from '@angular/core';
-import { Task } from "../../../../models/task.model";
+import { Task } from '../../../../models/task.model';
 
 @Component({
   selector: 'inner-task',
@@ -9,12 +9,17 @@ import { Task } from "../../../../models/task.model";
 })
 export class InnerTaskComponent implements OnInit {
 
+
     @Input('task') task: Task;
     imageEndPoint: string = `${environment.defaultImageEndPoint}`;
 
     constructor() { }
 
     ngOnInit() {
+    }
+
+    addDeveloper() {
+        
     }
 
 }

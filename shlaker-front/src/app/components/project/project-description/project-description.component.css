@@ -1,0 +1,27 @@
+.project_subhead {
+    color: firebrick;
+    align-self: center;
+}
+
+.project_developers {
+    margin-top: 20px;
+    display: flex;
+}
+
+.project_developer {
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    border-radius: 3px;
+    margin-right: 6px;
+}
+
+.developer_project_wrapper {
+    display: flex;
+    padding-left: 10px;
+}
+
+.add_developer {
+    color: #838a8a;
+    cursor: pointer;
+}

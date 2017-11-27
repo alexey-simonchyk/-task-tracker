@@ -4,7 +4,6 @@ import { Component, OnInit } from '@angular/core';
 import { select } from 'ng2-redux';
 import { ActivatedRoute } from '@angular/router';
 import { ProjectService } from '../../services/project-service';
-import { ParamMap } from '@angular/router/src/shared';
 
 @Component({
   templateUrl: './project.component.html',

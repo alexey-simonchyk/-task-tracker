@@ -40,3 +40,38 @@
     padding-right: 10px;
     text-align: right;
 }
+
+.add_developer {
+    margin-left: auto;
+    margin-right: 10px;
+    cursor: pointer;
+    color: #838a8a;
+}
+
+.add_developer_content {
+    flex-direction: column;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    border-radius: 3px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.add_developer_content div:first-child {
+    border-radius: 3px 3px 0 0;
+}
+
+.add_developer_content div:last-child {
+    border-radius: 0 0 3px 3px;
+}
+
+.add_developer_content div {
+    padding: 5px 10px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.add_developer_content div:hover {
+    background: #e8e9e9;
+}

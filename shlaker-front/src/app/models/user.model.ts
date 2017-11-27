@@ -4,4 +4,5 @@ export class User {
     password: string;
     nick: string;
     imageId: string;
+    role: string;
 }
