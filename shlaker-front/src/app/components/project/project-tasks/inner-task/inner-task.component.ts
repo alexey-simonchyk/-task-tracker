@@ -12,14 +12,20 @@ export class InnerTaskComponent implements OnInit {
 
     @Input('task') task: Task;
     imageEndPoint: string = `${environment.defaultImageEndPoint}`;
+    protected isOpenedModalWindow: boolean = false;
 
     constructor() { }
 
     ngOnInit() {
     }
 
-    addDeveloper() {
-        
+    protected openAddDeveloperModal() {
+        this.isOpenedModalWindow = true;
+    }
+
+    protected onCloseAddDeveloperModal(event) {
+        console.log(event);
+        this.isOpenedModalWindow = false;
     }
 
 }

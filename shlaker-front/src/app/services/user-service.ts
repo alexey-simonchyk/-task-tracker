@@ -10,9 +10,11 @@ export class UserService {
 
     private loginEndPoint: string;
     private token: string;
+    private userEndPoint: string;
 
     constructor(private http: HttpClient,
                 private ngRedux: NgRedux<IAppState>) {
+        this.userEndPoint = `${environment.apiUrl}/user`;
         this.loginEndPoint = `${environment.apiUrl}/oauth`;
         this.ngRedux.select("token").subscribe((token: any) => {
             this.token = token;
@@ -51,6 +53,14 @@ export class UserService {
                 this.ngRedux.dispatch({ type: REMOVE_TOKEN });
                 return !isAuthenticated;
             });
+    }
+
+    getDevelopers() {
+        if (!this.token) return;
+        return this
+            .http
+            .get(`${this.userEndPoint}/developers`, { headers: this.getAuthenticationHeader() })
+            .toPromise();
     }
 
     registrate(newUser) {

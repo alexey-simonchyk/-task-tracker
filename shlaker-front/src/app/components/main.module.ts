@@ -20,6 +20,7 @@ import { FormsModule } from '@angular/forms';
 import { TaskCreateComponent } from './task/task-create/task-create.component';
 import { ProjectDescriptionComponent } from './project/project-description/project-description.component';
 import { PipeModule } from '../pipes/pipe-module';
+import { ModalWindowComponent } from './modal-window/modal-window.component';
 
 
 @NgModule({
@@ -36,6 +37,7 @@ import { PipeModule } from '../pipes/pipe-module';
         CommentComponent,
         TaskCreateComponent,
         ProjectDescriptionComponent,
+        ModalWindowComponent,
     ],
     imports: [
         BrowserModule,

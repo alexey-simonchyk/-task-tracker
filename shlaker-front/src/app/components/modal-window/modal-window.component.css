@@ -1,0 +1,39 @@
+.modal_wrapper {
+    z-index: 1;
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    left: 0;
+    top: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+}
+
+.modal_content {
+    align-self: center;
+    background: #fff;
+    border-radius: 2px;
+    display: flex;
+    flex-direction: column;
+    padding: 25px;
+}
+
+.modal_header {
+    padding-bottom: 15px;
+    border-bottom: 1px solid firebrick;
+}
+
+.modal_buttons {
+    display: flex;
+}
+
+.modal_submit {
+    margin-right: auto;
+    cursor: pointer;
+}
+
+.modal_close {
+    margin-left: auto;
+    cursor: pointer;
+}

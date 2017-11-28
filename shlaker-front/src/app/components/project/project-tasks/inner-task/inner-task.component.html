@@ -9,7 +9,7 @@
         </div>
 
         <div class="developer_task_wrapper">
-            <div class="add_developer" (click)="addDeveloper()">+</div>
+            <div class="add_developer" (click)="openAddDeveloperModal ()">+</div>
             <!--<div class="add_developer_content" [style.display]="isPressed ? 'flex' : 'none'">
                 <div (click)="addDeveloper('piu')">user</div>
                 <div>user</div>
@@ -21,3 +21,4 @@
         {{task.endTime}}
     </div>
 </div>
+<modal-window *ngIf="isOpenedModalWindow" [developers]="task.developers" (close)="onCloseAddDeveloperModal($event)"></modal-window>
