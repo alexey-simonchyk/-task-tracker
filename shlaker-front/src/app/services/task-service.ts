@@ -18,7 +18,7 @@ export class TaskService {
         private ngRedux: NgRedux<IAppState>
     ) {
         this.taskEndpoint = `${environment.apiUrl}/task`;
-        this.ngRedux.select("token").subscribe((token: any) => {
+        this.ngRedux.select('token').subscribe((token: any) => {
             this.token = token;
         });
      }

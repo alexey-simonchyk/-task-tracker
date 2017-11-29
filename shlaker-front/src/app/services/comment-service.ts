@@ -17,13 +17,15 @@ export class CommentService {
       private ngRedux: NgRedux<IAppState>
     ) {
         this.commentEndPoint = `${environment.apiUrl}/comment`;
-        this.ngRedux.select("token").subscribe((token: any) => {
+        this.ngRedux.select('token').subscribe((token: any) => {
             this.token = token;
         });
      }
 
     addCommentToTask(taskId: string, comment: Comment) {
-        if (!this.token) return;
+        if (!this.token) {
+          return;
+        }
         this
             .http
             .post(`${this.commentEndPoint}/task/${taskId}`, comment, {headers: this.getAuthenticationHeader()})

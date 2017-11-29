@@ -31,7 +31,7 @@ export const INITIAL_STATE: IAppState = {
 };
 
 export function projectReducer(state = [], action) {
-    switch(action.type) {
+    switch (action.type) {
         case LOAD_PROJECTS: return action.projects;
         case ADD_PROJECT: return [...state, action.project];
     }
@@ -39,7 +39,7 @@ export function projectReducer(state = [], action) {
 }
 
 export function userReducer(state = null, action) {
-    switch(action.type) {
+    switch (action.type) {
         case ADD_USER: {
             return action.user;
         }
@@ -49,10 +49,10 @@ export function userReducer(state = null, action) {
 }
 
 export function selectedTaskReducer(state = null, action) {
-    switch(action.type) {
+    switch (action.type) {
         case SELECT_TASK: return action.task;
         case ADD_COMMENT_TO_TASK: {
-            let newComments = state.comments.slice();
+            const newComments = state.comments.slice();
             newComments.push(action.comment);
             return {...state, comments: newComments};
         }
@@ -67,7 +67,7 @@ export function selectedTaskReducer(state = null, action) {
 }
 
 export function tokenReducer(state = null, action) {
-    switch(action.type) {
+    switch (action.type) {
         case ADD_TOKEN: {
             window.localStorage.setItem(TOKEN, action.token);
             return action.token;
@@ -81,24 +81,24 @@ export function tokenReducer(state = null, action) {
 }
 
 export function selectedProjectReducer(state = null, action) {
-    switch(action.type) {
+    switch (action.type) {
         case SELECT_PROJECT: return action.project;
         case DESELECT_PROJECT: return null;
         case ADD_TASK: {
-            let newTasks = state.tasks.slice();
+            const newTasks = state.tasks.slice();
             newTasks.push(action.task);
             return {...state, tasks: newTasks};
         }
         case UPDATE_TASK_STATUS: {
-            let index = state.tasks.findIndex(task => task.id === action.taskId);
-            let newTasks = state.tasks.slice();
-            let newTask = {...newTasks[index]};
+            const index = state.tasks.findIndex(task => task.id === action.taskId);
+            const newTasks = state.tasks.slice();
+            const newTask = {...newTasks[index]};
             newTask.status = action.status;
             newTasks[index] = newTask;
             return {...state, tasks: newTasks};
         }
         case ADD_COMMENT_TO_PROJECT: {
-            let newComments = state.comments.slice();
+            const newComments = state.comments.slice();
             newComments.push(action.comment);
             return {...state, comments: newComments};
         }
@@ -106,8 +106,8 @@ export function selectedProjectReducer(state = null, action) {
             return {...state, developers: action.developers};
         }
         case UPDATE_TASK_DEVELOPERS: {
-            let newTask: Task = {...state.tasks.find(t => t.id === action.taskId)};
-            let newTasks: Task[] = state.tasks.filter(t => t.id !== newTask.id);
+            const newTask: Task = {...state.tasks.find(t => t.id === action.taskId)};
+            const newTasks: Task[] = state.tasks.filter(t => t.id !== newTask.id);
 
             newTask.developers = action.developers;
             newTasks.push(newTask);

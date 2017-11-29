@@ -6,7 +6,7 @@ import { environment } from '../../environments/environment';
 })
 export class DefaultImagePipe implements PipeTransform {
 
-    private imageEndPoint: string = `${environment.defaultImageEndPoint}`;
+    private imageEndPoint = `${environment.defaultImageEndPoint}`;
 
     transform(value: any, ...args: any[]): any {
         if (value) {

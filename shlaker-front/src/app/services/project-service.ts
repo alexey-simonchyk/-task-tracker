@@ -15,7 +15,7 @@ export class ProjectService {
     constructor(private http: HttpClient,
                 private ngRedux: NgRedux<IAppState> ) {
         this.projectEndPoint = `${environment.apiUrl}/project`;
-        this.ngRedux.select("token").subscribe((token: any) => {
+        this.ngRedux.select('token').subscribe((token: any) => {
             this.token = token;
         });
     }

@@ -2,7 +2,6 @@ package org.koydi.shlaker.service;
 
 import lombok.val;
 import org.koydi.shlaker.entity.Project;
-import org.koydi.shlaker.entity.ProjectStatus;
 import org.koydi.shlaker.entity.User;
 import org.koydi.shlaker.exception.BadRequestException;
 import org.koydi.shlaker.repository.ProjectRepository;
@@ -32,7 +31,7 @@ class ProjectNotFound extends BadRequestException {
 @Transactional
 public class ProjectService {
 
-    final static Function<String, String> projectNotFound =
+    final static Function<String, String> projectNotFoundErrorMessage =
             projectId -> String.format("Project with id %s not found", projectId);
 
     private final UserRepository userRepository;
@@ -50,7 +49,7 @@ public class ProjectService {
 
     public Project getProject(String projectId) {
         return Optional.ofNullable(projectRepository.getFullProject(projectId))
-                    .orElseThrow(() -> new ProjectNotFound(projectNotFound.apply(projectId)));
+                    .orElseThrow(() -> new ProjectNotFound(projectNotFoundErrorMessage.apply(projectId)));
     }
 
     public Project createProject(Project newProject) {
@@ -62,7 +61,7 @@ public class ProjectService {
         // TODO: 29.11.17 Delete this developers from all tasks
         val project = Optional
                 .ofNullable(projectRepository.getProjectWithDevelopers(projectId))
-                .orElseThrow(() -> new ProjectNotFound(projectNotFound.apply(projectId)));
+                .orElseThrow(() -> new ProjectNotFound(projectNotFoundErrorMessage.apply(projectId)));
 
         val newDevelopers = userRepository
                 .findAllByIdIn(

@@ -5,7 +5,7 @@ import { environment } from '../../environments/environment';
 @Pipe({ name : 'imageLink'})
 export class ImagePipe implements PipeTransform {
 
-    private imageEndPoint : string = `${environment.defaultImageEndPoint}`;
+    private imageEndPoint = `${environment.defaultImageEndPoint}`;
 
     transform(value: string, ...args: any[]) {
         if (value) {

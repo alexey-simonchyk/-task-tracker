@@ -14,7 +14,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { APP_ROUTE } from './app.routing';
-import { LoginComponent } from "./components/login/login.component";
+import { LoginComponent } from './components/login/login.component';
 import { FormsModule } from '@angular/forms';
 import { AuthenticatedGuard } from './guards/authenticated-guard';
 import { NotAuthenticatedGuard } from './guards/not-authenticated-guard';

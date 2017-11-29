@@ -17,7 +17,7 @@ import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import static org.koydi.shlaker.service.ProjectService.projectNotFound;
+import static org.koydi.shlaker.service.ProjectService.projectNotFoundErrorMessage;
 
 class TaskNotFound extends BadRequestException {
 
@@ -30,7 +30,7 @@ class TaskNotFound extends BadRequestException {
 @Transactional
 public class TaskService {
 
-    private static final Function<String, String> taskNotFoundError =
+    static final Function<String, String> taskNotFoundErrorMessage =
             taskId -> String.format("Task with id %s not found", taskId);
 
     private final TaskRepository taskRepository;
@@ -47,13 +47,13 @@ public class TaskService {
     public Task getFullTask(String taskId) {
         return Optional
                 .ofNullable(taskRepository.getFullTask(taskId))
-                .orElseThrow(()-> new TaskNotFound(taskNotFoundError.apply(taskId)));
+                .orElseThrow(()-> new TaskNotFound(taskNotFoundErrorMessage.apply(taskId)));
     }
 
     public void updateTaskStatus(String taskId, TaskStatus newTaskStatus) {
         val task = Optional
                 .ofNullable(taskRepository.getOne(taskId))
-                .orElseThrow(() -> new TaskNotFound(taskNotFoundError.apply(taskId)));
+                .orElseThrow(() -> new TaskNotFound(taskNotFoundErrorMessage.apply(taskId)));
         task.setStatus(newTaskStatus);
         taskRepository.save(task);
     }
@@ -61,7 +61,7 @@ public class TaskService {
     public void createTask(String projectId, Task newTask) {
         val project = Optional
                 .ofNullable(projectRepository.findOne(projectId))
-                .orElseThrow(() -> new ProjectNotFound(projectNotFound.apply(projectId)));
+                .orElseThrow(() -> new ProjectNotFound(projectNotFoundErrorMessage.apply(projectId)));
         newTask.setProject(project);
         taskRepository.save(newTask);
     }
@@ -69,7 +69,7 @@ public class TaskService {
     public Set<User> updateTaskDevelopers(Set<User> developers, String taskId) {
         val task = Optional
                 .ofNullable(taskRepository.getTaskWithDevelopers(taskId))
-                .orElseThrow(() -> new TaskNotFound(taskNotFoundError.apply(taskId)));
+                .orElseThrow(() -> new TaskNotFound(taskNotFoundErrorMessage.apply(taskId)));
 
         val newDevelopers = userRepository
                 .findAllByIdIn(

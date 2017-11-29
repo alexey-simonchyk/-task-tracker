@@ -1,9 +1,7 @@
 package org.koydi.shlaker.service;
 
 import lombok.val;
-import org.koydi.shlaker.entity.BaseEntity;
 import org.koydi.shlaker.entity.Comment;
-import org.koydi.shlaker.entity.Project;
 import org.koydi.shlaker.repository.CommentRepository;
 import org.koydi.shlaker.repository.ProjectRepository;
 import org.koydi.shlaker.repository.TaskRepository;
@@ -12,6 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Optional;
+
+import static org.koydi.shlaker.service.ProjectService.projectNotFoundErrorMessage;
+import static org.koydi.shlaker.service.TaskService.taskNotFoundErrorMessage;
+import static org.koydi.shlaker.service.UserService.userNotFoundErrorMessage;
 
 @Service
 @Transactional
@@ -34,24 +37,32 @@ public class CommentService {
     }
 
     public void addCommentToProject(String projectId, Comment comment) {
-        val project = projectRepository.getProjectWithComments(projectId);
-        val user = userRepository.getFullUser(comment.getUser().getId());
-        if (project != null && user != null) {
-            comment.setUser(user);
-            commentRepository.save(comment);
-            project.getComments().add(comment);
-            projectRepository.save(project);
-        }
+        val project = Optional
+                .ofNullable(projectRepository.getProjectWithComments(projectId))
+                .orElseThrow(() -> new ProjectNotFound(projectNotFoundErrorMessage.apply(projectId)));
+
+        val user = Optional
+                .ofNullable(userRepository.getFullUser(comment.getUser().getId()))
+                .orElseThrow(() -> new UserNotFound(userNotFoundErrorMessage.apply(comment.getUser().getId())));
+
+        comment.setUser(user);
+        commentRepository.save(comment);
+        project.getComments().add(comment);
+        projectRepository.save(project);
     }
 
     public void addCommentToTask(String taskId, Comment comment) {
-        val task = taskRepository.getTaskWithComments(taskId);
-        val user = userRepository.getFullUser(comment.getUser().getId());
-        if (task != null && user != null) {
-            comment.setUser(user);
-            commentRepository.save(comment);
-            task.getComments().add(comment);
-            taskRepository.save(task);
-        }
+        val task = Optional
+                .ofNullable(taskRepository.getTaskWithComments(taskId))
+                .orElseThrow(() -> new TaskNotFound(taskNotFoundErrorMessage.apply(taskId)));
+
+        val user = Optional
+                .ofNullable(userRepository.getFullUser(comment.getUser().getId()))
+                .orElseThrow(() -> new UserNotFound(userNotFoundErrorMessage.apply(comment.getUser().getId())));
+
+        comment.setUser(user);
+        commentRepository.save(comment);
+        task.getComments().add(comment);
+        taskRepository.save(task);
     }
 }

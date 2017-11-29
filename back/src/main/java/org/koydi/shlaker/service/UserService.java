@@ -13,6 +13,7 @@ import javax.transaction.Transactional;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.Function;
 
 class SuchUserExists extends BadRequestException {
 
@@ -32,6 +33,9 @@ class UserNotFound extends BadRequestException {
 @Service
 @Transactional
 public class UserService {
+
+    final static Function<String, String> userNotFoundErrorMessage =
+            userId -> String.format("User with id %s not found", userId);
 
     private final ShaPasswordEncoder shaPasswordEncoder;
     private final RoleRepository roleRepository;
@@ -59,7 +63,7 @@ public class UserService {
 
     public User getUserInformation(String userId) {
         return Optional.ofNullable(userRepository.getFullUser(userId))
-                .orElseThrow(() -> new UserNotFound("User with id not found"));
+                .orElseThrow(() -> new UserNotFound(userNotFoundErrorMessage.apply(userId)));
     }
 
     public Set<User> getDevelopers() {

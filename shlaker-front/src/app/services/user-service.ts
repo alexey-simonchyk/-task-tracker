@@ -16,7 +16,7 @@ export class UserService {
                 private ngRedux: NgRedux<IAppState>) {
         this.userEndPoint = `${environment.apiUrl}/user`;
         this.loginEndPoint = `${environment.apiUrl}/oauth`;
-        this.ngRedux.select("token").subscribe((token: any) => {
+        this.ngRedux.select('token').subscribe((token: any) => {
             this.token = token;
         });
     }
