@@ -42,6 +42,12 @@ import java.util.Set;
                 attributeNodes = {
                         @NamedAttributeNode(value = "comments")
                 }
+        ),
+        @NamedEntityGraph(
+                name = "ProjectWithDevelopers",
+                attributeNodes = {
+                        @NamedAttributeNode(value = "developers")
+                }
         )
 })
 

@@ -17,6 +17,8 @@ import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+import static org.koydi.shlaker.service.ProjectService.projectNotFound;
+
 class TaskNotFound extends BadRequestException {
 
     TaskNotFound(String message) {
@@ -59,7 +61,7 @@ public class TaskService {
     public void createTask(String projectId, Task newTask) {
         val project = Optional
                 .ofNullable(projectRepository.findOne(projectId))
-                .orElseThrow(() -> new ProjectNotFound("Such project not exists"));
+                .orElseThrow(() -> new ProjectNotFound(projectNotFound.apply(projectId)));
         newTask.setProject(project);
         taskRepository.save(newTask);
     }
