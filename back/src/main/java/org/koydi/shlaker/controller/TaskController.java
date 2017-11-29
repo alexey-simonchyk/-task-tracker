@@ -5,6 +5,7 @@ import org.koydi.shlaker.dto.TaskDto;
 import org.koydi.shlaker.dto.UserDto;
 import org.koydi.shlaker.entity.Task;
 import org.koydi.shlaker.mapper.TaskMapper;
+import org.koydi.shlaker.mapper.UserMapper;
 import org.koydi.shlaker.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,14 +20,17 @@ public class TaskController {
 
     private final TaskService taskService;
     private final TaskMapper taskMapper;
+    private final UserMapper userMapper;
 
     @Autowired
-    public TaskController(TaskService taskService, TaskMapper taskMapper) {
+    public TaskController(TaskService taskService, TaskMapper taskMapper, UserMapper userMapper) {
         this.taskService = taskService;
         this.taskMapper = taskMapper;
+        this.userMapper = userMapper;
     }
 
     @GetMapping("/{task_id}")
+    @ResponseStatus(HttpStatus.OK)
     public TaskDto getTask(@PathVariable("task_id") String taskId) {
         val task = taskService.getFullTask(taskId);
         return taskMapper.toFullTaskDto(task);
@@ -46,10 +50,12 @@ public class TaskController {
         return taskMapper.toShortTaskDto(newTask);
     }
 
-    @PostMapping("/{task_id}/developers")
+    @PutMapping("/{task_id}/developers")
+    @ResponseStatus(HttpStatus.OK)
     public List<UserDto> updateTaskDevelopers(@PathVariable("task_id") String taskId,
                                               @RequestBody List<UserDto> developers) {
-
-        return developers;
+        val newDevelopers = userMapper.fromUserDtos(developers);
+        val savedDevelopers = taskService.updateTaskDevelopers(newDevelopers, taskId);
+        return userMapper.toUserDtos(savedDevelopers);
     }
 }

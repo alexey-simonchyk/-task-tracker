@@ -28,6 +28,8 @@
 }
 
 .modal_buttons {
+    color: firebrick;
+    min-height: 35px;
     margin-top: auto;
     display: flex;
 }
@@ -35,11 +37,25 @@
 .modal_submit {
     margin-left: auto;
     cursor: pointer;
+    border-bottom: 1px solid #fff;
+    font-size: 25px;
+    margin-right: 15px;
+}
+
+.modal_submit:hover {
+    border-bottom: 1px solid firebrick;
 }
 
 .modal_close {
     margin-right: auto;
     cursor: pointer;
+    border-bottom: 1px solid #fff;
+    font-size: 25px;
+    margin-left: 15px;
+}
+
+.modal_close:hover {
+    border-bottom: 1px solid firebrick;
 }
 
 .modal_body {
@@ -79,7 +95,6 @@
 
 .dropdown-content {
     position: absolute;
-    /*background-color: firebrick;*/
     margin-left: 15px;
     color: #fff;
     min-width: 160px;

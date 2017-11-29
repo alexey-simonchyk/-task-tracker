@@ -56,7 +56,7 @@ export class TaskService {
         if (!this.token) return;
         return this
             .http
-            .post(`${this.taskEndpoint}/${taskId}/developers`, developers, {headers: this.getAuthenticationHeader()})
+            .put(`${this.taskEndpoint}/${taskId}/developers`, developers, {headers: this.getAuthenticationHeader()})
             .toPromise()
             .then(data => {
                 this.ngRedux.dispatch({type: UPDATE_TASK_DEVELOPERS, developers: data, taskId: taskId});

@@ -23,7 +23,7 @@ export class ModalWindowComponent implements OnInit {
         this.newDevelopersList = [...this.developers];
         this.userService.getDevelopers().then((data: User[]) => {
             this.allDevelopersNotIn = data.filter((developer: User) => {
-                return this.newDevelopersList.indexOf(developer) !== 0;
+                return this.newDevelopersList.find(temp => temp.id === developer.id) === undefined;
             });
         });
     }

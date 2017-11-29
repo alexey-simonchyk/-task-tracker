@@ -53,4 +53,7 @@ public interface UserMapper {
 
     @IterableMapping(qualifiedByName = "toShortUserDto")
     List<UserDto> toUserDtos(Set<User> users);
+
+    @IterableMapping(qualifiedByName = "fromUserDto")
+    Set<User> fromUserDtos(List<UserDto> users);
 }

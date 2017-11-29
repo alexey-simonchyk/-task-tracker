@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -29,6 +30,7 @@ class UserNotFound extends BadRequestException {
 
 
 @Service
+@Transactional
 public class UserService {
 
     private final ShaPasswordEncoder shaPasswordEncoder;
