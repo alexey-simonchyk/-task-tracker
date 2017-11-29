@@ -6,6 +6,7 @@ import org.koydi.shlaker.entity.User;
 import org.mapstruct.*;
 
 import java.util.List;
+import java.util.Set;
 
 @Mapper(
         nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS,
@@ -49,4 +50,7 @@ public interface UserMapper {
             @Mapping(target = "id", ignore = true),
     })
     User signUpMapper(SignUpUserDto user);
+
+    @IterableMapping(qualifiedByName = "toShortUserDto")
+    List<UserDto> toUserDtos(Set<User> users);
 }

@@ -3,8 +3,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { NgRedux } from 'ng2-redux';
 import { IAppState } from '../app.store';
-import { ADD_TASK, REMOVE_TOKEN, SELECT_TASK, UPDATE_TASK_STATUS } from '../actions';
+import { ADD_TASK, REMOVE_TOKEN, SELECT_TASK, UPDATE_TASK_DEVELOPERS, UPDATE_TASK_STATUS } from '../actions';
 import { Task } from '../models/task.model';
+import { User } from '../models/user.model';
 
 @Injectable()
 export class TaskService {
@@ -49,6 +50,21 @@ export class TaskService {
                         this.ngRedux.dispatch({ type: REMOVE_TOKEN });
                     }
                 });
+    }
+
+    updateTaskDevelopers(developers: User[], taskId: string) {
+        if (!this.token) return;
+        return this
+            .http
+            .post(`${this.taskEndpoint}/${taskId}/developers`, developers, {headers: this.getAuthenticationHeader()})
+            .toPromise()
+            .then(data => {
+                this.ngRedux.dispatch({type: UPDATE_TASK_DEVELOPERS, developers: data, taskId: taskId});
+            }, err => {
+                if (err.status === 401) {
+                    this.ngRedux.dispatch({ type: REMOVE_TOKEN });
+                }
+            });
     }
 
     createTask(projectId: string, newTask: Task) {

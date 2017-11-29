@@ -1,12 +1,15 @@
 import { NgModule } from '@angular/core';
 import { ImagePipe } from './image-pipe';
+import { DefaultImagePipe } from './defult-image-pipe';
 
 @NgModule({
     declarations: [
-        ImagePipe
+        ImagePipe,
+        DefaultImagePipe
     ],
     exports: [
-        ImagePipe
+        ImagePipe,
+        DefaultImagePipe
     ]
 })
 export class PipeModule {

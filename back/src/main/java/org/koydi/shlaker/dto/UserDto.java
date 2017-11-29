@@ -16,5 +16,5 @@ public class UserDto {
     private String password;
     private String imageId;
 
-    String role;
+    private String role;
 }

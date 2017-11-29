@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 
 class SuchUserExists extends BadRequestException {
 
@@ -56,5 +58,11 @@ public class UserService {
     public User getUserInformation(String userId) {
         return Optional.ofNullable(userRepository.getFullUser(userId))
                 .orElseThrow(() -> new UserNotFound("User with id not found"));
+    }
+
+    public Set<User> getDevelopers() {
+        return Optional
+                .ofNullable(userRepository.getUsersByRoleName("developer"))
+                .orElse(new HashSet<>());
     }
 }

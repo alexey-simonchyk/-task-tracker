@@ -5,7 +5,6 @@ import { NgRedux, select } from 'ng2-redux';
 import { Project } from '../../models/project.model';
 import { ProjectService } from '../../services/project-service';
 import * as $ from 'jquery';
-import { environment } from '../../../environments/environment';
 import { IAppState } from '../../app.store';
 import { REMOVE_TOKEN, REMOVE_USER } from '../../actions';
 
@@ -19,7 +18,6 @@ export class MenuComponent implements OnInit {
     @select('projects') projects: Observable<Project[]>;
     @select('selectedProject') selectedProject: Observable<Project>;
     @select('user') currentUser: Observable<User>;
-    imageEndPoint: string = `${environment.defaultImageEndPoint}`;
 
 
     menuState = {projects: false};

@@ -1,6 +1,6 @@
-import { environment } from '../../../../../environments/environment';
 import { Component, Input, OnInit } from '@angular/core';
 import { Task } from '../../../../models/task.model';
+import { TaskService } from '../../../../services/task-service';
 
 @Component({
   selector: 'inner-task',
@@ -11,10 +11,9 @@ export class InnerTaskComponent implements OnInit {
 
 
     @Input('task') task: Task;
-    imageEndPoint: string = `${environment.defaultImageEndPoint}`;
     protected isOpenedModalWindow: boolean = false;
 
-    constructor() { }
+    constructor(private taskService: TaskService) { }
 
     ngOnInit() {
     }
@@ -23,8 +22,10 @@ export class InnerTaskComponent implements OnInit {
         this.isOpenedModalWindow = true;
     }
 
-    protected onCloseAddDeveloperModal(event) {
-        console.log(event);
+    protected onCloseAddDeveloperModal(developers) {
+        if (developers) {
+            this.taskService.updateTaskDevelopers(developers, this.task.id);
+        }
         this.isOpenedModalWindow = false;
     }
 

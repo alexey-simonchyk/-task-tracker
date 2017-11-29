@@ -35,7 +35,7 @@ public class ProjectController {
     @PostMapping("/")
     public ProjectDto createProject(@RequestBody ProjectDto projectDto) {
         Project project = projectMapper.fromProjectDto(projectDto);
-        projectService.createProject(project);
+        project = projectService.createProject(project);
         return projectMapper.toShortProjectDto(project);
     }
 

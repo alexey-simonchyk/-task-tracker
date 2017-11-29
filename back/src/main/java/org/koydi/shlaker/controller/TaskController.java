@@ -2,12 +2,15 @@ package org.koydi.shlaker.controller;
 
 import lombok.val;
 import org.koydi.shlaker.dto.TaskDto;
+import org.koydi.shlaker.dto.UserDto;
 import org.koydi.shlaker.entity.Task;
 import org.koydi.shlaker.mapper.TaskMapper;
 import org.koydi.shlaker.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 @RestController
@@ -41,5 +44,12 @@ public class TaskController {
         Task newTask = taskMapper.fromTaskDto(newTaskDto);
         taskService.createTask(projectId, newTask);
         return taskMapper.toShortTaskDto(newTask);
+    }
+
+    @PostMapping("/{task_id}/developers")
+    public List<UserDto> updateTaskDevelopers(@PathVariable("task_id") String taskId,
+                                              @RequestBody List<UserDto> developers) {
+
+        return developers;
     }
 }

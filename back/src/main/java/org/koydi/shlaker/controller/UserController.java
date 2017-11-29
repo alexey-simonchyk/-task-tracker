@@ -1,5 +1,6 @@
 package org.koydi.shlaker.controller;
 
+import lombok.val;
 import org.koydi.shlaker.dto.SignUpUserDto;
 import org.koydi.shlaker.dto.UserDto;
 import org.koydi.shlaker.entity.User;
@@ -10,6 +11,8 @@ import org.koydi.shlaker.util.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 class PasswordsNotEqual extends BadRequestException {
 
@@ -48,5 +51,11 @@ public class UserController {
 
         User user = userMapper.signUpMapper(userDto);
         userService.createAccount(user);
+    }
+
+    @GetMapping("/user/developers")
+    public List<UserDto> getDevelopers() {
+        val users = userService.getDevelopers();
+        return userMapper.toUserDtos(users);
     }
 }

@@ -3,12 +3,34 @@
         <div class="modal_header">
             Developers editing
         </div>
-        <div class="modal_body">
-            Some body
+
+        <div class="dropdown_button" (click)="changeDropDownState()">+</div>
+        <div class="dropdown">
+            <div *ngIf="showDropDown" class="dropdown-content">
+                <div *ngFor="let newDeveloper of allDevelopersNotIn" class="dropdown_list_item" (click)="addDeveloper(newDeveloper)">
+                    {{newDeveloper.nick}}
+                </div>
+                <div *ngIf="allDevelopersNotIn.length === 0" class="dropdown_list_item">
+                    All developers are here
+                </div>
+            </div>
         </div>
+
+        <div class="modal_body" (click)="disableDropDown($event.target)">
+            <div class="developers_wrapper">
+
+                <div *ngFor="let developer of newDevelopersList" class="current_developer">
+                    <img class="developer_image" src="{{(developer.imageId | imageLink)}}" alt="developer" title="developer">
+                    <div class="developer_name">{{developer.nick}}</div>
+                    <div class="remove_developer" (click)="removeDeveloper(developer)">Remove</div>
+                </div>
+
+            </div>
+        </div>
+
         <div class="modal_buttons">
-            <div class="modal_submit" (click)="submit()">Submit</div>
             <div class="modal_close" (click)="close()">Close</div>
+            <div class="modal_submit" (click)="submit()">Submit</div>
         </div>
     </div>
 </div>

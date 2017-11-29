@@ -1,4 +1,3 @@
-import { environment } from '../../../../environments/environment';
 import { Component, Input, OnInit } from '@angular/core';
 import { Comment } from '../../../models/comment.model';
 
@@ -10,7 +9,6 @@ import { Comment } from '../../../models/comment.model';
 export class CommentComponent implements OnInit {
 
     @Input('comment') comment: Comment;
-    imageEndPoint: string = `${environment.defaultImageEndPoint}`;
 
     constructor() { }
 

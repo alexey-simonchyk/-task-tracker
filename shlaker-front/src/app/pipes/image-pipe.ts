@@ -1,14 +1,17 @@
 import { PipeTransform, Pipe } from '@angular/core';
+import { environment } from '../../environments/environment';
 
 
 @Pipe({ name : 'imageLink'})
 export class ImagePipe implements PipeTransform {
 
+    private imageEndPoint : string = `${environment.defaultImageEndPoint}`;
+
     transform(value: string, ...args: any[]) {
         if (value) {
-            return `/${value}`;
+            return `${this.imageEndPoint}/${value}`;
         } else {
-            return '/default/default_user';
+            return `${this.imageEndPoint}/default/default_user`;
         }
     }
 

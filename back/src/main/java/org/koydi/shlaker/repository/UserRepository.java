@@ -1,11 +1,14 @@
 package org.koydi.shlaker.repository;
 
+import org.koydi.shlaker.entity.Role;
 import org.koydi.shlaker.entity.User;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+
+import java.util.Set;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, String> {
@@ -16,4 +19,6 @@ public interface UserRepository extends JpaRepository<User, String> {
     @EntityGraph(value = "userWithRole", type = EntityGraph.EntityGraphType.LOAD)
     @Query("select u from User u where u.id = :userId")
     User getFullUser(@Param("userId") String userId);
+
+    Set<User> getUsersByRoleName(String role_name);
 }

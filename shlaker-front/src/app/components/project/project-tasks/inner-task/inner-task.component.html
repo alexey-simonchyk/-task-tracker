@@ -1,24 +1,26 @@
-<div class="task_header" [routerLink]="['./task', task.id]">{{task.name}}</div>
-<div class="task_description">
-    {{task.description}}
-</div>
-<div class="task_information">
-    <div class="task_developers">
-        <div class="developer_task_wrapper">
-            <img class="task_developer" src="{{imageEndPoint}}/default/default_user" alt="developer" title="developer">
-        </div>
+<div draggable="true" class="table_task">
+    <div class="task_header no_select" [routerLink]="['./task', task.id]">{{task.name}}</div>
+    <div class="task_description">
+        {{task.description}}
+    </div>
+    <div class="task_information">
+        <div class="task_developers">
+            <div class="developer_task_wrapper">
+                <img class="task_developer" src="{{('default_user' | defaultImageLink)}}" alt="developer" title="developer">
+            </div>
 
-        <div class="developer_task_wrapper">
-            <div class="add_developer" (click)="openAddDeveloperModal ()">+</div>
-            <!--<div class="add_developer_content" [style.display]="isPressed ? 'flex' : 'none'">
-                <div (click)="addDeveloper('piu')">user</div>
-                <div>user</div>
-                <div>user</div>
-            </div>-->
+            <div class="developer_task_wrapper">
+                <div class="add_developer" (click)="openAddDeveloperModal ()">+</div>
+            </div>
+        </div>
+        <div class="task_end_time">
+            {{task.endTime}}
         </div>
     </div>
-    <div class="task_end_time">
-        {{task.endTime}}
-    </div>
 </div>
-<modal-window *ngIf="isOpenedModalWindow" [developers]="task.developers" (close)="onCloseAddDeveloperModal($event)"></modal-window>
+<modal-window *ngIf="isOpenedModalWindow"
+              [developers]="task.developers"
+              (close)="onCloseAddDeveloperModal($event)"
+              draggable="false"
+>
+</modal-window>

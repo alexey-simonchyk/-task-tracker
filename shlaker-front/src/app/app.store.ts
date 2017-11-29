@@ -7,7 +7,7 @@ import {
     ADD_TOKEN,
     REMOVE_TOKEN,
     ADD_USER,
-    REMOVE_USER
+    REMOVE_USER, UPDATE_TASK_DEVELOPERS, UPDATE_PROJECT_DEVELOPERS
 } from './actions';
 import { IAppState } from './app.store';
 import { User } from './models/user.model';
@@ -56,6 +56,12 @@ export function selectedTaskReducer(state = null, action) {
             newComments.push(action.comment);
             return {...state, comments: newComments};
         }
+        case UPDATE_TASK_DEVELOPERS: {
+            if (state !== null && action.taskId === state.id) {
+                return {...state, developers: action.developers};
+            }
+            return state;
+        }
     }
     return state;
 }
@@ -95,6 +101,17 @@ export function selectedProjectReducer(state = null, action) {
             let newComments = state.comments.slice();
             newComments.push(action.comment);
             return {...state, comments: newComments};
+        }
+        case UPDATE_PROJECT_DEVELOPERS: {
+            return {...state, developers: action.developers};
+        }
+        case UPDATE_TASK_DEVELOPERS: {
+            let newTask: Task = {...state.tasks.find(t => t.id === action.taskId)};
+            let newTasks: Task[] = state.tasks.filter(t => t.id !== newTask.id);
+
+            newTask.developers = action.developers;
+            newTasks.push(newTask);
+            return {...state, tasks: newTasks};
         }
     }
     return state;
