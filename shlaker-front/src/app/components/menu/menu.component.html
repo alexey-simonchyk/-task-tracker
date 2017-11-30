@@ -24,7 +24,7 @@
     </div>
 </div>
 
-<div class="nav_element">
+<div class="nav_element" *ngIf="(currentUser | async)?.role === 'manager'">
     <div class="nav_element_header">
         <div [routerLink]="['/project/create']" class="menu_header no_select">Create Project</div>
     </div>

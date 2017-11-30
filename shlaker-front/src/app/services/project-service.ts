@@ -20,11 +20,32 @@ export class ProjectService {
         });
     }
 
-    getProjects() {
-        if (!this.token) return;
+    getAllProjects() {
+        if (!this.token) {
+            return;
+        }
+
         this
             .http
             .get(`${this.projectEndPoint}/`, {headers: this.getAuthenticationHeader()})
+            .toPromise()
+            .then(data => {
+                this.ngRedux.dispatch({type: LOAD_PROJECTS, projects: data})
+            },err => {
+                if (err.status === 401) {
+                    this.ngRedux.dispatch({ type: REMOVE_TOKEN });
+                }
+            });
+    }
+
+    getDeveloperProjets() {
+        if (!this.token) {
+            return;
+        }
+
+        this
+            .http
+            .get(`${this.projectEndPoint}/my`, {headers: this.getAuthenticationHeader()})
             .toPromise()
             .then(data => {
                 this.ngRedux.dispatch({type: LOAD_PROJECTS, projects: data})

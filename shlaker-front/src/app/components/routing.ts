@@ -5,6 +5,7 @@ import { ProjectCreateComponent } from './project/project-create/project-create.
 import { EmptyComponent } from './main/empty/empty.component';
 import { TaskCreateComponent } from './task/task-create/task-create.component';
 import { ProjectDescriptionComponent } from './project/project-description/project-description.component';
+import { ManagerGuard } from '../guards/manager-guard';
 
 
 
@@ -15,7 +16,8 @@ export const MAIN_ROUTE: Routes = [
     },
     {
         path: 'project/create',
-        component: ProjectCreateComponent
+        component: ProjectCreateComponent,
+        canActivate: [ManagerGuard]
     },
     {
         path: 'project/:projectId/task/create',

@@ -53,7 +53,7 @@ import { ModalWindowComponent } from './modal-window/modal-window.component';
         CommentService,
         UserService,
         TaskService,
-        ProjectService
+        ProjectService,
     ]
 })
 export class MainModule {

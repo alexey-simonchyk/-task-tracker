@@ -40,7 +40,9 @@ export class CommentService {
     }
 
     addCommentToProject(projectId: string, comment: Comment) {
-        if (!this.token) return;
+        if (!this.token) {
+          return;
+        }
         this
             .http
             .post(`${this.commentEndPoint}/project/${projectId}`, comment, {headers: this.getAuthenticationHeader()})

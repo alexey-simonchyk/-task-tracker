@@ -18,6 +18,7 @@ import { LoginComponent } from './components/login/login.component';
 import { FormsModule } from '@angular/forms';
 import { AuthenticatedGuard } from './guards/authenticated-guard';
 import { NotAuthenticatedGuard } from './guards/not-authenticated-guard';
+import { ManagerGuard } from './guards/manager-guard';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { NotAuthenticatedGuard } from './guards/not-authenticated-guard';
     ],
     providers: [
         AuthenticatedGuard,
-        NotAuthenticatedGuard
+        NotAuthenticatedGuard,
+        ManagerGuard
     ],
     bootstrap: [AppComponent]
 })

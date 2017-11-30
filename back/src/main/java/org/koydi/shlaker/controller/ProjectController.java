@@ -4,11 +4,14 @@ import lombok.val;
 import org.koydi.shlaker.dto.ProjectDto;
 import org.koydi.shlaker.dto.UserDto;
 import org.koydi.shlaker.entity.Project;
+import org.koydi.shlaker.entity.User;
 import org.koydi.shlaker.mapper.ProjectMapper;
 import org.koydi.shlaker.mapper.UserMapper;
 import org.koydi.shlaker.service.ProjectService;
+import org.koydi.shlaker.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,22 +23,32 @@ public class ProjectController {
     private final ProjectService projectService;
     private final UserMapper userMapper;
     private final ProjectMapper projectMapper;
+    private final UserService userService;
 
     @Autowired
-    public ProjectController(ProjectService projectService, ProjectMapper projectMapper, UserMapper userMapper) {
+    public ProjectController(ProjectService projectService, ProjectMapper projectMapper, UserMapper userMapper, UserService userService) {
         this.projectService = projectService;
         this.projectMapper = projectMapper;
         this.userMapper = userMapper;
+        this.userService = userService;
     }
 
-    @PreAuthorize("hasAuthority('developer')")
     @GetMapping("/")
+    @PreAuthorize("hasAuthority('manager')")
     public List<ProjectDto> getProjects() {
         val projects = projectService.getProjects();
         return projectMapper.toShortProjectDtos(projects);
     }
 
+    @GetMapping("/my")
+    public List<ProjectDto> getUserProjects(Authentication authentication) {
+        val user = userService.getUserInformation((String)authentication.getPrincipal());
+        val projects = projectService.getProjectsUserIn(user);
+        return projectMapper.toShortProjectDtos(projects);
+    }
+
     @PostMapping("/")
+    @PreAuthorize("hasAuthority('manager')")
     public ProjectDto createProject(@RequestBody ProjectDto projectDto) {
         Project project = projectMapper.fromProjectDto(projectDto);
         project = projectService.createProject(project);
@@ -50,6 +63,7 @@ public class ProjectController {
     }
 
     @PutMapping("/{project_id}/developers")
+    @PreAuthorize("hasAuthority('manager')")
     public List<UserDto> updateProjectDevelopers(@PathVariable("project_id") String projectId,
                                                  @RequestBody List<UserDto> developers) {
         val newDevelopers = userMapper.fromUserDtos(developers);

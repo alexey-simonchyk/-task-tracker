@@ -7,7 +7,7 @@
     <div class="developer_project_wrapper">
         <img *ngFor="let developer of (selectedProject | async)?.developers" class="project_developer" src="{{(developer.imageId | imageLink)}}"
              alt="{{developer.nick}}" title="{{developer.nick}}">
-        <div class="add_developer" (click)="addDeveloper()">+</div>
+        <div *ngIf="(user | async)?.role === 'manager'" class="add_developer" (click)="addDeveloper()">+</div>
     </div>
 </div>
 <comments class="full_width"

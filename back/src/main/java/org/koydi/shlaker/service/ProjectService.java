@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -45,6 +46,12 @@ public class ProjectService {
 
     public List<Project> getProjects() {
         return projectRepository.findAll();
+    }
+
+    public List<Project> getProjectsUserIn(User user) {
+        val userSet = new HashSet<User>();
+        userSet.add(user);
+        return projectRepository.getProjectsByDevelopersContains(userSet);
     }
 
     public Project getProject(String projectId) {

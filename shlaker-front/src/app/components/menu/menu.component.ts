@@ -26,7 +26,16 @@ export class MenuComponent implements OnInit {
     constructor(private projectService: ProjectService, private ngRedux: NgRedux<IAppState>) { }
 
     ngOnInit() {
-        this.projectService.getProjects();
+        this.currentUser.subscribe(user => {
+            if (user === null) {
+                return;
+            }
+            if (user.role === 'developer') {
+               this.projectService.getDeveloperProjets();
+            } else {
+               this.projectService.getAllProjects();
+            }
+        });
     }
 
     changeMenuState(target) {
