@@ -41,6 +41,7 @@
 .task_table_content_side {
     display: flex;
     min-height: 65vh;
+    height: 95%;
     flex-direction: column;
 }
 
@@ -71,4 +72,10 @@
     margin-right: 10px;
     cursor: pointer;
     color: #838a8a;
+}
+
+.inner_task_wrapper {
+    display: flex;
+    flex-direction: row;
+    padding: 10px 10px 0;
 }

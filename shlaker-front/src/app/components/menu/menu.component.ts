@@ -40,7 +40,7 @@ export class MenuComponent implements OnInit {
         });
     }
 
-    changeMenuState(target) {
+    protected changeMenuState(target) {
         let element;
         switch (target) {
             case 'projects':
@@ -57,13 +57,16 @@ export class MenuComponent implements OnInit {
         this.menuState[target] = !this.menuState[target];
     }
 
-    logout() {
+    protected logout() {
         this.ngRedux.dispatch({type: REMOVE_USER});
         this.ngRedux.dispatch({type: REMOVE_TOKEN});
     }
 
-    openPictureModalWindow() {
+    protected openPictureModalWindow() {
         this.isOpenedPictureModal = true;
     }
 
+    protected onChangeImageClose(isNewImageSet) {
+        this.isOpenedPictureModal = false;
+    }
 }

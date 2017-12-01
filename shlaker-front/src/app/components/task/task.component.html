@@ -14,7 +14,7 @@
         <div class="task_subhead">Task developers</div>
         <div class="developer_task_wrapper">
             <img *ngFor="let developer of (selectedTask | async)?.developers" class="task_developer"
-                 src="{{(developer.imageId | imageLink)}}" alt="{{developer.nick}}" title="{{developer.nick}}">
+                 [src]="(developer.imageId | imageLink)" alt="{{developer.nick}}" title="{{developer.nick}}">
         </div>
     </div>
 

@@ -41,12 +41,12 @@ export class ProjectTasksComponent implements OnInit {
         event.preventDefault();
     }
 
-    enterDropArea(event) {
-        $(event.target).addClass('drop_here');
+    enterDropArea(target) {
+        $(target).addClass('drop_here');
     }
 
-    leaveDropArea(event) {
-        $(event.target).removeClass('drop_here');
+    leaveDropArea(target) {
+        $(target).removeClass('drop_here');
     }
 
 }

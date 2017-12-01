@@ -3,11 +3,11 @@
 </div>
 
 <div class="nav_element_profile">
-    <img class="avatar_image" src="{{((currentUser | async)?.imageId | imageLink)}}" alt="Avatar" />
+    <img class="avatar_image" [src]="((currentUser | async)?.imageId | imageLink)" alt="Avatar" />
     <div class="nav_profile">
         {{(currentUser | async)?.nick}}
     </div>
-    <div (click)="openPictureModalWindow()">
+    <div class="load_picture_text" (click)="openPictureModalWindow()">
         Load picture
     </div>
     <div (click)="logout()" class="logout">
@@ -19,7 +19,7 @@
     <div class="nav_element_header" (click)="changeMenuState('projects')">
         <div class="menu_header">Projects</div>
         <div class="down_arrow">
-            <img class="down_arrow_image" src="{{('down_arrow' | defaultImageLink)}}" alt="Down Arrow">
+            <img class="down_arrow_image" [src]="('down_arrow' | defaultImageLink)" alt="Down Arrow">
         </div>
     </div>
     <div id="projects_close" class="nav_element_list">
@@ -32,4 +32,4 @@
         <div [routerLink]="['/project/create']" class="menu_header no_select">Create Project</div>
     </div>
 </div>
-<app-modal-load-image *ngIf="isOpenedPictureModal"></app-modal-load-image>
+<app-modal-load-image (close)="onChangeImageClose($event)" *ngIf="isOpenedPictureModal"></app-modal-load-image>

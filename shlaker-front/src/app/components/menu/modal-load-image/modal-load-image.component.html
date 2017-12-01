@@ -1,5 +1,17 @@
-<div class="modal_wrapper">
-    <div class="modal_content">
-        Here will be something!
+<div class="load_image_modal_wrapper">
+    <div class="load_image_modal_content">
+        <div class="load_image_header">
+            <div>Upload a new photo</div>
+            <div class="close_load_image_button" (click)="close()">x</div>
+        </div>
+        <div class="load_image_body">
+            <input type="file" (change)="imageSelect($event, imageTarget)" id="selectedImage" style="display: none;" />
+            <div class="buttons_wrapper">
+                <div class="choose_image" onclick="document.getElementById('selectedImage').click();"><div>Select</div></div>
+                <div *ngIf="isImageLoaded" class="choose_image apply_button" (click)="apply()"><div>Apply</div></div>
+            </div>
+            <img [hidden]="!isImageLoaded" class="loaded_image" #imageTarget id="uploaded_image"/>
+        </div>
+        <div class="load_image_footer"><div>Not upload bad pictures!</div></div>
     </div>
 </div>

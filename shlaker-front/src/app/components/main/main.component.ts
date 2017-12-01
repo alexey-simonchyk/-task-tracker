@@ -1,6 +1,6 @@
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
-import { UserService } from './../../services/user-service';
+import { UserService } from '../../services/user-service';
 import { Component, OnInit } from '@angular/core';
 import { select } from 'ng2-redux';
 

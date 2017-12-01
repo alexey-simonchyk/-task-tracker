@@ -4,13 +4,20 @@
         <div class="task_table_status">
             <div class="task_table_header_side">Appointed</div>
             <div
+                #appointed
                 (drop)="onDrop($event, 'APPOINTED')"
                 (dragover)="allowDrag($event)"
-                (dragenter)="enterDropArea($event)"
-                (dragleave)="leaveDropArea($event)"
+                (dragenter)="enterDropArea(appointed)"
+                (dragleave)="leaveDropArea(appointed)"
                 class="task_table_content_side"
             >
-                <inner-task *ngFor="let task of getTasks('APPOINTED')" [task]="task" (dragstart)="onDragStart($event, task)"></inner-task>
+                <inner-task *ngFor="let task of getTasks('APPOINTED')"
+                            [task]="task"
+                            (dragenter)="enterDropArea(appointed)"
+                            (dragleave)="leaveDropArea(appointed)"
+                            (dragstart)="onDragStart($event, task)"
+                            class="inner_task_wrapper"
+                ></inner-task>
                 <div [routerLink]="['/project', projectId, 'task', 'create']" class="create_task_link no_select">
                     <div class="create_task_link_text no_select">+</div>
                 </div>
@@ -20,26 +27,40 @@
         <div class="task_table_status">
             <div class="task_table_header_middle">Performing</div>
             <div
+                #performing
                 (drop)="onDrop($event, 'PERFORMING')"
-                (dragenter)="enterDropArea($event)"
-                (dragleave)="leaveDropArea($event)"
+                (dragenter)="enterDropArea(performing)"
+                (dragleave)="leaveDropArea(performing)"
                 (dragover)="allowDrag($event)"
                 class="task_table_content_middle"
             >
-                <inner-task *ngFor="let task of getTasks('PERFORMING')" [task]="task" (dragstart)="onDragStart($event, task)"></inner-task>
+                <inner-task *ngFor="let task of getTasks('PERFORMING')"
+                            [task]="task"
+                            (dragenter)="enterDropArea(performing)"
+                            (dragleave)="leaveDropArea(performing)"
+                            (dragstart)="onDragStart($event, task)"
+                            class="inner_task_wrapper"
+                ></inner-task>
             </div>
         </div>
 
         <div class="task_table_status">
             <div class="task_table_header_side">Fulfilled</div>
             <div
+                #fulfilled
                 (drop)="onDrop($event, 'FULFILLED')"
                 (dragover)="allowDrag($event)"
-                (dragenter)="enterDropArea($event)"
-                (dragleave)="leaveDropArea($event)"
+                (dragenter)="enterDropArea(fulfilled)"
+                (dragleave)="leaveDropArea(fulfilled)"
                 class="task_table_content_side"
             >
-                <inner-task *ngFor="let task of getTasks('FULFILLED')" [task]="task" (dragstart)="onDragStart($event, task)"></inner-task>
+                <inner-task *ngFor="let task of getTasks('FULFILLED')"
+                            [task]="task"
+                            (dragenter)="enterDropArea(fulfilled)"
+                            (dragleave)="leaveDropArea(fulfilled)"
+                            (dragstart)="onDragStart($event, task)"
+                            class="inner_task_wrapper"
+                ></inner-task>
             </div>
         </div>
 

@@ -1,4 +1,4 @@
-.modal_wrapper {
+.load_image_modal_wrapper {
     z-index: 1;
     position: absolute;
     width: 100%;
@@ -10,13 +10,91 @@
     justify-content: center;
 }
 
-.modal_content {
-    max-height: 65vh;
+.load_image_modal_content {
+    color: #fff;
     margin-top: 15vh;
-    width: 40%;
+    width: 654px;
     background: #fff;
-    border-radius: 2px;
+    border-radius: 6px;
     display: flex;
     flex-direction: column;
-    padding: 25px;
+    margin-bottom: auto;
+}
+
+.load_image_header {
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    background: firebrick;
+    padding-left: 15px;
+    padding-top: 15px;
+    padding-bottom: 10px;
+    font-size: 20px;
+    display: flex;
+    border-bottom: 1px solid firebrick;
+}
+
+.load_image_body {
+    min-height: 250px;
+    display: flex;
+    flex-direction: column;
+}
+
+.loaded_image {
+    height: 300px;
+    width: 550px;
+    align-self: center;
+    margin-bottom: 25px;
+    border-radius: 5px;
+}
+
+.load_image_footer {
+    background: firebrick;
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 15px;
+    font-size: 20px;
+    display: flex;
+    border-top: 1px solid firebrick;
+    justify-content: center;
+}
+
+.load_image_footer div {
+    align-self: center;
+}
+
+.close_load_image_button {
+    margin-left: auto;
+    cursor: pointer;
+    padding-right: 15px;
+}
+
+.choose_image {
+    cursor: pointer;
+    background: white;
+    border: 1px solid firebrick;
+    color: firebrick;
+    text-align: center;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    font-size: 16px;
+
+    width: 20%;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    align-self: center;
+    display: flex;
+    justify-content: center;
+}
+
+.choose_image:hover {
+    opacity: 0.85;
+}
+
+.buttons_wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.apply_button {
+    margin-left: 5px;
 }
