@@ -21,6 +21,7 @@ import { TaskCreateComponent } from './task/task-create/task-create.component';
 import { ProjectDescriptionComponent } from './project/project-description/project-description.component';
 import { PipeModule } from '../pipes/pipe-module';
 import { ModalWindowComponent } from './modal-window/modal-window.component';
+import { ModalLoadImageComponent } from './menu/modal-load-image/modal-load-image.component';
 
 
 @NgModule({
@@ -38,6 +39,7 @@ import { ModalWindowComponent } from './modal-window/modal-window.component';
         TaskCreateComponent,
         ProjectDescriptionComponent,
         ModalWindowComponent,
+        ModalLoadImageComponent,
     ],
     imports: [
         BrowserModule,

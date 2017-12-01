@@ -22,10 +22,12 @@ export class MenuComponent implements OnInit {
 
     menuState = {projects: false};
     imageLink: string = '';
+    isOpenedPictureModal: boolean;
 
     constructor(private projectService: ProjectService, private ngRedux: NgRedux<IAppState>) { }
 
     ngOnInit() {
+        this.isOpenedPictureModal = false;
         this.currentUser.subscribe(user => {
             if (user === null) {
                 return;
@@ -58,6 +60,10 @@ export class MenuComponent implements OnInit {
     logout() {
         this.ngRedux.dispatch({type: REMOVE_USER});
         this.ngRedux.dispatch({type: REMOVE_TOKEN});
+    }
+
+    openPictureModalWindow() {
+        this.isOpenedPictureModal = true;
     }
 
 }
