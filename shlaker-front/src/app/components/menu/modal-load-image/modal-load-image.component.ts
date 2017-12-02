@@ -1,3 +1,4 @@
+import { ImageService } from '../../../services/image-service';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 @Component({
@@ -9,8 +10,9 @@ export class ModalLoadImageComponent implements OnInit {
 
     @Output('close') closeEvent: EventEmitter<boolean> = new EventEmitter();
     protected isImageLoaded: boolean = false;
+    private currentFile;
 
-    constructor() { }
+    constructor(private imageService: ImageService) { }
 
     ngOnInit() {
     }
@@ -20,13 +22,16 @@ export class ModalLoadImageComponent implements OnInit {
     }
 
     protected apply() {
+        if (this.isImageLoaded) {
+            this.imageService.uploadImage(this.currentFile);
+        }
         this.closeEvent.emit(true);
     }
 
     protected imageSelect(event, imageTarget) {
         if (event.target.files[0]) {
             this.isImageLoaded = true;
-            console.log(event.target.files[0]);
+            this.currentFile = event.target.files[0];
             this.showImage(event.target, imageTarget)
         } else {
             this.isImageLoaded = false;

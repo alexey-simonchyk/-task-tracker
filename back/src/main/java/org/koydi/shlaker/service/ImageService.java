@@ -36,4 +36,11 @@ public class ImageService {
                 .ofNullable(imageRepository.getOne(imageId))
                 .orElseThrow(() -> new ImageNotFound(imageNotFoundErrorMessage.apply(imageId)));
     }
+
+    public Image createImage(String path) {
+        Image image = new Image();
+        image.setPath(path);
+        image = imageRepository.save(image);
+        return image;
+    }
 }

@@ -3,26 +3,40 @@ package org.koydi.shlaker.controller;
 import lombok.val;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
+import org.koydi.shlaker.dto.ImageDto;
+import org.koydi.shlaker.entity.Image;
+import org.koydi.shlaker.exception.BadRequestException;
 import org.koydi.shlaker.exception.ServerErrorException;
 import org.koydi.shlaker.service.ImageService;
-import org.koydi.shlaker.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.function.Function;
+
+class EmptyImageUpload extends BadRequestException {
+
+    EmptyImageUpload(String message) {
+        super(message);
+    }
+}
 
 @Controller
 @RequestMapping("/image")
 public class ImageController {
+
+    @Value("${store.image.path}")
+    private String uploadPath;
 
     private final ImageService imageService;
     private static final String JPG_FORMAT = "jpg";
@@ -82,6 +96,27 @@ public class ImageController {
                 .ok()
                 .contentType(imageType)
                 .body(bytes);
+    }
+
+    @PostMapping("/upload")
+    @ResponseStatus(HttpStatus.OK)
+    public ImageDto uploadImage(@RequestParam("file") MultipartFile image) {
+        if (image.isEmpty()) {
+            throw new EmptyImageUpload("Image not found");
+        }
+
+        Image savedImage;
+        try {
+            String path = uploadPath + "/newFile" + ".jpg";
+            savedImage = imageService.createImage(path);
+
+            byte[] imageBytes = image.getBytes();
+            Files.write(Paths.get(path), imageBytes);
+
+        } catch (IOException exception) {
+            throw new ServerErrorException("Error while saving uploaded image", exception);
+        }
+        return new ImageDto(savedImage.getId());
     }
 
 }

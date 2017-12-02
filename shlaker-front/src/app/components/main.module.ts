@@ -1,3 +1,4 @@
+import { ImageService } from '../services/image-service';
 import { NgModule } from '@angular/core';
 import { MainComponent } from './main/main.component';
 import { CommentService } from '../services/comment-service';
@@ -56,6 +57,7 @@ import { ModalLoadImageComponent } from './menu/modal-load-image/modal-load-imag
         UserService,
         TaskService,
         ProjectService,
+        ImageService
     ]
 })
 export class MainModule {
