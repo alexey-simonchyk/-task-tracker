@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { IAppState } from '../app.store';
@@ -13,7 +14,8 @@ export class ProjectService {
     private token: string;
 
     constructor(private http: HttpClient,
-                private ngRedux: NgRedux<IAppState> ) {
+                private ngRedux: NgRedux<IAppState>, 
+                private router: Router ) {
         this.projectEndPoint = `${environment.apiUrl}/project`;
         this.ngRedux.select('token').subscribe((token: any) => {
             this.token = token;
@@ -65,8 +67,13 @@ export class ProjectService {
             .then(data => {
                 this.ngRedux.dispatch({type: SELECT_PROJECT, project: data})
             },err => {
-                if (err.status === 401) {
-                    this.ngRedux.dispatch({ type: REMOVE_TOKEN });
+                switch (err.status) {
+                    case 401:
+                        this.ngRedux.dispatch({ type: REMOVE_TOKEN });
+                        break;
+                    case 400:
+                        this.router.navigate(['/']);
+                        break;
                 }
             });
     }

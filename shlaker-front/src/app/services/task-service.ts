@@ -6,6 +6,7 @@ import { IAppState } from '../app.store';
 import { ADD_TASK, REMOVE_TOKEN, SELECT_TASK, UPDATE_TASK_DEVELOPERS, UPDATE_TASK_STATUS } from '../actions';
 import { Task } from '../models/task.model';
 import { User } from '../models/user.model';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class TaskService {
@@ -15,7 +16,8 @@ export class TaskService {
 
     constructor(
         private http: HttpClient,
-        private ngRedux: NgRedux<IAppState>
+        private ngRedux: NgRedux<IAppState>,
+        private router: Router
     ) {
         this.taskEndpoint = `${environment.apiUrl}/task`;
         this.ngRedux.select('token').subscribe((token: any) => {
@@ -32,8 +34,13 @@ export class TaskService {
             .then(data => {
                 this.ngRedux.dispatch({ type: SELECT_TASK, task: data })
             }, err => {
-                if (err.status === 401) {
-                    this.ngRedux.dispatch({ type: REMOVE_TOKEN });
+                switch (err.status) {
+                    case 401:
+                        this.ngRedux.dispatch({ type: REMOVE_TOKEN });
+                        break;
+                    case 400:
+                        this.router.navigate(['/']);
+                        break;
                 }
             });
     }

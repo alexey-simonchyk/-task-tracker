@@ -7,6 +7,7 @@ import org.koydi.shlaker.exception.BadRequestException;
 import org.koydi.shlaker.repository.ProjectRepository;
 import org.koydi.shlaker.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -25,6 +26,13 @@ class ProjectNotFound extends BadRequestException {
 
     public ProjectNotFound(String message, Throwable cause) {
         super(message, cause);
+    }
+}
+
+class UserNotInProject extends BadRequestException {
+
+    public UserNotInProject(String message) {
+        super(message);
     }
 }
 
@@ -55,8 +63,10 @@ public class ProjectService {
     }
 
     public Project getProject(String projectId) {
-        return Optional.ofNullable(projectRepository.getFullProject(projectId))
+        val project = Optional.ofNullable(projectRepository.getFullProject(projectId))
                     .orElseThrow(() -> new ProjectNotFound(projectNotFoundErrorMessage.apply(projectId)));
+        checkUserInProject(project);
+        return project;
     }
 
     public Project createProject(Project newProject) {
@@ -69,6 +79,7 @@ public class ProjectService {
         val project = Optional
                 .ofNullable(projectRepository.getProjectWithDevelopers(projectId))
                 .orElseThrow(() -> new ProjectNotFound(projectNotFoundErrorMessage.apply(projectId)));
+        checkUserInProject(project);
 
         val newDevelopers = userRepository
                 .findAllByIdIn(
@@ -81,5 +92,16 @@ public class ProjectService {
         project.setDevelopers(newDevelopers);
         projectRepository.save(project);
         return newDevelopers;
+    }
+
+    private void checkUserInProject(Project project) {
+        val userId = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        boolean check  = project
+                .getDevelopers()
+                .stream()
+                .noneMatch(developer -> developer.getId().equals(userId));
+        if (check) {
+            throw new UserNotInProject("This user not in project");
+        }
     }
 }

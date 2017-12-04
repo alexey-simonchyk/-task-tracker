@@ -9,6 +9,7 @@ import org.koydi.shlaker.repository.ProjectRepository;
 import org.koydi.shlaker.repository.TaskRepository;
 import org.koydi.shlaker.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -22,6 +23,13 @@ import static org.koydi.shlaker.service.ProjectService.projectNotFoundErrorMessa
 class TaskNotFound extends BadRequestException {
 
     TaskNotFound(String message) {
+        super(message);
+    }
+}
+
+class UserNotInTask extends BadRequestException {
+
+    UserNotInTask(String message) {
         super(message);
     }
 }
@@ -45,9 +53,11 @@ public class TaskService {
     }
 
     public Task getFullTask(String taskId) {
-        return Optional
+        val task = Optional
                 .ofNullable(taskRepository.getFullTask(taskId))
                 .orElseThrow(()-> new TaskNotFound(taskNotFoundErrorMessage.apply(taskId)));
+        checkUserInTask(task);
+        return task;
     }
 
     public void updateTaskStatus(String taskId, TaskStatus newTaskStatus) {
@@ -82,5 +92,16 @@ public class TaskService {
         task.setDevelopers(newDevelopers);
         taskRepository.save(task);
         return newDevelopers;
+    }
+
+    private void checkUserInTask(Task task) {
+        val userId = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        boolean check  = task
+                .getDevelopers()
+                .stream()
+                .noneMatch(developer -> developer.getId().equals(userId));
+        if (check) {
+            throw new UserNotInTask("This user not in project");
+        }
     }
 }
