@@ -27,23 +27,7 @@ public class ShlakerApplicationTests {
 
 	@Test
 	public void findAllDevelopers() {
-        Set<User> developers = userService.getDevelopers();
-        assertThat(developers)
-                .isNotNull();
-	}
 
-	@Test
-    public void findAllProjectsDeveloperIn() {
-	    Optional<User> user = userService
-                .getDevelopers()
-                .stream()
-                .filter(temp -> temp.getNick().equals("koydi"))
-                .findFirst();
-	    if (user.isPresent()) {
-	        val projects = projectService.getProjectsUserIn(user.get());
-            System.out.println(projects);
-            assertThat(projects).isNotEmpty();
-        }
-    }
+	}
 
 }

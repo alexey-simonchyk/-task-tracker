@@ -1,8 +1,10 @@
+import { REMOVE_TOKEN } from './../actions';
 import { environment } from '../../environments/environment';
 import { IAppState } from '../app.store';
 import { NgRedux } from 'ng2-redux';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { ADD_USER_IMAGE } from '../actions';
 
 
 @Injectable()
@@ -24,17 +26,19 @@ export class ImageService {
         }
 
         const formData = new FormData();
-        formData.append("name", "Name");
+        console.log(file);
         formData.append("file", file);
 
         return this
             .http
             .post(this.imageUploadEndpoint, formData, {headers: this.getAuthenticationHeader()})
             .toPromise()
-            .then(data => {
-                console.log(data);
+            .then((data: any) => {
+                this.ngRedux.dispatch({type: ADD_USER_IMAGE, imageId: data.id});
             }, err => {
-                console.log(err);
+                if (err.status === 401) {
+                    this.ngRedux.dispatch({ type: REMOVE_TOKEN });
+                }
             });
 
     }

@@ -37,6 +37,7 @@
     width: 20px;
     height: 20px;
     cursor: pointer;
+    border-radius: 3px;
 }
 
 .developer_task_wrapper {

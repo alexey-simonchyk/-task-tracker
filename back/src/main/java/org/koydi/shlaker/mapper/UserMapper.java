@@ -26,7 +26,8 @@ public interface UserMapper {
     @Named("toFullUser")
     @Mappings({
             @Mapping(target = "password", ignore = true),
-            @Mapping(target = "role", source = "role.name")
+            @Mapping(target = "role", source = "role.name"),
+            @Mapping(target = "imageId", source = "image.id")
     })
     UserDto toFullUser(User user);
 

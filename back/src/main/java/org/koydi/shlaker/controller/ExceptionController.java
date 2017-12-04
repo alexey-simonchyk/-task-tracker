@@ -22,7 +22,8 @@ public class ExceptionController {
     }
 
     @ExceptionHandler(value = {
-            ServerErrorException.class
+            ServerErrorException.class,
+            Exception.class
     })
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ResponseEntity<Object> serverError(ServerErrorException exception) {

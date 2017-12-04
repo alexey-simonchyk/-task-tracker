@@ -15,6 +15,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -27,6 +28,13 @@ import java.util.function.Function;
 class EmptyImageUpload extends BadRequestException {
 
     EmptyImageUpload(String message) {
+        super(message);
+    }
+}
+
+class NotImageError extends BadRequestException {
+
+    NotImageError(String message) {
         super(message);
     }
 }
@@ -45,6 +53,9 @@ public class ImageController {
     private static final Function<String, String> imageIoError =
             imagePath -> String.format("Image not found by path %s", imagePath);
 
+    private static final Function<String, String> getDefaultImagePath =
+            imageName -> String.format("image/default/%s.jpg", imageName);
+
     @Autowired
     public ImageController(ImageService imageService) {
         this.imageService = imageService;
@@ -53,7 +64,7 @@ public class ImageController {
     @GetMapping(value = "/default/{imageName}")
     public ResponseEntity<byte[]> getImage(@PathVariable("imageName") String imageName) {
 
-        String imagePath = String.format("image/default/%s.jpg", imageName);
+        String imagePath = getDefaultImagePath.apply(imageName);
         Resource image = new ClassPathResource(imagePath);
         String extension = FilenameUtils.getExtension(image.getFilename());
 
@@ -74,12 +85,12 @@ public class ImageController {
                 .body(bytes);
     }
 
-    @GetMapping(value = "/{image_id}")
+    @GetMapping(value = "/user/{image_id}")
     public ResponseEntity<byte[]> getUserImage(@PathVariable("image_id") String imageId) {
 
         val image = imageService.getImage(imageId);
-        Resource imageResource = new ClassPathResource(image.getPath());
-        String extension = FilenameUtils.getExtension(imageResource.getFilename());
+        String imagePath = image.getFullPath();
+        String extension = FilenameUtils.getExtension(imagePath);
 
         MediaType imageType =
                 extension.equals(JPG_FORMAT) ? MediaType.IMAGE_JPEG :
@@ -88,7 +99,7 @@ public class ImageController {
 
         byte[] bytes;
         try {
-            bytes = IOUtils.toByteArray(imageResource.getInputStream());
+            bytes = Files.readAllBytes(Paths.get(imagePath));
         } catch (IOException e) {
             throw new ServerErrorException(imageIoError.apply(image.getPath()), e);
         }
@@ -100,23 +111,34 @@ public class ImageController {
 
     @PostMapping("/upload")
     @ResponseStatus(HttpStatus.OK)
-    public ImageDto uploadImage(@RequestParam("file") MultipartFile image) {
+    public ResponseEntity<ImageDto> uploadImage(@RequestParam("file") MultipartFile image,
+                                                Authentication authentication) {
+
         if (image.isEmpty()) {
             throw new EmptyImageUpload("Image not found");
         }
 
         Image savedImage;
         try {
-            String path = uploadPath + "/newFile" + ".jpg";
-            savedImage = imageService.createImage(path);
+            String fileExtension = FilenameUtils.getExtension(image.getOriginalFilename());
+
+            if (!(fileExtension.equals(JPG_FORMAT) || fileExtension.equals(PNG_FORMAT))) {
+                throw new NotImageError("Uploaded file must be image");
+            }
+
+            String path = String.format("%s/{image_id}.%s", uploadPath, fileExtension);
+            savedImage = imageService.createImage(path, (String)authentication.getPrincipal());
 
             byte[] imageBytes = image.getBytes();
-            Files.write(Paths.get(path), imageBytes);
+            System.out.println(savedImage.getFullPath());
+            Files.write(Paths.get(savedImage.getFullPath()), imageBytes);
 
         } catch (IOException exception) {
             throw new ServerErrorException("Error while saving uploaded image", exception);
         }
-        return new ImageDto(savedImage.getId());
+        val imageDto = new ImageDto(savedImage.getId());
+        return ResponseEntity
+                .ok(imageDto);
     }
 
 }

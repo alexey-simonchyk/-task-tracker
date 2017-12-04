@@ -7,7 +7,7 @@ import {
     ADD_TOKEN,
     REMOVE_TOKEN,
     ADD_USER,
-    REMOVE_USER, UPDATE_TASK_DEVELOPERS, UPDATE_PROJECT_DEVELOPERS
+    REMOVE_USER, UPDATE_TASK_DEVELOPERS, UPDATE_PROJECT_DEVELOPERS, ADD_USER_IMAGE
 } from './actions';
 import { IAppState } from './app.store';
 import { User } from './models/user.model';
@@ -42,6 +42,9 @@ export function userReducer(state = null, action) {
     switch (action.type) {
         case ADD_USER: {
             return action.user;
+        }
+        case ADD_USER_IMAGE: {
+            return {...state, imageId: action.imageId};
         }
         case REMOVE_USER: return null;
     }

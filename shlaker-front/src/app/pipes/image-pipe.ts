@@ -9,7 +9,7 @@ export class ImagePipe implements PipeTransform {
 
     transform(value: string, ...args: any[]) {
         if (value) {
-            return `${this.imageEndPoint}/${value}`;
+            return `${this.imageEndPoint}/user/${value}`;
         } else {
             return `${this.imageEndPoint}/default/default_user`;
         }
