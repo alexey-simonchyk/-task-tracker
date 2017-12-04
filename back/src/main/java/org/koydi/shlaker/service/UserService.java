@@ -68,7 +68,8 @@ public class UserService {
 
     public Set<User> getDevelopers() {
         return Optional
-                .ofNullable(userRepository.getUsersByRoleName("developer"))
+//                .ofNullable(userRepository.getUsersByRoleName("developer"))
+                .ofNullable(userRepository.getAllUsers())
                 .orElse(new HashSet<>());
     }
 }

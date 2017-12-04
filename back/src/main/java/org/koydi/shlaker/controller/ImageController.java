@@ -130,7 +130,6 @@ public class ImageController {
             savedImage = imageService.createImage(path, (String)authentication.getPrincipal());
 
             byte[] imageBytes = image.getBytes();
-            System.out.println(savedImage.getFullPath());
             Files.write(Paths.get(savedImage.getFullPath()), imageBytes);
 
         } catch (IOException exception) {

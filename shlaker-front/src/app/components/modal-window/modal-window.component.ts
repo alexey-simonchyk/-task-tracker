@@ -1,6 +1,9 @@
+import { Project } from './../../models/project.model';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { UserService } from '../../services/user-service';
 import { User } from '../../models/user.model';
+import { NgRedux } from 'ng2-redux';
+import { IAppState } from '../../app.store';
 
 @Component({
     selector: 'modal-window',
@@ -9,6 +12,7 @@ import { User } from '../../models/user.model';
 })
 export class ModalWindowComponent implements OnInit {
 
+    @Input('type') type: string;
     @Input('developers') developers: User[];
     @Output('close') closeEvent: EventEmitter<User[]> = new EventEmitter();
 
@@ -17,15 +21,29 @@ export class ModalWindowComponent implements OnInit {
 
     protected showDropDown: boolean = false;
 
-    constructor(private userService: UserService) { }
+    constructor(private userService: UserService, private ngRedux: NgRedux<IAppState>) { }
 
     ngOnInit() {
         this.newDevelopersList = [...this.developers];
-        this.userService.getDevelopers().then((data: User[]) => {
-            this.allDevelopersNotIn = data.filter((developer: User) => {
-                return this.newDevelopersList.find(temp => temp.id === developer.id) === undefined;
-            });
-        });
+        switch (this.type) {
+            case 'project': {
+                this.userService.getDevelopers().then((data: User[]) => {
+                    this.allDevelopersNotIn = data.filter((developer: User) => {
+                        return this.newDevelopersList.find(temp => temp.id === developer.id) === undefined;
+                    });
+                });
+                break;
+            }
+
+            case 'task': {
+                this.ngRedux.select('selectedProject').subscribe((project: Project) => {
+                    this.allDevelopersNotIn = project.developers.filter((developer: User) => {
+                        return this.newDevelopersList.find(temp => temp.id === developer.id) === undefined;
+                    });
+                });
+                break;
+            } 
+        }
     }
 
     protected addDeveloper(developer: User) {

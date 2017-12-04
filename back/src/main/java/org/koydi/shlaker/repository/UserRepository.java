@@ -24,5 +24,9 @@ public interface UserRepository extends JpaRepository<User, String> {
     Set<User> getUsersByRoleName(String role_name);
 
     @EntityGraph(value = "userWithRole", type = EntityGraph.EntityGraphType.LOAD)
+    @Query("select user from User user")
+    Set<User> getAllUsers();
+
+    @EntityGraph(value = "userWithRole", type = EntityGraph.EntityGraphType.LOAD)
     Set<User> findAllByIdIn(Collection<String> id);
 }

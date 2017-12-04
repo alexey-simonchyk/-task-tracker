@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, EventEmitter, Output } from '@angular/core';
 import { Task } from '../../../../models/task.model';
 import { TaskService } from '../../../../services/task-service';
 
@@ -8,7 +8,6 @@ import { TaskService } from '../../../../services/task-service';
   styleUrls: ['./inner-task.component.css'],
 })
 export class InnerTaskComponent implements OnInit {
-
 
     @Input('task') task: Task;
     protected isOpenedModalWindow: boolean = false;
