@@ -7,7 +7,7 @@ import {
     ADD_TOKEN,
     REMOVE_TOKEN,
     ADD_USER,
-    REMOVE_USER, UPDATE_TASK_DEVELOPERS, UPDATE_PROJECT_DEVELOPERS, ADD_USER_IMAGE
+    REMOVE_USER, UPDATE_TASK_DEVELOPERS, UPDATE_PROJECT, ADD_USER_IMAGE
 } from './actions';
 import { IAppState } from './app.store';
 import { User } from './models/user.model';
@@ -105,8 +105,8 @@ export function selectedProjectReducer(state = null, action) {
             newComments.push(action.comment);
             return {...state, comments: newComments};
         }
-        case UPDATE_PROJECT_DEVELOPERS: {
-            return {...state, developers: action.developers};
+        case UPDATE_PROJECT: {
+            return action.project;
         }
         case UPDATE_TASK_DEVELOPERS: {
             const newTask: Task = {...state.tasks.find(t => t.id === action.taskId)};

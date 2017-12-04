@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { IAppState } from '../app.store';
 import { NgRedux } from 'ng2-redux';
-import { ADD_PROJECT, LOAD_PROJECTS, REMOVE_TOKEN, SELECT_PROJECT, UPDATE_PROJECT_DEVELOPERS } from '../actions';
+import { ADD_PROJECT, LOAD_PROJECTS, REMOVE_TOKEN, SELECT_PROJECT, UPDATE_PROJECT } from '../actions';
 import { environment } from '../../environments/environment';
 import { User } from '../models/user.model';
 
@@ -105,6 +105,11 @@ export class ProjectService {
             .http
             .put(`${this.projectEndPoint}/${projectId}/developers`, developers, {headers: this.getAuthenticationHeader()})
             .toPromise()
-            .then(data => this.ngRedux.dispatch({type: UPDATE_PROJECT_DEVELOPERS, developers: data}));
+            .then(data => this.ngRedux.dispatch({type: UPDATE_PROJECT, project: data}),
+            err => {
+                if (err.status === 401) {
+                    this.ngRedux.dispatch({ type: REMOVE_TOKEN });
+                }
+            });
     }
 }

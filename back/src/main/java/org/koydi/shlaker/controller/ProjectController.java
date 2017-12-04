@@ -58,17 +58,16 @@ public class ProjectController {
     @GetMapping("/{project_id}")
     public ProjectDto getProject(@PathVariable("project_id") String projectId) {
         val project = projectService.getProject(projectId);
-        val projectDto = projectMapper.toFullProjectDto(project);
-        return projectDto;
+        return projectMapper.toFullProjectDto(project);
     }
 
     @PutMapping("/{project_id}/developers")
     @PreAuthorize("hasAuthority('manager')")
-    public List<UserDto> updateProjectDevelopers(@PathVariable("project_id") String projectId,
+    public ProjectDto updateProjectDevelopers(@PathVariable("project_id") String projectId,
                                                  @RequestBody List<UserDto> developers) {
         val newDevelopers = userMapper.fromUserDtos(developers);
-        val savedDevelopers = projectService.updateProjectDevelopers(newDevelopers, projectId);
-        return userMapper.toUserDtos(savedDevelopers);
+        val updatedProject = projectService.updateProjectDevelopers(newDevelopers, projectId);
+        return projectMapper.toFullProjectDto(updatedProject);
     }
 
 }

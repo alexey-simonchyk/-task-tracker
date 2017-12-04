@@ -5,6 +5,7 @@ import org.koydi.shlaker.entity.Project;
 import org.koydi.shlaker.entity.User;
 import org.koydi.shlaker.exception.BadRequestException;
 import org.koydi.shlaker.repository.ProjectRepository;
+import org.koydi.shlaker.repository.TaskRepository;
 import org.koydi.shlaker.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -45,9 +46,13 @@ public class ProjectService {
 
     private final UserRepository userRepository;
     private final ProjectRepository projectRepository;
+    private final TaskRepository taskRepository;
 
     @Autowired
-    public ProjectService(ProjectRepository projectRepository, UserRepository userRepository) {
+    public ProjectService(ProjectRepository projectRepository,
+                          UserRepository userRepository,
+                          TaskRepository taskRepository) {
+        this.taskRepository = taskRepository;
         this.projectRepository = projectRepository;
         this.userRepository = userRepository;
     }
@@ -74,10 +79,9 @@ public class ProjectService {
         return newProject;
     }
 
-    public Set<User> updateProjectDevelopers(Set<User> developers, String projectId) {
-        // TODO: 29.11.17 Delete this developers from all tasks
+    public Project updateProjectDevelopers(Set<User> developers, String projectId) {
         val project = Optional
-                .ofNullable(projectRepository.getProjectWithDevelopers(projectId))
+                .ofNullable(projectRepository.getFullProject(projectId))
                 .orElseThrow(() -> new ProjectNotFound(projectNotFoundErrorMessage.apply(projectId)));
         checkUserInProject(project);
 
@@ -89,9 +93,18 @@ public class ProjectService {
                                 .collect(Collectors.toList())
                 );
 
+
+        val removedDevelopers = new HashSet<User>(project.getDevelopers());
+        removedDevelopers.removeAll(newDevelopers);
+        if (removedDevelopers.size() > 0) {
+            project.getTasks()
+                    .forEach(task -> task.getDevelopers().removeAll(removedDevelopers));
+            taskRepository.save(project.getTasks());
+        }
+
         project.setDevelopers(newDevelopers);
-        projectRepository.save(project);
-        return newDevelopers;
+        val updatedProject = projectRepository.save(project);
+        return updatedProject;
     }
 
     private void checkUserInProject(Project project) {
