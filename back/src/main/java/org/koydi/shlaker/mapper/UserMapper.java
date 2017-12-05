@@ -39,7 +39,6 @@ public interface UserMapper {
             @Mapping(target = "role", ignore = true),
             @Mapping(target = "activated", ignore = true),
             @Mapping(target = "comments", ignore = true),
-            @Mapping(target = "projects", ignore = true),
             @Mapping(target = "tasks", ignore = true)
     })
     User fromUserDto(UserDto userDto);
@@ -55,6 +54,7 @@ public interface UserMapper {
     })
     User signUpMapper(SignUpUserDto user);
 
+    @Named("toShortUsersDtos")
     @IterableMapping(qualifiedByName = "toShortUserDto")
     List<UserDto> toUserDtos(Set<User> users);
 

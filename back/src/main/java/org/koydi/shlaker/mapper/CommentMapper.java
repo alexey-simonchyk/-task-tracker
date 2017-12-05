@@ -1,7 +1,9 @@
 package org.koydi.shlaker.mapper;
 
 import org.koydi.shlaker.dto.CommentDto;
+import org.koydi.shlaker.dto.UserDto;
 import org.koydi.shlaker.entity.Comment;
+import org.koydi.shlaker.entity.User;
 import org.mapstruct.*;
 
 import java.util.List;

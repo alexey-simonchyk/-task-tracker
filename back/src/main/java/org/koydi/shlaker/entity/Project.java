@@ -19,7 +19,8 @@ import java.util.Set;
                 name = "FullProject",
                 attributeNodes = {
                         @NamedAttributeNode(value = "comments", subgraph = "commentsWithUser"),
-                        @NamedAttributeNode(value = "tasks", subgraph = "taskWithDevelopers")
+                        @NamedAttributeNode(value = "tasks", subgraph = "taskWithDevelopers"),
+                        @NamedAttributeNode(value = "command", subgraph = "commandWithUsers")
                 },
                 subgraphs = {
                         @NamedSubgraph(
@@ -32,6 +33,12 @@ import java.util.Set;
                                 name = "commentsWithUser",
                                 attributeNodes = {
                                         @NamedAttributeNode("user")
+                                }
+                        ),
+                        @NamedSubgraph(
+                                name = "commandWithUsers",
+                                attributeNodes = {
+                                        @NamedAttributeNode("developers")
                                 }
                         )
                 }
@@ -73,4 +80,8 @@ public class Project extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "command_id")
     private Command command;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "company_id")
+    private Company company;
 }

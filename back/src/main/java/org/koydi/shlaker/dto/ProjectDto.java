@@ -20,16 +20,13 @@ public class ProjectDto {
     private String description;
     private ProjectStatus status;
 
-//    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date startTime;
 
-//    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date endTime;
 
     private List<CommentDto> comments;
-    private List<UserDto> developers;
     private List<TaskDto> tasks;
-
+    private CommandDto command;
 }

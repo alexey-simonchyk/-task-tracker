@@ -24,5 +24,5 @@ public class Command extends BaseEntity {
     private Set<Project> projects = new HashSet<>();
 
     @OneToMany(mappedBy = "command", fetch = FetchType.LAZY)
-    private Set<User> users = new HashSet<>();
+    private Set<User> developers = new HashSet<>();
 }

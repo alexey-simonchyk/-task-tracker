@@ -63,11 +63,16 @@ public class ProjectService {
     }
 
     public Set<Project> getProjectsUserIn(User user) {
-        String commandId = user.getCommand().getId();
-        return projectRepository.getUserProjects(commandId);
+        Optional<String> commandId = Optional.ofNullable(user.getCommand().getId());
+        if (commandId.isPresent()) {
+            return projectRepository.getUserProjects(commandId.get());
+        } else {
+            return new HashSet<>();
+        }
     }
 
     public Project getProject(String projectId) {
+        // todo: Add checking if user in project
         val project = Optional.ofNullable(projectRepository.getFullProject(projectId))
                     .orElseThrow(() -> new ProjectNotFound(projectNotFoundErrorMessage.apply(projectId)));
         checkUserInProject(project);
@@ -75,41 +80,13 @@ public class ProjectService {
     }
 
     public Project createProject(Project newProject) {
+        // todo: Here add getting company and command
         newProject = projectRepository.save(newProject);
         return newProject;
     }
 
-    public Project updateProjectDevelopers(Set<User> developers, String projectId) {
-        /*val project = Optional
-                .ofNullable(projectRepository.getFullProject(projectId))
-                .orElseThrow(() -> new ProjectNotFound(projectNotFoundErrorMessage.apply(projectId)));
-        checkUserInProject(project);
-
-        val newDevelopers = userRepository
-                .findAllByIdIn(
-                        developers
-                                .stream()
-                                .map(User::getId)
-                                .collect(Collectors.toList())
-                );
-
-
-        val removedDevelopers = new HashSet<User>(project.getDevelopers());
-        removedDevelopers.removeAll(newDevelopers);
-        if (removedDevelopers.size() > 0) {
-            project.getTasks()
-                    .forEach(task -> task.getDevelopers().removeAll(removedDevelopers));
-            taskRepository.save(project.getTasks());
-        }
-
-        project.setDevelopers(newDevelopers);
-        val updatedProject = projectRepository.save(project);
-        return updatedProject;*/
-        return null;
-    }
-
     private void checkUserInProject(Project project) {
-        val userId = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        /*val userId = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         boolean isManager =
                 SecurityContextHolder
                         .getContext()

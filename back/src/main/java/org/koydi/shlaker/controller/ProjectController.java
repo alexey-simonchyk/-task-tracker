@@ -62,13 +62,4 @@ public class ProjectController {
         return projectMapper.toFullProjectDto(project);
     }
 
-    @PutMapping("/{project_id}/developers")
-    @PreAuthorize("hasAuthority('manager')")
-    public ProjectDto updateProjectDevelopers(@PathVariable("project_id") String projectId,
-                                                 @RequestBody List<UserDto> developers) {
-        val newDevelopers = userMapper.fromUserDtos(developers);
-        val updatedProject = projectService.updateProjectDevelopers(newDevelopers, projectId);
-        return projectMapper.toFullProjectDto(updatedProject);
-    }
-
 }
