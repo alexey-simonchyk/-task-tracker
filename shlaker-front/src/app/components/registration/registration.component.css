@@ -10,7 +10,7 @@
 .registration_form_wrapper {
     align-self: center;
     width: 50vh;
-    height: 62vh;
+    height: 64vh;
     background: #fff;
     border-radius: 3px;
     padding: 2%;
@@ -97,4 +97,12 @@
 .go_to_login_text:hover {
     padding-bottom: 1px;
     border-bottom: 1px solid firebrick;
+}
+
+.is_manager_input {
+    display: flex;
+}
+
+.check_box_style {
+    width: 10%;
 }

@@ -11,6 +11,7 @@ export class RegistrationComponent implements OnInit {
     newUser: RegistrationUser = new RegistrationUser();
 
     errorMessage: string = '';
+    isManager: boolean = false;
     constructor(private userService: UserService, private router: Router) { }
 
     ngOnInit() {
@@ -23,6 +24,7 @@ export class RegistrationComponent implements OnInit {
             return;
         }
 
+        this.newUser.role = this.isManager ? 'manager' : 'developer';
         this
             .userService
             .registrate(this.newUser)
@@ -54,4 +56,5 @@ class RegistrationUser {
     password: string;
     repeatPassword: string;
     nick: string;
+    role: string;
 }

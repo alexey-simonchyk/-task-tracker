@@ -21,18 +21,18 @@ import java.util.stream.Collectors;
 
 class ProjectNotFound extends BadRequestException {
 
-    public ProjectNotFound(String message) {
+    ProjectNotFound(String message) {
         super(message);
     }
 
-    public ProjectNotFound(String message, Throwable cause) {
+    ProjectNotFound(String message, Throwable cause) {
         super(message, cause);
     }
 }
 
 class UserNotInProject extends BadRequestException {
 
-    public UserNotInProject(String message) {
+    UserNotInProject(String message) {
         super(message);
     }
 }
@@ -109,11 +109,22 @@ public class ProjectService {
     }
 
     private void checkUserInProject(Project project) {
-        /*val userId = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        val userId = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        boolean isManager =
+                SecurityContextHolder
+                        .getContext()
+                        .getAuthentication()
+                        .getAuthorities()
+                        .stream()
+                        .anyMatch(t -> t.getAuthority().equals("manager"));
+        if (isManager) {
+            return;
+        }
+
         boolean check  = project
-                .getDevelopers()
-                .stream()
-                .noneMatch(developer -> developer.getId().equals(userId));
+                                .getDevelopers()
+                                .stream()
+                                .noneMatch(developer -> developer.getId().equals(userId));
         if (check) {
             throw new UserNotInProject("This user not in project");
         }*/

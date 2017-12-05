@@ -9,9 +9,11 @@ import org.koydi.shlaker.mapper.UserMapper;
 import org.koydi.shlaker.service.UserService;
 import org.koydi.shlaker.util.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 class PasswordsNotEqual extends BadRequestException {
@@ -42,15 +44,16 @@ public class UserController {
     }
 
     @PostMapping("/sign-up")
-    public void signUp(@RequestBody SignUpUserDto userDto) {
+    public Object signUp(@RequestBody SignUpUserDto userDto) {
 
-        validator.Validate(userDto.getPassword(), userDto.getEmail(), userDto.getNick(), userDto.getRepeatPassword());
+        validator.Validate(userDto.getPassword(), userDto.getEmail(), userDto.getNick(), userDto.getRepeatPassword(), userDto.getRole());
         if (!userDto.getPassword().equals(userDto.getRepeatPassword())) {
             throw new PasswordsNotEqual("Password and repeated password not equal");
         }
 
         User user = userMapper.signUpMapper(userDto);
         userService.createAccount(user);
+        return new ArrayList<>();
     }
 
     @GetMapping("/user/developers")

@@ -36,7 +36,11 @@ public interface UserMapper {
             @Mapping(target = "password", ignore = true),
             @Mapping(target = "email", ignore = true),
             @Mapping(target = "image", ignore = true),
-            @Mapping(target = "role", ignore = true)
+            @Mapping(target = "role", ignore = true),
+            @Mapping(target = "activated", ignore = true),
+            @Mapping(target = "comments", ignore = true),
+            @Mapping(target = "projects", ignore = true),
+            @Mapping(target = "tasks", ignore = true)
     })
     User fromUserDto(UserDto userDto);
 
@@ -45,9 +49,9 @@ public interface UserMapper {
             @Mapping(target = "comments", ignore = true),
             @Mapping(target = "tasks", ignore = true),
             @Mapping(target = "activated", ignore = true),
-            @Mapping(target = "role", ignore = true),
             @Mapping(target = "image", ignore = true),
             @Mapping(target = "id", ignore = true),
+            @Mapping(target = "role.name", source = "role"),
     })
     User signUpMapper(SignUpUserDto user);
 
