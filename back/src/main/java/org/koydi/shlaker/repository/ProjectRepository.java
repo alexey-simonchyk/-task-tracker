@@ -22,9 +22,4 @@ public interface ProjectRepository extends JpaRepository<Project, String> {
     @Query("select project from Project project where project.id = :projectId")
     Project getProjectWithComments(@Param("projectId") String projectId);
 
-    @EntityGraph(value = "ProjectWithDevelopers", type = EntityGraph.EntityGraphType.LOAD)
-    @Query("select project from Project project where project.id = :projectId")
-    Project getProjectWithDevelopers(@Param("projectId") String projectId);
-
-    List<Project> getProjectsByDevelopersContains(Set<User> developers);
 }

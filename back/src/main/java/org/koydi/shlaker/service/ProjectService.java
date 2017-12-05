@@ -64,7 +64,8 @@ public class ProjectService {
     public List<Project> getProjectsUserIn(User user) {
         val userSet = new HashSet<User>();
         userSet.add(user);
-        return projectRepository.getProjectsByDevelopersContains(userSet);
+//        return projectRepository.getProjectsByDevelopersContains(userSet);
+        return null;
     }
 
     public Project getProject(String projectId) {
@@ -80,7 +81,7 @@ public class ProjectService {
     }
 
     public Project updateProjectDevelopers(Set<User> developers, String projectId) {
-        val project = Optional
+        /*val project = Optional
                 .ofNullable(projectRepository.getFullProject(projectId))
                 .orElseThrow(() -> new ProjectNotFound(projectNotFoundErrorMessage.apply(projectId)));
         checkUserInProject(project);
@@ -104,17 +105,18 @@ public class ProjectService {
 
         project.setDevelopers(newDevelopers);
         val updatedProject = projectRepository.save(project);
-        return updatedProject;
+        return updatedProject;*/
+        return null;
     }
 
     private void checkUserInProject(Project project) {
-        val userId = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        /*val userId = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         boolean check  = project
                 .getDevelopers()
                 .stream()
                 .noneMatch(developer -> developer.getId().equals(userId));
         if (check) {
             throw new UserNotInProject("This user not in project");
-        }
+        }*/
     }
 }

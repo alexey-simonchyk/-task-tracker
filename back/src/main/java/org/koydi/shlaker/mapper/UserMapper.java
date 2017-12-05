@@ -43,7 +43,6 @@ public interface UserMapper {
     @Named("signUpMapper")
     @Mappings({
             @Mapping(target = "comments", ignore = true),
-            @Mapping(target = "projects", ignore = true),
             @Mapping(target = "tasks", ignore = true),
             @Mapping(target = "activated", ignore = true),
             @Mapping(target = "role", ignore = true),

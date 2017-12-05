@@ -12,14 +12,13 @@ import java.util.Set;
 @Entity
 @Table(name = "project")
 @Data
-@EqualsAndHashCode(exclude = {"tasks", "comments", "developers"}, callSuper = false)
-@ToString(exclude = {"tasks", "comments", "developers"})
+@EqualsAndHashCode(exclude = {"tasks", "comments", "command"}, callSuper = false)
+@ToString(exclude = {"tasks", "comments", "command"})
 @NamedEntityGraphs({
         @NamedEntityGraph(
                 name = "FullProject",
                 attributeNodes = {
                         @NamedAttributeNode(value = "comments", subgraph = "commentsWithUser"),
-                        @NamedAttributeNode(value = "developers"),
                         @NamedAttributeNode(value = "tasks", subgraph = "taskWithDevelopers")
                 },
                 subgraphs = {
@@ -41,12 +40,6 @@ import java.util.Set;
                 name = "ProjectWithComments",
                 attributeNodes = {
                         @NamedAttributeNode(value = "comments")
-                }
-        ),
-        @NamedEntityGraph(
-                name = "ProjectWithDevelopers",
-                attributeNodes = {
-                        @NamedAttributeNode(value = "developers")
                 }
         )
 })
@@ -77,8 +70,7 @@ public class Project extends BaseEntity {
                                                 inverseJoinColumns = @JoinColumn(name = "comment_id"))
     private Set<Comment> comments = new HashSet<>();
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "user_in_project", joinColumns = @JoinColumn(name = "project_id"),
-                                            inverseJoinColumns = @JoinColumn(name = "user_id"))
-    private Set<User> developers = new HashSet<>();
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "command_id")
+    private Command command;
 }

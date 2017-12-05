@@ -22,7 +22,6 @@ public interface ProjectMapper {
             @Mapping(target = "endTime", ignore = true),
             @Mapping(target = "status", ignore = true),
             @Mapping(target = "comments", ignore = true),
-            @Mapping(target = "developers", ignore = true),
             @Mapping(target = "tasks", ignore = true)
     })
     @Named("toShortProjectDto")
@@ -30,7 +29,6 @@ public interface ProjectMapper {
 
     @Mappings({
             @Mapping(target = "comments", qualifiedByName = "toCommentDto"),
-            @Mapping(target = "developers", qualifiedByName = "toShortUserDto"),
             @Mapping(target = "tasks", qualifiedByName = "toShortTaskDto")
     })
     @Named("toFullProjectDto")
@@ -40,7 +38,6 @@ public interface ProjectMapper {
             @Mapping(target = "startTime", ignore = true),
             @Mapping(target = "status", ignore = true),
             @Mapping(target = "comments", ignore = true),
-            @Mapping(target = "developers", ignore = true),
             @Mapping(target = "tasks", ignore = true),
             @Mapping(target = "id", ignore = true)
     })

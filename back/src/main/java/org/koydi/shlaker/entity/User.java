@@ -11,8 +11,8 @@ import java.util.Set;
 @Entity
 @Table(name = "user")
 @Data
-@EqualsAndHashCode(exclude = {"role", "comments", "projects", "tasks"}, callSuper = false)
-@ToString(exclude = {"role", "comments", "projects", "tasks"})
+@EqualsAndHashCode(exclude = {"role", "comments", "tasks", "command", "company"}, callSuper = false)
+@ToString(exclude = {"role", "comments", "tasks", "command", "company"})
 @NamedEntityGraphs({
         @NamedEntityGraph(
                 name = "userWithRole",
@@ -47,8 +47,13 @@ public class User extends BaseEntity {
     private Set<Comment> comments = new HashSet<>();
 
     @ManyToMany(mappedBy = "developers", fetch = FetchType.LAZY)
-    private Set<Project> projects = new HashSet<>();
-
-    @ManyToMany(mappedBy = "developers", fetch = FetchType.LAZY)
     private Set<Task> tasks =  new HashSet<>();
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "command_id")
+    private Command command;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "company_id")
+    private Company company;
 }
