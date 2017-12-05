@@ -15,9 +15,18 @@ import java.util.Set;
 @ToString(exclude = {"role", "comments", "tasks", "command", "company"})
 @NamedEntityGraphs({
         @NamedEntityGraph(
-                name = "userWithRole",
+                name = "userWithRoleAndCommand",
                 attributeNodes = {
-                        @NamedAttributeNode(value = "role")
+                        @NamedAttributeNode(value = "role"),
+                        @NamedAttributeNode(value = "command"),
+                }
+        ),
+        @NamedEntityGraph(
+                name = "userWithRoleCommandCompany",
+                attributeNodes = {
+                        @NamedAttributeNode(value = "role"),
+                        @NamedAttributeNode(value = "command"),
+                        @NamedAttributeNode(value = "company")
                 }
         )
 })

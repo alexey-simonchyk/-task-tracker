@@ -57,15 +57,14 @@ public class ProjectService {
         this.userRepository = userRepository;
     }
 
-    public List<Project> getProjects() {
-        return projectRepository.findAll();
+    public Set<Project> getProjects(User user) {
+        String companyId = user.getCompany().getId();
+        return projectRepository.getAllByCompanyId(companyId);
     }
 
-    public List<Project> getProjectsUserIn(User user) {
-        val userSet = new HashSet<User>();
-        userSet.add(user);
-//        return projectRepository.getProjectsByDevelopersContains(userSet);
-        return null;
+    public Set<Project> getProjectsUserIn(User user) {
+        String commandId = user.getCommand().getId();
+        return projectRepository.getUserProjects(commandId);
     }
 
     public Project getProject(String projectId) {

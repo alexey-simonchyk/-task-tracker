@@ -22,4 +22,9 @@ public interface ProjectRepository extends JpaRepository<Project, String> {
     @Query("select project from Project project where project.id = :projectId")
     Project getProjectWithComments(@Param("projectId") String projectId);
 
+    @Query("select project from Project project where project.command.id = :commandId")
+    Set<Project> getUserProjects(@Param("command_id") String commandId);
+
+    @Query("select project from Project project where project.command.company.id = :companyId")
+    Set<Project> getAllByCompanyId(@Param("company_id") String companyId);
 }

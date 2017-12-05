@@ -5,6 +5,7 @@ import org.koydi.shlaker.entity.Project;
 import org.mapstruct.*;
 
 import java.util.List;
+import java.util.Set;
 
 @Mapper(
         nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS,
@@ -12,6 +13,9 @@ import java.util.List;
         uses = {CommentMapper.class, UserMapper.class, TaskMapper.class}
 )
 public interface ProjectMapper {
+
+    @IterableMapping(qualifiedByName = "toShortProjectDto")
+    List<ProjectDto> toShortProjectDtos(Set<Project> projects);
 
     @IterableMapping(qualifiedByName = "toShortProjectDto")
     List<ProjectDto> toShortProjectDtos(List<Project> projects);

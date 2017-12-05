@@ -34,9 +34,10 @@ public class ProjectController {
     }
 
     @GetMapping("/")
-    @PreAuthorize("hasAuthority('manager')")
-    public List<ProjectDto> getProjects() {
-        val projects = projectService.getProjects();
+    @PreAuthorize("hasAuthority('manager') or hasAuthority('director')")
+    public List<ProjectDto> getProjects(Authentication authentication) {
+        val user = userService.getUserInformation((String)authentication.getPrincipal());
+        val projects = projectService.getProjects(user);
         return projectMapper.toShortProjectDtos(projects);
     }
 
@@ -48,7 +49,7 @@ public class ProjectController {
     }
 
     @PostMapping("/")
-    @PreAuthorize("hasAuthority('manager')")
+    @PreAuthorize("hasAuthority('manager') or hasAuthority('director')")
     public ProjectDto createProject(@RequestBody ProjectDto projectDto) {
         Project project = projectMapper.fromProjectDto(projectDto);
         project = projectService.createProject(project);
