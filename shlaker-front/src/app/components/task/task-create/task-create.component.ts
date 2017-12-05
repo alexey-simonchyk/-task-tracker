@@ -19,6 +19,9 @@ export class TaskCreateComponent implements OnInit {
     ) { }
 
     ngOnInit() {
+        let today = new Date(Date.now());
+        today.setHours(0, 0, 0, 0);
+        this.newTask.startTime = today;
         this.route.params.subscribe(params => {
             this.projectId = params['projectId'];
         })

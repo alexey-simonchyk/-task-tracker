@@ -12,4 +12,5 @@ public class SignUpUserDto {
     private String email;
     private String password;
     private String repeatPassword;
+    private String role;
 }

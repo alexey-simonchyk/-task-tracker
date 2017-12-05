@@ -29,6 +29,13 @@ class UserNotFound extends BadRequestException {
     }
 }
 
+class RoleNotExists extends BadRequestException {
+
+    RoleNotExists(String message) {
+        super(message);
+    }
+}
+
 
 @Service
 @Transactional
@@ -56,7 +63,8 @@ public class UserService {
         });
 
         user.setPassword(shaPasswordEncoder.encodePassword(user.getPassword(), ""));
-        val role = roleRepository.findByName("developer");
+        val role = Optional.ofNullable(roleRepository.findByName(user.getRole().getName()))
+                            .orElseThrow(() -> new RoleNotExists("No such role"));
         user.setRole(role);
         userRepository.save(user);
     }
@@ -68,7 +76,6 @@ public class UserService {
 
     public Set<User> getDevelopers() {
         return Optional
-//                .ofNullable(userRepository.getUsersByRoleName("developer"))
                 .ofNullable(userRepository.getAllUsers())
                 .orElse(new HashSet<>());
     }

@@ -13,7 +13,6 @@ export class ManagerGuard implements CanActivate{
 
     constructor(private ngRedux: NgRedux<IAppState>, private router: Router) {
         this.ngRedux.select('user').subscribe((user: User) => {
-            console.log(user);
             this.user = user
         });
     }

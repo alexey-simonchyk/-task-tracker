@@ -42,6 +42,9 @@ export class TaskComponent implements OnInit {
 
     private getDaysBetween(startDate: Date, endDate: Date) {
         let currentDate = new Date(Date.now());
+        currentDate.setHours(0, 0, 0, 0);
+        endDate.setHours(0, 0, 0, 0);
+        startDate.setHours(0, 0, 0, 0);
 
         let taskTime = Math.round(Math.abs((endDate.getTime() - startDate.getTime()) / this.oneDay));
         let leftTime = Math.round(Math.abs((currentDate.getTime() - startDate.getTime()) / this.oneDay));

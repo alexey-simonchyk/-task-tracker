@@ -65,6 +65,18 @@
             />
         </div>
 
+        <div class="registration_input_wrapper is_manager_input">
+            <label for="input_is_manager">
+                Manager
+            </label>
+            <input type="checkbox"
+                   class="no_select registration_input check_box_style"
+                   id="input_is_manager"
+                   name="input_is_manager"
+                   [(ngModel)]="isManager"
+            />
+        </div>
+
         <div *ngIf="errorMessage !== ''" class="error_message_wrapper">{{errorMessage}}</div>
         <div class="button_registration_wrapper">
             <button [disabled]="!registrationForm.form.valid" class="no_select registration_button" type="submit">Sign up</button>
