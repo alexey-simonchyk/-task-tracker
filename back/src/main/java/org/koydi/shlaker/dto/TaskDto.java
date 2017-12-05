@@ -20,7 +20,6 @@ public class TaskDto {
     private String name;
     private TaskStatus status;
 
-//    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date startTime;
 
