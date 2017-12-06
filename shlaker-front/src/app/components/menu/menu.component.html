@@ -27,9 +27,9 @@
     </div>
 </div>
 
-<div class="nav_element" *ngIf="(currentUser | async)?.role === 'manager'">
+<div class="nav_element">
     <div class="nav_element_header">
-        <div [routerLink]="['/project/create']" class="menu_header no_select">Create Project</div>
+        <div [routerLink]="['/company']" class="menu_header no_select">{{(currentUser | async)?.company.name}}</div>
     </div>
 </div>
 <app-modal-load-image (close)="onChangeImageClose($event)" *ngIf="isOpenedPictureModal"></app-modal-load-image>

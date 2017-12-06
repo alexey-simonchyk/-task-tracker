@@ -24,6 +24,7 @@ import { PipeModule } from '../pipes/pipe-module';
 import { ModalWindowComponent } from './modal-window/modal-window.component';
 import { ModalLoadImageComponent } from './menu/modal-load-image/modal-load-image.component';
 import { CompanyService } from '../services/company-service';
+import { CompanyComponent } from './company/company.component';
 
 
 @NgModule({
@@ -42,6 +43,7 @@ import { CompanyService } from '../services/company-service';
         ProjectDescriptionComponent,
         ModalWindowComponent,
         ModalLoadImageComponent,
+        CompanyComponent,
     ],
     imports: [
         BrowserModule,

@@ -6,6 +6,7 @@ import { EmptyComponent } from './main/empty/empty.component';
 import { TaskCreateComponent } from './task/task-create/task-create.component';
 import { ProjectDescriptionComponent } from './project/project-description/project-description.component';
 import { ManagerGuard } from '../guards/manager-guard';
+import { CompanyComponent } from './company/company.component';
 
 
 
@@ -36,5 +37,9 @@ export const MAIN_ROUTE: Routes = [
                 component: TaskComponent
             }
         ]
+    },
+    {
+        path: 'company',
+        component: CompanyComponent
     }
 ];
