@@ -12,7 +12,6 @@ import { User } from '../../../models/user.model';
 export class ProjectDescriptionComponent implements OnInit {
 
     @select('user') protected user: Observable<User>;
-    protected isOpenedModalWindow: boolean = false;
     @select('selectedProject') selectedProject: Observable<Project>;
     private projectId: string;
 
@@ -24,17 +23,6 @@ export class ProjectDescriptionComponent implements OnInit {
                 this.projectId = project.id;
             }
         });
-    }
-
-    protected addDeveloper() {
-        this.isOpenedModalWindow = true;
-    }
-
-    protected onCloseAddDeveloperModal(developers: User[]) {
-        if (developers) {
-            this.projectService.updateProjectDevelopers(developers, this.projectId);
-        }
-        this.isOpenedModalWindow = false;
     }
 
 }

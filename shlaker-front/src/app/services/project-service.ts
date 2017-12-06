@@ -14,7 +14,7 @@ export class ProjectService {
     private token: string;
 
     constructor(private http: HttpClient,
-                private ngRedux: NgRedux<IAppState>, 
+                private ngRedux: NgRedux<IAppState>,
                 private router: Router ) {
         this.projectEndPoint = `${environment.apiUrl}/project`;
         this.ngRedux.select('token').subscribe((token: any) => {
@@ -97,19 +97,5 @@ export class ProjectService {
         return new HttpHeaders({
             'Authorization': `Bearer ${this.token}`
         });
-    }
-
-    updateProjectDevelopers(developers: User[], projectId: string) {
-        if (!this.token) return;
-        return this
-            .http
-            .put(`${this.projectEndPoint}/${projectId}/developers`, developers, {headers: this.getAuthenticationHeader()})
-            .toPromise()
-            .then(data => this.ngRedux.dispatch({type: UPDATE_PROJECT, project: data}),
-            err => {
-                if (err.status === 401) {
-                    this.ngRedux.dispatch({ type: REMOVE_TOKEN });
-                }
-            });
     }
 }

@@ -26,23 +26,14 @@ export class ModalWindowComponent implements OnInit {
     ngOnInit() {
         this.newDevelopersList = [...this.developers];
         switch (this.type) {
-            case 'project': {
-                this.userService.getDevelopers().then((data: User[]) => {
-                    this.allDevelopersNotIn = data.filter((developer: User) => {
+            case 'task': {
+                this.ngRedux.select('selectedProject').subscribe((project: Project) => {
+                    this.allDevelopersNotIn = project.command.developers.filter((developer: User) => {
                         return this.newDevelopersList.find(temp => temp.id === developer.id) === undefined;
                     });
                 });
                 break;
             }
-
-            case 'task': {
-                this.ngRedux.select('selectedProject').subscribe((project: Project) => {
-                    this.allDevelopersNotIn = project.developers.filter((developer: User) => {
-                        return this.newDevelopersList.find(temp => temp.id === developer.id) === undefined;
-                    });
-                });
-                break;
-            } 
         }
     }
 

@@ -67,14 +67,41 @@
 
         <div class="registration_input_wrapper is_manager_input">
             <label for="input_is_manager">
-                Manager
+                New company
             </label>
             <input type="checkbox"
                    class="no_select registration_input check_box_style"
                    id="input_is_manager"
                    name="input_is_manager"
-                   [(ngModel)]="isManager"
+                   [(ngModel)]="registrateNewCompany"
             />
+        </div>
+
+        <div *ngIf="registrateNewCompany" class="registration_input_wrapper">
+            <label for="input_company_name">
+                Company name
+            </label>
+            <input type="text"
+                   class="no_select registration_input"
+                   placeholder="Enter your company name"
+                   id="input_company_name"
+                   name="input_nick"
+                   [(ngModel)]="newUser.companyName"
+            />
+        </div>
+
+        <div *ngIf="!registrateNewCompany" class="registration_input_wrapper">
+            <label for="input_company_id">
+                Select company
+            </label>
+            <select class="no_select registration_input select_company"
+                   #nick="ngModel"
+                   id="input_company_id"
+                   name="input_nick"
+                   [(ngModel)]="newUser.companyId"
+            >
+                <option *ngFor="let company of companies" [value]="company.id">{{company.name}}</option>
+            </select>
         </div>
 
         <div *ngIf="errorMessage !== ''" class="error_message_wrapper">{{errorMessage}}</div>

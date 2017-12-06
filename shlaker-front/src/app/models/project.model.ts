@@ -1,5 +1,5 @@
 import { Task } from './task.model';
-import { User } from './user.model';
+import { Command } from './command.model';
 
 export class Project {
     id: string;
@@ -10,7 +10,7 @@ export class Project {
     endTime: Date;
 
     comments: Comment[];
-    developers: User[];
+    command: Command;
     tasks: Task[];
 }
 

@@ -5,9 +5,9 @@
 <div class="project_developers">
     <div class="project_subhead">Project developers</div>
     <div class="developer_project_wrapper">
-        <img *ngFor="let developer of (selectedProject | async)?.developers" class="project_developer" [src]="(developer.imageId | imageLink)"
+        <img *ngFor="let developer of (selectedProject | async)?.command.developers" class="project_developer" [src]="(developer.imageId | imageLink)"
              alt="{{developer.nick}}" title="{{developer.nick}}">
-        <div *ngIf="(user | async)?.role === 'manager'" class="add_developer" (click)="addDeveloper()">+</div>
+        <!--<div *ngIf="(user | async)?.role === 'manager'" class="add_developer" (click)="addDeveloper()">+</div>-->
     </div>
 </div>
 <comments class="full_width"
@@ -15,11 +15,11 @@
           [itemId]="(selectedProject | async)?.id"
           [comments]="(selectedProject | async)?.comments">
 </comments>
-<modal-window *ngIf="isOpenedModalWindow"
-              [developers]="(selectedProject | async)?.developers"
+<!--<modal-window *ngIf="isOpenedModalWindow"
+              [developers]="(selectedProject | async)?.command.developers"
               (close)="onCloseAddDeveloperModal($event)"
               draggable="false"
               [type]="'project'"
 >
-</modal-window>
+</modal-window>-->
 

@@ -10,7 +10,8 @@
 .registration_form_wrapper {
     align-self: center;
     width: 50vh;
-    height: 64vh;
+    height: 78vh;
+    overflow: auto;
     background: #fff;
     border-radius: 3px;
     padding: 2%;
@@ -105,4 +106,10 @@
 
 .check_box_style {
     width: 10%;
+}
+
+.select_company {
+    height: 32px;
+    background: #fff;
+    cursor: pointer;
 }

@@ -1,6 +1,7 @@
 package org.koydi.shlaker.service;
 
 import lombok.val;
+import org.koydi.shlaker.entity.Command;
 import org.koydi.shlaker.entity.Project;
 import org.koydi.shlaker.entity.User;
 import org.koydi.shlaker.exception.BadRequestException;
@@ -63,12 +64,12 @@ public class ProjectService {
     }
 
     public Set<Project> getProjectsUserIn(User user) {
-        Optional<String> commandId = Optional.ofNullable(user.getCommand().getId());
-        if (commandId.isPresent()) {
-            return projectRepository.getUserProjects(commandId.get());
-        } else {
+        Optional<Command> command = Optional.ofNullable(user.getCommand());
+        if (!command.isPresent()) {
             return new HashSet<>();
         }
+        String commandId = command.get().getId();
+        return projectRepository.getUserProjects(commandId);
     }
 
     public Project getProject(String projectId) {

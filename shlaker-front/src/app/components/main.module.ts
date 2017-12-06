@@ -23,6 +23,7 @@ import { ProjectDescriptionComponent } from './project/project-description/proje
 import { PipeModule } from '../pipes/pipe-module';
 import { ModalWindowComponent } from './modal-window/modal-window.component';
 import { ModalLoadImageComponent } from './menu/modal-load-image/modal-load-image.component';
+import { CompanyService } from '../services/company-service';
 
 
 @NgModule({
@@ -57,7 +58,8 @@ import { ModalLoadImageComponent } from './menu/modal-load-image/modal-load-imag
         UserService,
         TaskService,
         ProjectService,
-        ImageService
+        ImageService,
+        CompanyService
     ]
 })
 export class MainModule {

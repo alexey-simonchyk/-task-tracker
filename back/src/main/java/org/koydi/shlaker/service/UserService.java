@@ -1,8 +1,10 @@
 package org.koydi.shlaker.service;
 
-import lombok.val;
+import org.koydi.shlaker.entity.Company;
+import org.koydi.shlaker.entity.Role;
 import org.koydi.shlaker.entity.User;
 import org.koydi.shlaker.exception.BadRequestException;
+import org.koydi.shlaker.repository.CompanyRepository;
 import org.koydi.shlaker.repository.RoleRepository;
 import org.koydi.shlaker.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +38,13 @@ class RoleNotExists extends BadRequestException {
     }
 }
 
+class NotAllDataForRegistartion extends BadRequestException {
+
+    public NotAllDataForRegistartion(String message) {
+        super(message);
+    }
+}
+
 
 @Service
 @Transactional
@@ -47,30 +56,66 @@ public class UserService {
     private final ShaPasswordEncoder shaPasswordEncoder;
     private final RoleRepository roleRepository;
     private final UserRepository userRepository;
+    private final CompanyRepository companyRepository;
 
     @Autowired
     public UserService(UserRepository userRepository,
                        ShaPasswordEncoder shaPasswordEncoder,
-                       RoleRepository roleRepository) {
+                       RoleRepository roleRepository,
+                       CompanyRepository companyRepository) {
+        this.companyRepository = companyRepository;
         this.userRepository = userRepository;
         this.shaPasswordEncoder = shaPasswordEncoder;
         this.roleRepository = roleRepository;
     }
 
-    public void createAccount(User user) {
+    public void createAccount(User user, String companyName, String companyId) {
+        if ((companyName == null || companyName.isEmpty()) &&
+                (companyId == null || companyId.isEmpty())) {
+            throw new NotAllDataForRegistartion("Company not specified");
+        }
+
+
         Optional.ofNullable(userRepository.findByEmail(user.getEmail())).ifPresent(s -> {
             throw new SuchUserExists("Such user exists");
         });
 
         user.setPassword(shaPasswordEncoder.encodePassword(user.getPassword(), ""));
-        val role = Optional.ofNullable(roleRepository.findByName(user.getRole().getName()))
-                            .orElseThrow(() -> new RoleNotExists("No such role"));
+        Role role;
+        Company company;
+        if (companyName == null || companyName.isEmpty()) {
+             role = Optional.ofNullable(roleRepository.findByName("developer"))
+                    .orElseThrow(() -> new RoleNotExists("No such role"));
+             company = Optional.ofNullable(companyRepository.getCompanyWithDevelopers(companyId))
+                                .orElseThrow(() -> new CompanyNotFound("No such company"));
+             user.setActivated(true);
+
+        } else {
+            company = new Company();
+            company.setName(companyName);
+            role = Optional.ofNullable(roleRepository.findByName("director"))
+                    .orElseThrow(() -> new RoleNotExists("No such role"));
+            user.setActivated(false);
+            company = companyRepository.save(company);
+        }
+
+        user.setCompany(company);
         user.setRole(role);
         userRepository.save(user);
     }
 
     public User getUserInformation(String userId) {
         return Optional.ofNullable(userRepository.getFullUser(userId))
+                .orElseThrow(() -> new UserNotFound(userNotFoundErrorMessage.apply(userId)));
+    }
+
+    public User getUserWithCompany(String userId) {
+        return Optional.ofNullable(userRepository.getUserWithCompany(userId))
+                .orElseThrow(() -> new UserNotFound(userNotFoundErrorMessage.apply(userId)));
+    }
+
+    public User getUserWithRole(String userId) {
+        return Optional.ofNullable(userRepository.getUserWithRole(userId))
                 .orElseThrow(() -> new UserNotFound(userNotFoundErrorMessage.apply(userId)));
     }
 

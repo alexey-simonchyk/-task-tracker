@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user-service';
 import { Router } from '@angular/router';
+import { CompanyService } from '../../services/company-service';
+import { Company } from '../../models/company.model';
 
 @Component({
   templateUrl: './registration.component.html',
@@ -10,11 +12,15 @@ export class RegistrationComponent implements OnInit {
 
     newUser: RegistrationUser = new RegistrationUser();
 
+    companies: Company[];
     errorMessage: string = '';
-    isManager: boolean = false;
-    constructor(private userService: UserService, private router: Router) { }
+    registrateNewCompany: boolean = false;
+    constructor(private userService: UserService,
+                private router: Router,
+                private companyService: CompanyService) { }
 
     ngOnInit() {
+        this.companyService.getCompanies().then((data: any) => this.companies = data);
     }
 
     onSubmit() {
@@ -24,7 +30,6 @@ export class RegistrationComponent implements OnInit {
             return;
         }
 
-        this.newUser.role = this.isManager ? 'manager' : 'developer';
         this
             .userService
             .registrate(this.newUser)
@@ -56,5 +61,6 @@ class RegistrationUser {
     password: string;
     repeatPassword: string;
     nick: string;
-    role: string;
+    companyName: string;
+    companyId: string;
 }

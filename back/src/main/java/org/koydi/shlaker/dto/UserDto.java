@@ -17,4 +17,5 @@ public class UserDto {
     private String imageId;
 
     private String role;
+    private CompanyDto company;
 }

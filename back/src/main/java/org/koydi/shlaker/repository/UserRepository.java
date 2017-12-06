@@ -20,6 +20,14 @@ public interface UserRepository extends JpaRepository<User, String> {
     @Query("select u from User u where u.id = :userId")
     User getFullUser(@Param("userId") String userId);
 
+    @EntityGraph(value = "userWithCompany", type = EntityGraph.EntityGraphType.LOAD)
+    @Query("select u from User u where u.id = :userId")
+    User getUserWithCompany(@Param("userId") String userId);
+
+    @EntityGraph(value = "userWithRole", type = EntityGraph.EntityGraphType.LOAD)
+    @Query("select u from User u where u.id = :userId")
+    User getUserWithRole(@Param("userId") String userId);
+
     @EntityGraph(value = "userWithRoleAndCommand", type = EntityGraph.EntityGraphType.LOAD)
     @Query("select user from User user")
     Set<User> getAllUsers();

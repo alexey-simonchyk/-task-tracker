@@ -36,7 +36,7 @@ public class ProjectController {
     @GetMapping("/")
     @PreAuthorize("hasAuthority('manager') or hasAuthority('director')")
     public List<ProjectDto> getProjects(Authentication authentication) {
-        val user = userService.getUserInformation((String)authentication.getPrincipal());
+        val user = userService.getUserWithCompany((String)authentication.getPrincipal());
         val projects = projectService.getProjects(user);
         return projectMapper.toShortProjectDtos(projects);
     }

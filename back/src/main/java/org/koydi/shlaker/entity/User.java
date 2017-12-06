@@ -22,10 +22,23 @@ import java.util.Set;
                 }
         ),
         @NamedEntityGraph(
+                name = "userWithRole",
+                attributeNodes = {
+                        @NamedAttributeNode(value = "role"),
+                        @NamedAttributeNode(value = "company")
+                }
+        ),
+        @NamedEntityGraph(
                 name = "userWithRoleCommandCompany",
                 attributeNodes = {
                         @NamedAttributeNode(value = "role"),
                         @NamedAttributeNode(value = "command"),
+                        @NamedAttributeNode(value = "company")
+                }
+        ),
+        @NamedEntityGraph(
+                name = "userWithCompany",
+                attributeNodes = {
                         @NamedAttributeNode(value = "company")
                 }
         )

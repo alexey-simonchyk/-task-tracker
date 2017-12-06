@@ -1,3 +1,5 @@
+import { Company } from './company.model';
+
 export class User {
     id: string;
     email: string;
@@ -5,4 +7,5 @@ export class User {
     nick: string;
     imageId: string;
     role: string;
+    company: Company;
 }

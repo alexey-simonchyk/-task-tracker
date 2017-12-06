@@ -39,20 +39,20 @@ public class UserController {
 
     @GetMapping("/me")
     public UserDto getUserInformation(Authentication authentication) {
-        User user = userService.getUserInformation((String)authentication.getPrincipal());
+        User user = userService.getUserWithRole((String)authentication.getPrincipal());
         return userMapper.toFullUser(user);
     }
 
     @PostMapping("/sign-up")
     public Object signUp(@RequestBody SignUpUserDto userDto) {
 
-        validator.Validate(userDto.getPassword(), userDto.getEmail(), userDto.getNick(), userDto.getRepeatPassword(), userDto.getRole());
+        validator.Validate(userDto.getPassword(), userDto.getEmail(), userDto.getNick(), userDto.getRepeatPassword());
         if (!userDto.getPassword().equals(userDto.getRepeatPassword())) {
             throw new PasswordsNotEqual("Password and repeated password not equal");
         }
 
         User user = userMapper.signUpMapper(userDto);
-        userService.createAccount(user);
+        userService.createAccount(user, userDto.getCompanyName(), userDto.getCompanyId());
         return new ArrayList<>();
     }
 

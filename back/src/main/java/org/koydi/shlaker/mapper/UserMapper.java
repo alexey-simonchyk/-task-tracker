@@ -2,6 +2,7 @@ package org.koydi.shlaker.mapper;
 
 import org.koydi.shlaker.dto.SignUpUserDto;
 import org.koydi.shlaker.dto.UserDto;
+import org.koydi.shlaker.entity.Company;
 import org.koydi.shlaker.entity.User;
 import org.mapstruct.*;
 
@@ -10,7 +11,10 @@ import java.util.Set;
 
 @Mapper(
         nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS,
-        componentModel = "spring"
+        componentModel = "spring",
+        uses = {
+                CompanyMapper.class
+        }
 )
 public interface UserMapper {
 
@@ -18,7 +22,8 @@ public interface UserMapper {
             @Mapping(target = "email", ignore = true),
             @Mapping(target = "password", ignore = true),
             @Mapping(target = "imageId", source = "image.id"),
-            @Mapping(target = "role", source = "role.name")
+            @Mapping(target = "role", source = "role.name"),
+            @Mapping(target = "company", ignore = true)
     })
     @Named("toShortUserDto")
     UserDto toShortDto(User user);
@@ -27,7 +32,8 @@ public interface UserMapper {
     @Mappings({
             @Mapping(target = "password", ignore = true),
             @Mapping(target = "role", source = "role.name"),
-            @Mapping(target = "imageId", source = "image.id")
+            @Mapping(target = "imageId", source = "image.id"),
+            @Mapping(target = "company", qualifiedByName = "toShortCompanyDto")
     })
     UserDto toFullUser(User user);
 
@@ -39,7 +45,8 @@ public interface UserMapper {
             @Mapping(target = "role", ignore = true),
             @Mapping(target = "activated", ignore = true),
             @Mapping(target = "comments", ignore = true),
-            @Mapping(target = "tasks", ignore = true)
+            @Mapping(target = "tasks", ignore = true),
+            @Mapping(target = "company", ignore = true)
     })
     User fromUserDto(UserDto userDto);
 
@@ -50,7 +57,8 @@ public interface UserMapper {
             @Mapping(target = "activated", ignore = true),
             @Mapping(target = "image", ignore = true),
             @Mapping(target = "id", ignore = true),
-            @Mapping(target = "role.name", source = "role"),
+            @Mapping(target = "role", ignore = true),
+            @Mapping(target = "company", ignore = true)
     })
     User signUpMapper(SignUpUserDto user);
 
