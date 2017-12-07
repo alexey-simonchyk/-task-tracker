@@ -63,6 +63,10 @@ public class ProjectService {
         return projectRepository.getAllByCompanyId(companyId);
     }
 
+    public Set<Project> getProjectsByCompanyId(String companyId) {
+        return projectRepository.getAllByCompanyId(companyId);
+    }
+
     public Set<Project> getProjectsUserIn(User user) {
         Optional<Command> command = Optional.ofNullable(user.getCommand());
         if (!command.isPresent()) {

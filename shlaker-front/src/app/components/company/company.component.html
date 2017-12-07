@@ -1,3 +1,4 @@
-<p>
-  company works!
-</p>
+<div class="company_container">
+    <div class="company_name_text">{{(user | async)?.company.name}}</div>
+    <router-outlet></router-outlet>
+</div>

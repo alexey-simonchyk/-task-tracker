@@ -1,0 +1,19 @@
+.company_container {
+    background: #fff;
+    border-radius: 8px;
+    min-height: 90%;
+    margin: 1%;
+    padding: 2%;
+    color: black;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.company_name_text {
+    font-size: 50px;
+    font-weight: 900;
+    border-bottom: 2px solid firebrick;
+    width: 100%;
+    text-align: center;
+}

@@ -40,6 +40,19 @@ export class ProjectService {
             });
     }
 
+    getAllCompanyProjects(companyId: string) {
+        if (!this.token) return;
+        return this
+            .http
+            .get(`${this.projectEndPoint}/`, {headers: this.getAuthenticationHeader()})
+            .toPromise()
+            .then(data => data, err => {
+                if (err.status === 401) {
+                    this.ngRedux.dispatch({type: REMOVE_TOKEN});
+                }
+            });
+    }
+
     getDeveloperProjets() {
         if (!this.token) {
             return;

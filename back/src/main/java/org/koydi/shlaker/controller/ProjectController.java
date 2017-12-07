@@ -41,6 +41,13 @@ public class ProjectController {
         return projectMapper.toShortProjectDtos(projects);
     }
 
+
+    @GetMapping("/company/{company_id}")
+    public List<ProjectDto> getProjects(@PathVariable("company_id") String companyId) {
+        val projects = projectService.getProjectsByCompanyId(companyId);
+        return projectMapper.toShortProjectDtos(projects);
+    }
+
     @GetMapping("/my")
     public List<ProjectDto> getUserProjects(Authentication authentication) {
         val user = userService.getUserInformation((String)authentication.getPrincipal());
